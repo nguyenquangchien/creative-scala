@@ -1,28 +1,28 @@
-## Literal Expressions
+## Biểu thức nguyên văn
 
-We'll now start to explore the various forms of expressions in Scala, starting with the simplest expressions, *literals*. Here's a literal expression:
+Bây giờ ta hãy khám phá các dạng biểu thức khác nhau trong Scala, bắt đầu bằng loại đơn giản nhất, biểu thức *nguyên mẫu*. Sau đây là một biểu thức nguyên mẫu:
 
 ```scala mdoc
 3
 ```
 
-A literal evaluates to "itself." How we write the expression and how the console prints the value are the same. Remember though, there is a difference between the written representation of a value and its actual representation in the computer's memory.
+Biểu thức nguyên mẫu sẽ ước lượng thành "chính nó." Ta viết biểu thức nào thì console sẽ in ra giá trị hệt như vậy. Song cần nhớ rằng vẫn có sự khác biệt giữa hình thức viết của giá trị và cách biểu diễn nó trong bộ nhớ máy tính.
 
-Scala has many different forms of literals. We've already seen `Int` literals. There is a different type, and a different literal syntax, for what are called *floating point numbers*. This corresponds to a computer's approximation of the real numbers. Here's an example:
+Scala có nhiều loại biểu thức nguyên văn. Ta đã thấy nguyên văn kiểu `Int`. Cũng có một loại khác, biểu thức nguyên văn với cú pháp khác, đó là *các số phẩy động*. Nó tương ứng với cách mà máy tính xấp xỉ một số thực. Sau đây là ví dụ:
 
 ```scala mdoc
 0.1
 ```
 
-As you can see, the type is called `Double`.
+Như bạn thấy, kiểu này được gọi là một `Double`.
 
-Numbers are well and good, but what about text? Scala's `String` type represents a sequence of characters. We write literal strings by putting their contents in double quotes.
+Các số thì tốt rồi, nhưng còn chữ thì sao? Kiểu dữ liệu `String` biểu diễn cho một dãy các kí tự. Ta viết các chuỗi nguyên văn bằng cách đặt nội dung của chúng giữa cặp dấu nháy kép.
 
 ```scala mdoc
 "To be fond of dancing was a certain step towards falling in love."
 ```
 
-Sometimes we want to write strings that span several lines. We can do this by using triple double quotes, as below.
+Đôi khi ta muốn viết các chuỗi chạy trên vài dòng khác nhau. Có thẻ làm điều này bằng cách dùng 3 dấu nháy kép, như sau.
 
 ```scala mdoc
 """
@@ -35,17 +35,17 @@ possession have rendered possible.
 """
 ```
 
-A `String` is a sequence of characters. Characters themselves have a type, `Char`, and character literals are written in single quotes.
+`String` là một dãy các kí tự. Bản thân kí tự lại có một kiểu riêng, đó là `Char`, và các nguyên mẫu kí tự được viết giữa cặp dấu nháy đơn.
 
 ```scala mdoc
 'a'
 ```
 
-Finally we'll look at the literal representations of the `Boolean` type, named after English logician [George Boole](https://en.wikipedia.org/wiki/George_Boole). This fancy name just means a value that can be either `true` or `false`, and this indeed is how we write boolean literals.
+Sau cùng, ta sẽ xem cách biểu diễn nguyên mẫu của kiểu `Boolean`, được đặt tên theo nhà logic học người Anh [George Boole](https://en.wikipedia.org/wiki/George_Boole). Tên gọi kiểu cách đơn giản là để chỉ những giá trị có thể là `true` (đúng) hoặc `false` (sai), và đây chính là cách mà ta viết các nguyên mẫu boolean.
 
 ```scala mdoc
 true
 false
 ```
 
-With literal expressions, we can create values, but we won't get very far if we can't somehow manipulate the values we've created. We've seen a few examples of more complex expressions like `1 + 2`. In the next section, we'll learn about objects and methods, which will allow us to understand how this, and more interesting expressions, work.
+Bằng các biểu thức nguyên mẫu, ta có thể tạo các giá trị, nhưng sẽ không có tác dụng gì nếu ta không thể thao tác trên các giá trị vừa tạo này. Ta đã thấy vài ví dụ về những biểu thức phức hợp như `1 + 2`. Ở mục kê tiếp, ta sẽ tìm hiểu về các đối tượng và phương thức, từ đó ta sẽ hiểu được biểu thức này cũng như các biểu thức thú vị khác, hoạt động ra sao.
