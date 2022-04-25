@@ -1,11 +1,11 @@
-## Exercises
+## Bài tập
 
-#### Arithmetic
+#### Toán số
 
-Write an expression using integer literals, addition, and subtraction that evaluates to 42.
+Hãy viết một biểu thức sử dụng các nguyên văn là số nguyên, phép cộng và phép trừ sao cho ước lượng thành kết quả 42.
 
 <div class="solution">
-This exercise is just about getting used to writing Scala code. Here is one possible solution.
+Bài tập này chỉ để làm quen với mã lệnh Scala. Sau đây là một trong các lời giải.
 
 ```scala mdoc
 1 + 43 - 2
@@ -13,12 +13,12 @@ This exercise is just about getting used to writing Scala code. Here is one poss
 </div>
 
 
-#### Appending Strings
+#### Nói chuỗi
 
-Join together two strings (known as *appending* strings) using the `++` method. Write equivalent expressions using both the normal method call style and the operator style.
+Việc *nối* hai chuỗi với nhau được thực hiện bằng toán tử `++`. Hãy viết các biểu thức tương đương sửa dụng kiểu gọi phương thức thông thường và kiểu toán tử.
 
 <div class="solution">
-Something like the below should do.
+Có thể viết như sau.
 
 ```scala mdoc
 "It is a truth ".++("universally acknowledged")
@@ -26,12 +26,12 @@ Something like the below should do.
 ```
 </div>
 
-#### Precedence
+#### Thứ tự phép toán
 
-In mathematics we learned that some operators take *precedence* over others. For example, in the expression `1 + 2 * 3` we should do the multiplication before the addition. Do the same rules hold in Scala?
+Trong toán học, ta đã biết rằng các toán tử có *thứ tự* thực hiện. Chẳng hạn, trong biểu thức `1 + 2 * 3` ta cần làm phép nhân trước phép cộng. Những quy tắc này còn đúng trong Scala không?
 
 <div class="solution">
-A bit of exploration at the console should convince you that yes, Scala does maintain the standard precedence rules. The example below demonstrates this.
+Sau khi thử nghiệm một chút bằng dòng lệnh console, bạn sẽ thấy thuyết phục rằng đúng, Scala tuân theo quy tắc thực tự phép toán. Ví dụ sau minh họa điều này.
 
 ```scala mdoc
 1 + 2 * 3
@@ -41,9 +41,9 @@ A bit of exploration at the console should convince you that yes, Scala does mai
 </div>
 
 
-#### Types and Values
+#### Kiểu dữ liệu và các giá trị
 
-Which of the following expressions will not compile? Of the expressions that will compile, what is their type? Which expressions fail at run-time?
+Những biểu thức nào trong số sau đây sẽ không biên dịch được? Với số những biểu thức biên dịch được, kiểu dữ liệu của chúng là gì? Những biểu thức nào sẽ báo lỗi khi chạy?
 
 ```scala mdoc:silent
 1 + 2
@@ -78,76 +78,77 @@ Which of the following expressions will not compile? Of the expressions that wil
 ```
 
 <div class="solution">
+  
 ```scala mdoc
 1 + 2
 ```
 
-This expression has type `Int` and evaluates to `3`.
+Biểu thức này có kiểu `Int` và ước lượng thành `3`.
 
 
 ```scala mdoc
 "3".toInt
 ```
 
-This expression has type `Int` and evaluates to `3`.
+Biểu thức này có kiểu `Int` và ước lượng thành `3`.
 
 ```scala mdoc:crash
 "Electric blue".toInt
 ```
 
-This expression has type `Int` but fails at run-time.
+Biểu thức này có kiểu `Int` nhưng bị lỗi lúc chạy.
 
 ```scala mdoc
 "Electric blue".take(1)
 ```
 
-This expression has type `String` and evaluates to `"E"`.
+Biểu thức này có kiểu `String` và ước lượng thành `"E"`.
 
 ```scala mdoc:fail
 "Electric blue".take("blue")
 ```
 
-This expression fails at compile-time and hence has no type.
+Biểu thức này bị lỗi lúc biên dịch và do đó không có kiểu dữ liệu nào cả.
 
 ```scala mdoc
 1 + ("Moonage daydream".indexOf("N"))
 ```
 
-This expression has type `Int` and evaluates to `0`.
+Biểu thức này có kiểu `Int` và ước lượng thành `0`.
 
 ```scala mdoc
 1 / 1 + ("Moonage daydream".indexOf("N"))
 ```
 
-This expression has type `Int` and, due to precedence, evaluates to `(1 / 1) + -1`, which is `0`.
+Biểu thức này có kiểu `Int` và do thứ tự phép tính, ước lượng thành `(1 / 1) + -1`, tức là `0`.
 
 ```scala mdoc:crash
 1 / (1 + ("Moonage daydream".indexOf("N")))
 ```
 
-This expression has type `Int` but fails at run-time with a division by zero.
+Biểu thức này có kiểu `Int` nhưng bị lỗi lúc chạy với phép chia cho số 0.
 </div>
 
-#### Floating Point Failings
+#### Nhược điểm của số phẩy động
 
-When we introduced Doubles, I said they are an approximation to the real numbers. Why do you think this is? Think about representing numbers like ⅓ and π. How much space would it take to represent these numbers in decimal?
+Khi giới thiệu các số Double, tôi đã nói rằng chúng là dạng xấp xỉ cho các số thực. Tại sao bạn nghĩ rằng đó là sự xấp xỉ?  Hãy nghĩ đến việc biểu diễn những số như ⅓ và π. Cần bao nhiêu chữ số phần thập phân để biểu diễn được đúng?
 
 <div class="solution">
-`Double` is an approximation because it has the fit within the computer's finite memory. A `Double` takes up precisely 64-bits, which is enough space to store a lot of digits but not enough to store a number that, like π, has an infinite expansion.
+`Double` là kiểu dữ liệu xấp xỉ vì nó phải nằm vừa trong bộ nhớ máy tính. Một số `Double` chiếm lấy đúng 64 bit, đủ chỗ để lưu nhiều chữ số, song không đủ chứa một số như π, vốn kéo dài vô hạn.
 
-The number ⅓ also has an infinite expansion in decimal. Because Doubles are stored in binary there are some numbers that can be represented in a finite number of decimal digits but have no finite representation in binary. 0.1 turns out to be one such number.
+Con số ⅓ cũng có phần thập phân kéo dài vô hạn. Vì những Double được lưu trữ dưới dạng nhị phân nên cũng có những số tuy được biểu diễn bởi hữu hạn các chữ số thập phân nhưng lại vô hạn khi biểu diễn dạng nhị phân. Một số như 0.1 hóa ra cũng như vậy.
 
-In general, floating point numbers can lead to nasty surprises if you expect them to act like the reals. They are fine for our purposes in Creative Scala, but don't go using them to write accounting software!
+Nói chung, các số phẩy động có thể dẫn tới những ngạc nhiên phát bực khi bạn trông đợi chúng phải đóng vai trò các số thực. Đối với mục đích của ta trong cuốn Scala sáng tạo này thì điều đó không mấy ảnh hưởng, so đừng để tình trạng này xảy khi viết các phần mềm kế toán!
 </div>
 
-#### Beyond Expressions
+#### Xa hơn những biểu thức
 
-In our current model of computation there are only three components: expressions (program text) with types, that evaluate to values (something within the computer's memory). Is this sufficient? Could we write a stock market or a computer game with just this model? Can you think of ways to extend this model?
+Trong mô hình tính toán hiện tại của ta, chỉ có 3 thành phần: biểu thức (các chữ và số của chương trình) mang kiểu dữ liệu cụ thể, và ước lượng thành giá trị (cái nằm trong bộ nhớ máy tính). Liệu như vậy đã đủ chưa? Chỉ với mô hình này, ta có thể viết nên một phần mềm thị trường chứng khoán hay trò chơi điện tử không? Bạn có thể nghĩ ra cách mở rộng mô hình này không?
 
 <div class="solution">
-This is very open ended question. There are several ways to go beyond the model we have so far.
+Đây là một câu hỏi rất mở. Có vài cách vượt khỏi giới hạn mô hình mà ta hiện có.
 
-To be useful our programs must be capable of creating effects---changes in the world that go beyond the computer's memory. For example, displaying things on the screen, making sound, sending messages to other computers, and the like. The console implicitly does some of this for us, by printing values on the screen. We'll need to go a bit beyond that for more useful programs.
+Để có ích thì các chương trình của ta phải tạo được những hiệu ứng---hiệu ứng là những thay đổi ở môi trường nằm ngoài bộ nhớ máy tính. Chẳng hạn, phải hiển thị nội dung trên màn hình, phát ra âm thanh, gửi những tin nhắn tới máy tính khác, v.v. Console đã ngầm giúp ta làm điều đó, bằng việc in các giá trị lên màn hình. Ta sẽ cần phải đi xa hơn nữa để có được những chương trình hữu ích.
 
-We also don't have any way to define our own objects and methods, or reuse values in our programs. If we want to, say, use someone's name across a program we have to repeat that name everywhere. We need more methods of *abstraction* and that's what we'll turn to soon.
+Ta cũng sẽ không có cách nào định nghĩa các đối tượng và phương thức của riêng mình, hay sử dụng lại những giá trị trong chương trình. Chẳng hạn, nếu ta muốn dùng tên của người khác trong suốt chương trình thì ta cần phải lặp lại tên đó suốt. Ta muốn có thêm các phương thức *trừu tượng hóa* và đó là điều ta sẽ sớm biết đến trong cuốn sách này.
 </div>
