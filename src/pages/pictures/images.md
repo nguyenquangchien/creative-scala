@@ -1,4 +1,4 @@
-## Images
+## Image (Hình)
 
 ```scala mdoc:invisible
 import doodle.core._
@@ -8,57 +8,58 @@ import doodle.image.syntax.core._
 import doodle.java2d._
 ```
 
-Let's start with some simple shapes, programming at the console as we've done before.
+Ta hãy bắt đầu bằng những hình đơn giản, lập trình từ dòng lệnh console như đã làm trước đây.
 
 ```scala mdoc
 Image.circle(10)
 ```
 
-What is happening here? `Image` is an object and `circle` a method on that object. We pass to `circle` a parameter, `10` that gives the diameter of the circle we're constructing. Note the type of the result---an `Image`.
+Điều gì xảy ra ở đây vậy? `Image` là một đối tượng còn `circle` là phương thức trên đối tượng đó. Ta truyền tới `circle`  một tham số, `10` nhằm cho biết đường kính của hình tròn mà ta vẽ. Lưu ý kiểu của kết quả---một `Image` (hình).
 
 ```scala mdoc
 Image.circle(10)
 ```
 
-We draw the circle by calling the `draw` method.
+Ta vẽ hình tròn bằng cách gọi phương thức `draw`.
 
 ```scala
 Image.circle(10).draw()
 ```
 
-A window should appear as shown in [@fig:pictures:circle].
+Một cửa sổ sẽ xuất hiện như cho thấy trên [@fig:pictures:circle].
 
-![A circle](src/pages/pictures/circle.pdf+svg){#fig:pictures:circle}
+![Một hình tròn](src/pages/pictures/circle.pdf+svg){#fig:pictures:circle}
 
-Doodle supports a handful of "primitive" images: circles, rectangles, and triangles. Let's try drawing a rectangle.
+Doodle hỗ trợ một loạt các hình "cơ bản": tròn, chữ nhật, và tam giác. Hãy thử vẽ một hình chữ nhật.
 
 ```scala
 Image.rectangle(100, 50).draw()
 ```
 
-The output is shown in [@fig:pictures:rectangle].
+Kết quả được cho thấy ở [@fig:pictures:rectangle].
 
-![A rectangle](src/pages/pictures/rectangle.pdf+svg){#fig:pictures:rectangle}
+![Một hình chữ nhật](src/pages/pictures/rectangle.pdf+svg){#fig:pictures:rectangle}
 
-Finally let's try a triangle, for which the output is shown in [@fig:pictures:triangle].
+Cuối cùng, hãy thử một hình tam giác, mà kết quả được cho thấy ở [@fig:pictures:triangle].
 
 
 ```scala
 Image.triangle(60, 40).draw()
 ```
 
-![A triangle](src/pages/pictures/triangle.pdf+svg){#fig:pictures:triangle}
+![Một hình tam giác](src/pages/pictures/triangle.pdf+svg){#fig:pictures:triangle}
 
-### Exercises {-}
+### Bài tập {-}
 
-#### I Go Round in Circles {-}
+#### Tôi đi vòng tròn {-}
 
+Hãy tạo các hình tròn rộng 1, 10, và 100 đơn vị. Bây giờ hãy vẽ chúng lên!
 Create circles that are 1, 10, and 100 units wide. Now draw them!
 
 <div class="solution">
-In this exercise we're checking that our Doodle install is working correctly and we're getting used to using the library. One of the important points in Doodle is we separate *defining the image* from *drawing the image*. We'll talk more about this throughout the book.
+Ở bài tập này, chúng ta kiểm tra xem Doodle đã được cài đặt để hoạt động bình thường chưa, đồng thời làm quen với thư viện này. Một trong những điểm quan trọng ở Doodle là sự phân biệt giữa *định nghĩa một hình* với *vẽ hình đó*. Ta sẽ nói thêm về điều này xuyên suốt cuốn sách.
 
-We can create circles with the code below.
+Ta có thể tạo nên các hình tròn với mã lệnh dưới đây:
 
 ```scala mdoc:silent
 Image.circle(1)
@@ -66,7 +67,7 @@ Image.circle(10)
 Image.circle(100)
 ```
 
-We can draw the circles by calling the `draw` method on each circle.
+Ta có thể vẽ nên các hình tròn bằng cách gọi phương thức `draw` lên mỗi hình tròn.
 
 ```scala
 Image.circle(1).draw()
@@ -76,12 +77,12 @@ Image.circle(100).draw()
 </div>
 
 
-#### My Type of Art {-}
+#### Kiểu của hình nghệ thuật {-}
 
-What is the type of a circle? A rectangle? A triangle?
+Kiểu dữ liệu của một hình tròn, hình chữ nhật, hình tam giác là gì? 
 
 <div class="solution">
-They all have type `Image`, as we can tell from the console.
+Chúng đều có kiểu `Image`, như ta thấy trên dòng lệnh console.
 
 ```scala
 :type Image.circle(10)
@@ -93,27 +94,27 @@ They all have type `Image`, as we can tell from the console.
 ```
 </div>
 
-#### Not My Type of Art {-}
+#### Không kiểu bản vẽ nghệ thuật {-}
 
-What's the type of *drawing* an image? What does this mean?
+Kiểu dữ liệu của *bản vẽ* một hình là gì? Điều này nghĩa là sao?
 
 <div class="solution">
-Once again, we can ask the console this quesstion.
+Một lần nữa, ta có thể đặt câu hỏi này cho console.
 
 ```scala
 :type Image.circle(10).draw()
 // Unit
 ```
 
-We see that the type of drawing an image is `Unit`. `Unit` is the type of expressions that have no interesting value to return. This is the case for `draw`; we call it because we want something to appear on the screen, not because we have a use for the value it returns. There is only one value with type `Unit`. This value is also called unit, which written as a literal expression is `()`
+Ta thấy rằng kiểu của bản vẽ một hình là `Unit`. `Unit` là kiểu của một biểu thức trong đó không có giá trị nào hay ho để trả lại cả. Đây là trường hợp cho `draw`; ta gọi nó vì ta muốn có thứ gì đó xuất hiện trên màn hình, chứ không vì ta phải dùng đến giá trị mà nó trả lại. Chỉ có một giá trị duy nhất thuộc kiểu `Unit`. Giá trị này cũng có tên gọi là unit, với biểu thức nguyên văn được viết là `()`
 
-You'll note that the console doesn't print unit by default.
+Bạn sẽ nhận thấy rằng theo mặc định thì console sẽ không in ra giá trị unit.
 
 ```scala
 ()
 ```
 
-We can ask the console for the type to show that there really is unit here.
+Ta có thể hỏi console về kiểu dữ liệu để thấy được nó thực sự là unit trong trường hợp này.
 
 ```scala
 :type ()
