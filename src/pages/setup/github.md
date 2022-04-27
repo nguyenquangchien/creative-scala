@@ -1,38 +1,34 @@
 ## GitHub
 
-We have created a [template] for you that will get you set up with all the code you need to work through Creative Scala.
-This template is stored on [GitHub][github], a website for sharing code.
+Chúng tôi đã tạo ra một [bản mẫu (template)] để giúp bạn có thể thiết lập tất cả mã lệnh mà bạn cần để luyện tập cho toàn bộ đợt học Scala Sáng tạo.
+Bản mẫu này được lưu trên [GitHub][github], một website giúp việc chia sẻ mã lệnh.
 
-You can copy the template onto your computer, which Git calls cloning, but this means you won't be able to save any changes you make back to GitHub where other people can view them.
+Bạn có thể sao chép bản mẫu về máy của bạn, việc này gọi là sao chép (cloning) Git, nhưng cũng đồng nghĩa với việc bạn không thể lưu trữ bất kì sửa đổi nào đã thực hiện trở lại GitHub nơi mọi người xem được những sửa đổi đó.
 
-If you want to be able to share your changes, you need to make a copy of the template project on GitHub that you own.
-Git calls this forking.
-You fork the repository on GitHub and then clone *your fork* to your computer.
-Then you can save your changes back to your fork on GitHub.
+Nếu muốn chia sẻ những sửa đổi đã thực hiện, bạn cần phải nhân bản cái bản mẫu dự án trên tài khoản GitHub của bạn.
+Việc nhân bản này được Git gọi là "forking".
+Bạn nhân bản mã lệnh trên GitHub rồi sau đó nhân bản *cái bản fork đó* về máy tính.
+Từ khi đó, bạn có thể lưu những sửa đổi mà bạn thự hiện vào bản fork của mình trên GitHub.
 
-To start this process you need to create a GitHub account, if you do not have one already.
+Để bắt đầu quá trình này, bạn cần tạo một tài khoản GitHub nếu chưa có sẵn.
 
-Once you have an account, visit the [template project](https://github.com/creativescala/creative-scala-template) in your browser.
-At the top right is button called "Fork".
-Press this button to create your own copy of the template.
-You will be taken to a web page displaying your own fork of the template.
-Remember the name of this repository. It should be something like `yourname/creative-scala-template` where `yourname` is your GitHub user name.
+Một khi đã có tài khoản rồi, bạn hãy thăm [dự án mẫu](https://github.com/creativescala/creative-scala-template) trong trình duyệt của bạn. Ở góc trên tay phải có một nút bấm tên là "Fork". Hãy ấn nút này để tạo một bản sao từ bản mẫu cho riêng bạn. Trình duyệt sẽ dẫn bạn tới một trang web hiển thị bản sao mẫu riêng của bạn. Hãy nhớ tên của bản mã lệnh này. Nó sẽ có tên gọi kiểu như `yourname/creative-scala-template` trong đó `yourname` là tên người dùng GitHub của bạn.
 
-Now cloning your fork is as simple as running this command and replacing `yourname` with your actual GitHub user name.
+Bây giờ việc sao chép nhân bản của bạn sẽ chỉ đơn giản như là chạy câu lệnh dưới đây và thay thế `yourname` bằng tên người dùng GitHub thật của bạn.
 
 ```bash
 git clone git@github.com:yourname/creative-scala-template.git
 ```
 
-Now any changes you make can be sent back to your fork on GitHub.
-The process for doing this in Git is a bit involved.
-When you've made a change you must:
+Bây giờ bất kì thay đổi nào bạn thực hiện đều được gửi trở lại bản sao của bạn trên GitHub.
+Quá trình thực hiện điều này trong Git sẽ khá phức tạp.
+Mỗi khi thực hiện một thay đổi, bạn phải:
 
-  - `add` the change to what's called Git's index;
-  - `commit` the change; and finally
-  - `push` the change to the fork.
+  - `add` - bổ sung thay đổi vào cái mà ta gọi là chỉ số (index) của Git;
+  - `commit` - chấp nhận thay đổi; và sau cùng
+  - `push` - đẩy thay đổi này vào bản sao.
 
-Here's an example of using the command line to do this.
+Sau đây là một ví dụ mà ta thực hiện bằng dòng lệnh.
 
 ```bash
 git add
@@ -40,8 +36,8 @@ git commit -m "Explain here what you did"
 git push
 ```
 
-GitHub makes a nice free graphical tool for using Git, called [GitHub Desktop](https://desktop.github.com/).
-It's probably the easiest way to use Git when you're getting started.
+GitHub tạo ra một công cụ đồ họa miễn phí tuyệt vời bằng Git, gọi là [GitHub Desktop](https://desktop.github.com/).
+Có lẽ đây là cách dễ nhất để sử dụng Git với những người mới bắt đầu như bạn.
 
 [github]: https://github.com/
 [template]: https://github.com/underscoreio/creative-scala-template
