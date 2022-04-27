@@ -1,4 +1,4 @@
-## Layout
+## Bố trí
 
 ```scala mdoc:invisible
 import doodle.core._
@@ -8,47 +8,47 @@ import doodle.image.syntax.core._
 import doodle.java2d._
 ```
 
-We can seen how to create primitive images. We can combine together images using layouts methods to create more complex images. Try the following code---you should see a circle and a rectangle displayed beside one another, as in [@fig:picture:circle-rect].
+Ta đã thấy cách tạo nên những hình cơ bản. Ta có thể kết hợp chúng lại bằng những phương thức bố trí khác nhau để tạo nên những hình phức tạp hơn. Hãy thử đoạn mã lệnh sau---bạn sẽ thấy một hình tròn và một hình chữ nhật hiện ra cạnh nhau, như ở [@fig:picture:circle-rect].
 
 ```scala
 (Image.circle(10).beside(Image.rectangle(10, 20))).draw()
 ```
 
-![A circle beside a rectangle](src/pages/pictures/circle-beside-rectangle.pdf+svg){#fig:picture:circle-rect}
+![Một hình tròn bên cạnh hình chữ nhật](src/pages/pictures/circle-beside-rectangle.pdf+svg){#fig:picture:circle-rect}
 
-`Image` contains several layout methods for combining images, described in [@tbl:pictures:layout]. Try them out now to see what they do.
+`Image` có chứa vài phương thức bố trí để kết hợp các hình. Chúng được mô tả trong [@tbl:pictures:layout]. Hãy thử xem chúng làm được việc gì.
 
 +---------------+-----------+----------------------------+------------------------------+
-| Method        | Parameter | Description                | Example                      |
+| Phương thức   | Tham số   | Mô tả                      | Ví dụ                        |
 +===============+===========+============================+==============================+
-| `beside`      |`Image`    | Places images horizontally | `Image.circle(10)            |
-|               |           | next to one another        |    .beside(Image.circle(10))`|
+| `beside`      |`Image`    | Đặt các hình cạnh nhau     | `Image.circle(10)            |
+|               |           | theo hướng ngang           |    .beside(Image.circle(10))`|
 +---------------+-----------+----------------------------+------------------------------+
-| `above`       |`Image`    | Places images vertically   | `Image.circle(10)            |
-|               |           | next to one another        |    .above(Image.circle(10))` |
+| `above`       |`Image`    | Đặt các hình cạnh nhau     | `Image.circle(10)            |
+|               |           | theo hướng đứng            |    .above(Image.circle(10))` |
 +---------------+-----------+----------------------------+------------------------------+
-| `below`       |`Image`    | Places images vertically   | `Image.circle(10)            |
-|               |           | next to one another        |    .below(Image.circle(10))` |
+| `below`       |`Image`    | Đặt các hình cạnh nhau     | `Image.circle(10)            |
+|               |           | theo hướng đứng            |    .below(Image.circle(10))` |
 +---------------+-----------+----------------------------+------------------------------+
-| `on`          |`Image`    | Places images centered     | `Image.circle(10)            |
-|               |           | on top of one another      |    .on(Image.circle(10))`    |
+| `on`          |`Image`    | Đặt các hình chồng lên nhau| `Image.circle(10)            |
+|               |           | và cùng căn giữa           |    .on(Image.circle(10))`    |
 +---------------+-----------+----------------------------+------------------------------+
-| `under`       |`Image`    | Places images centered     | `Image.circle(10)            |
-|               |           | on top of one another      |    .under(Image.circle(10))` |
+| `under`       |`Image`    | Đặt các hình chồng lên nhau| `Image.circle(10)            |
+|               |           | và cùng căn giữa           |    .under(Image.circle(10))` |
 +---------------+-----------+----------------------------+------------------------------+
 
-: Layout methods available in Doodle {#tbl:pictures:layout}
+: Các phương thức bố trí có sẵn trong Doodle {#tbl:pictures:layout}
 
-### Exercises {-}
+### Bài tập {-}
 
-#### The Width of a Circle {-}
+#### Bề rộng của một hình tròn {-}
 
-Create the picture [@fig:picture:width-of-a-circle] using the layout methods and basic images we've covered so far.
+Hãy tạo nên hình [@fig:picture:width-of-a-circle] sử dụng các phương thức bố trí và những hình cơ bản mà ta đã đề cập tới cho đến giờ.
 
-![The width of a circle](src/pages/pictures/width-of-a-circle.pdf+svg){#fig:picture:width-of-a-circle}
+![Bề rộng của một hình tròn](src/pages/pictures/width-of-a-circle.pdf+svg){#fig:picture:width-of-a-circle}
 
 <div class="solution">
-It's three small circles on top of a bigger circle, and we can just about state this as is in code.
+Đó là ba hình tròn nhỏ đặt chồng lên trên một hình tròn lớn, và ta chỉ cần thực hiện như đoạn mã lệnh sau.
 
 ```scala mdoc
 (Image
