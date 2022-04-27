@@ -1,111 +1,111 @@
-## Installing Terminal Software and a Text Editors
+## Cài đặt chương trình cửa sổ lệnh (Terminal) và trình biên tập file chữ (Text Editor)
 
-This section is our recommended setup for people new to programming, and describes how to setup Creative Scala with the terminal and a text editor.
-We need to install:
+Trong mục này, chúng tôi gợi ý cách thiết lập cho những bạn mới lập trình, và mô tả cách thiết lập Scala Sáng tạo với cửa sổ lệnh và một trình biên tập file chữ.
+Ta cần cài đặt:
 
-- the JVM;
+- JVM (máy ảo Java);
 - Git;
-- a text editor; and
-- the template project for Creative Scala.
+- một trình biên tập chữ, và
+- một dự án mẫu cho Scala Sáng tạo.
 
 
 ### OS X
 
-Open the terminal. (Click the magnifying glass icon on the top righthand side of the toolbar. Type in "terminal".)
+Mở cửa sổ lệnh. (Kích chuột vào biểu tượng kính lúp ở góc trên bên phải thanh công cụ. Gõ vào chữ "terminal".)
 
-Install Java.
-Type into the terminal
+Cài đặt Java. 
+Gõ vào cửa sổ lệnh dòng chữ sau
 
 ```bash
 java
 ```
 
-If this runs you already have Java installed.
-Otherwise it will prompt you to install Java.
+Nếu chương trình chạy được thì máy bạn đã cài Java rồi. 
+Còn nếu không thì nó sẽ nhắc bạn cài đặt Java.
 
-Install homebrew.
-Paste into the terminal
+Hãy cài đặt homebrew.
+Copy và paste dòng sau vào cửa sổ lệnh
 
 ```bash
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ```
 
-Install `git` using homebrew.
-At the terminal, type
+Hãy cài đặt `git` bằng homebrew.
+Tại cửa sổ lệnh, gõ vào
 
 ```bash
 brew install git
 ```
 
-Now install the text editor Atom.
-Again type at the terminal
+Bây giờ thì cài đặt trình biên tập Atom.
+Một lần nữa, gõ vào cửa sổ lệnh
 
 ```bash
 brew install Caskroom/cask/atom
 ```
 
-Install Scala support inside Atom: Settings > Install > language-scala
+Cài đặt trợ giúp Scala trong Atom như sau: Settings > Install > language-scala
 
-Now we will use Git to get an SBT project that will work with Creative Scala.
-Type
+Bây giờ ta sẽ dùng Git để làm cho dự án SBT hoạt động với Scala sáng tạo (Creative Scala).
+Hãy gõ vào
 
 ```bash
 git clone https://github.com/underscoreio/creative-scala-template.git
 ```
 
 <div class="callout callout-info">
-#### Sharing Your Work {-}
 
-There is an alternative setup that involves first forking the Creative Scala template project, and then cloning it to your computer.
-This is the setup to choose if you want to share your work with other people; for example you might be taking Creative Scala with a remote instructor or you might just (quite rightfully) be proud of your work.
+#### Chia sẻ kết quả học tập của bạn {-}
 
-In this setup you first *fork* the Creative Scala template.
-Then you make a clone of *your* fork.
-This alternative setup is described in more detail in the section on GitHub later in this chapter.
+Có một cách thiết lập khác như sau: ban đầu "nhân bản" (fork) dự án mẫu Creative Scala, rồi "sao chép" (clone) về máy tính của bạn.
+Đây là cách thiết lập cần làm nếu bạn muốn chia sẻ kết quả học tập của mình với người khác; chẳng hạn bạn đang học Scala Sáng tạo với thầy giáo trực tuyến hoặc chỉ đơn thuần là bạn thấy (chính đáng thôi) tự hào về thành quả của mình.
+
+Theo cách thiết lập này, ban đầu bạn *fork* mẫu Creative Scala.
+Sau đó là sao chép bản fork mà *bạn* vừa mới tạo.
+Cách này sẽ được mô tả kĩ hơn ở mục GitHub bên dưới.
 </div>
 
 
-Now change to the directory we just created and run SBT.
+Bây giờ hãy chuyển tới thư mục mà ta mới lập rồi chạy SBT.
 
 ```bash
 cd creative-scala-template
 ./sbt.sh
 ```
 
-SBT should start.
-Within SBT type `console`.
-Finally type
+SBT sẽ khởi động.
+Bên trong SBT, hãy gõ `console`.
+Sau cùng, gõ vào
 
 ```scala
 Example.image.draw()
 ```
 
-and an image of three circles should appear!
+và một hình ảnh ba vòng tròn sẽ xuất hiện!
 
-If you've made it this far you've successfully installed all the software you need for work through Creative Scala.
+Nếu bạn tới đây rồi, điều đó có nghĩa bạn đã cài đặt thành công tất cả phần mềm bạn cần để học tập toàn bộ khoá học Scala Sáng tạo.
 
-The final step is to load Atom and use it to open `Example.scala`, which you can find in `src/main/scala`.
+Bước sau cùng là khởi động Atom rồi dùng nó để mở `Example.scala`, mà bạn có thể thấy ở `src/main/scala`.
 
 
 ### Windows
 
-Download and install Java.
-Search for the "JDK" (Java development kit).
-This will take you to Oracle's site.
-Accept their license and download the JDK.
-Run the installer you just downloaded.
+Tải về và cài đặt Java.
+Tìm chữ "JDK" (Java development kit).
+Đường link sẽ đưa bạn tới website của Oracle.
+Chấp nhận giấy phép của họ rồi tải về JDK.
+Chạy bộ cài đặt mà bạn mới tải về.
 
-Download and install Atom.
-Go to `https://atom.io/` and download Atom for Windows.
-Run the installer you've just downloaded.
+Tải về và cài đặt Atom.
+Hãy đến `https://atom.io/` và tải về Atom cho Windows.
+Chạy bộ cài đặt mà bạn mới tải về.
 
-Download and install Git.
-Go to `https://git-scm.com/` and download Git for Windows.
-Run the installer you've just downloaded.
-At the very end it gives you the option to open Git.
-Select that option.
-A window will open up with a command prompt.
-Type
+Tải về và cài đặt Git.
+Tới `https://git-scm.com/` và tải về Git cho Windows.
+Chạy bộ cài đặt mà bạn mới tải về.
+Đến cuối, chương trình sẽ cho bạn chọn có mở Git hay không. 
+Hãy chấp nhận, và một cửa sổ sẽ mở ra với dòng lệnh. 
+Gõ vào
 
 
 ```bash
@@ -113,47 +113,48 @@ git clone https://github.com/underscoreio/creative-scala-template.git
 ```
 
 <div class="callout callout-info">
-#### Sharing Your Work {-}
+ 
+#### Chia sẻ thành quả của bạn {-}
 
-There is an alternative setup that involves first forking the Creative Scala template project, and then cloning it to your computer.
-This is the setup to choose if you want to share your work with other people; for example you might be taking Creative Scala with a remote instructor or you might just (quite rightfully) be proud of your work.
+Có một cách thiết lập khác như sau: ban đầu "nhân bản" (fork) dự án mẫu Creative Scala, rồi "sao chép" (clone) về máy tính của bạn.
+Đây là cách thiết lập cần làm nếu bạn muốn chia sẻ kết quả học tập của mình với người khác; chẳng hạn bạn đang học Scala Sáng tạo với thầy giáo trực tuyến hoặc chỉ đơn thuần là bạn thấy (chính đáng thôi) tự hào về thành quả của mình.
 
-In this setup you first *fork* the Creative Scala template.
-Then you make a clone of *your* fork.
-This alternative setup is described in more detail in the section on GitHub later in this chapter.
+Theo cách thiết lập này, ban đầu bạn *fork* mẫu Creative Scala.
+Sau đó là sao chép bản fork mà *bạn* vừa mới tạo.
+Cách này sẽ được mô tả kĩ hơn ở mục GitHub bên dưới.
 </div>
 
-Open a normal command-prompt.
-Click on the Windows icon on the bottom left of the screen.
-In the search box enter "cmd" and run the program it finds.
-In the window that is opened up type
+Hãy mở một cửa sổ dòng lệnh thông thường. 
+Kích chuột vào biểu tượng cửa sổ ở góc trái phía dưới màn hình. 
+Trong hộp tìm kiếm, gõ vào "cmd" rồi chạy chương trình mà nó tìm được. 
+Trong cửa sổ mới mở ra, bạn hãy gõ
 
 ```bash
 cd creative-scala-template
 ```
 
-which will change into the directory of the Creative Scala template project we just downloaded.
-Type
+Lệnh này sẽ chuyển tới thư mục chứa dự án mẫu Scala Sáng tạo mà ta mới tải về.
+Hãy gõ vào 
 
 ```bash
 sbt.bat
 ```
 
-to start SBT.
-Within SBT type `console`.
-Finally type
+để khởi động SBT. 
+Bên trong SBT, gõ vào `console`.
+Sau cùng, gõ vào
 
 ```scala
 Example.image.draw()
 ```
 
-and an image of three circles should appear!
+và một hình ảnh ba vòng tròn sẽ xuất hiện!
 
-If you've made it this far you've successfully installed all the software you need for work through Creative Scala.
+Nếu bạn tới đây rồi, điều đó có nghĩa bạn đã cài đặt thành công tất cả phần mềm bạn cần để học tập toàn bộ khoá học Scala Sáng tạo.
 
-The final step is to load Atom and use it to open `Example.scala`, which you can find in the directory `src\main\scala`.
+Bước sau cùng là khởi động Atom rồi dùng nó để mở `Example.scala`, mà bạn có thể thấy ở thư mục `src\main\scala`.
 
 
 ### Linux
 
-Follow the OS X instructions, using your distributions package manager to install software in place of Homebrew.
+Theo các hướng dẫn cho OS X, nhưng sử dụng trình quản lý gói (distributions package manager) trong máy bạn để cài đặt phần mềm thay vì dùng Homebrew.
