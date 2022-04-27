@@ -8,35 +8,35 @@ import doodle.image.syntax.core._
 import doodle.java2d._
 ```
 
-In addition to layout, Doodle has some simple operators to add a splash of colour to our images. Try these out the methods described in [@tbl:pictures:color] to see how they work.
+Ngoài cách bố trí ra, Doodle còn có những toán tử đơn giản để thêm màu sắc cho các hình bạn vẽ. Hãy thử những phương thức mô tả trong [@tbl:pictures:color] để xem chúng tác dụng ra sao.
 
 +-----------------------------+-----------+-------------------------+------------------------------+
-| Method                      | Parameter | Description             | Example                      |
+| Phương thức                 | Tham số   | Mô tả                   | Ví dụ                        |
 +=============================+===========+=========================+==============================+
-| `fillColor`                 | `Color`   | Fills the image with    | `Image.circle(10)            |
-|                             |           | the specified color.    |    .fillColor(Color.red)`    |
+| `fillColor`                 | `Color`   | Tô hình bằng            | `Image.circle(10)            |
+|                             |           | màu đã chọn.            |    .fillColor(Color.red)`    |
 +-----------------------------+-----------+-------------------------+------------------------------+
-| `strokeColor`               | `Color`   | Outlines the image with | `Image.circle(10)            |
-|                             |           | the specified color.    |    .strokeColor(Color.blue)` |
+| `strokeColor`               | `Color`   | Vẽ viền hình bằng       | `Image.circle(10)            |
+|                             |           | màu đã chọn.            |    .strokeColor(Color.blue)` |
 +-----------------------------+-----------+-------------------------+------------------------------+
-| `strokeWdith`               | `Double`  | Sets the width of the   | `Image.circle(10)            |
-|                             |           | image outline.          |    .strokeWidth(3)`          |
+| `strokeWdith`               | `Double`  | Đặt bề rộng của viền    | `Image.circle(10)            |
+|                             |           | hình vẽ.                |    .strokeWidth(3)`          |
 +-----------------------------+-----------+-------------------------+------------------------------+
-| `noFill`                    | None      | Removes any fill from   | `Image.circle(10).noFill`    |
-|                             |           | the image.              |                              |
+| `noFill`                    | Không     | Xóa màu tô              | `Image.circle(10).noFill`    |
+|                             |           | trong hình.             |                              |
 +-----------------------------+-----------+-------------------------+------------------------------+
-| `noStroke`                  | None      | Removes any stroke from | `Image.circle(10).noStroke`  |
-|                             |           | the image.              |                              | 
+| `noStroke`                  | Không     | Xóa đường viền          | `Image.circle(10).noStroke`  |
+|                             |           | của hình.               |                              | 
 +-----------------------------+-----------+-------------------------+------------------------------+
 
-: Some of the methods to add color to images in Doodle. {#tbl:pictures:color}
+: Một vài phương thức vẽ màu cho các hình trong Doodle. {#tbl:pictures:color}
 
-Doodle has various ways of creating colours.
-The simplest are the predefined colours in [CommonColors.scala][common-colors].
-Some of the most commonly used are described in [@tbl:pictures:colors].
+Doodle có nhiều cách để tạo màu sắc.
+Cách đơn giản nhất là dùng màu định sẵn trong [CommonColors.scala][common-colors].
+Một số màu thông dụng nhất được mô tả trong [@tbl:pictures:colors].
 
 +--------------+-------+------------------------------------------+
-| Color        | Type  | Example                                  |
+| Màu          | Kiểu  | Ví dụ                                    |
 +==============+=======+==========================================+
 |`Color.red`   |`Color`| `Image.circle(10).fillColor(Color.red)`  |
 +--------------+-------+------------------------------------------+
@@ -53,18 +53,18 @@ Some of the most commonly used are described in [@tbl:pictures:colors].
 |`Color.brown` |`Color`| `Image.circle(10).fillColor(Color.brown)`|
 +--------------+-------+------------------------------------------+
 
-: Some of the most common predefined colors. {#tbl:pictures:colors}
+: Một số màu định sẵn thông dụng nhất. {#tbl:pictures:colors}
 
-### Exercises {-}
+### Bài tập {-}
 
-#### Evil Eye {-}
+#### Mắt quỷ {-}
 
-Make the image in [@fig:pictures:evil-eye], designed to look like a traditional amulet protecting against the evil eye. I used `cornflowerBlue` for the iris, and `darkBlue` for the outer color, but experiment with your own choices!
+Hãy tạo hình vẽ ở [@fig:pictures:evil-eye], vốn được thiết kế giông như một lá bùa truyền thống tránh khỏi con mắt quỷ. Tôi đã dùng màu `cornflowerBlue` cho lòng đen mắt, và `darkBlue` cho màu bên ngoài, nhưng bạn có thể tự chọn để thử nghiệm!
 
-![No evil eyes here!](src/pages/pictures/evil-eye.pdf+svg){#fig:pictures:evil-eye}
+![Mắt quỷ, cấm vào!](src/pages/pictures/evil-eye.pdf+svg){#fig:pictures:evil-eye}
 
 <div class="solution">
-Here's my amulet:
+Đây là lá bùa của tôi:
 
 ```scala mdoc
 Image
