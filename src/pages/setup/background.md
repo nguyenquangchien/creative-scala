@@ -1,92 +1,90 @@
-## Background
+## Thông tin nền
 
-This section gives some background information on some of the tools we'll be using.
-If you're an experienced developer a lot of this will be old hat, and you can skip it.
-If you're not, this will hopefully give some useful context to the software we'll be working with.
+Mục này đề cập một số thông tin nền về những công cụ mà chúng ta sẽ dùng.
+Nếu bạn là người phát triển có kinh nghiệm thì đã thạo rồi và có thể bỏ qua.
+Bằng không, hi vọng là mục sẽ giúp bạn một số manh mối có ích về phần mềm mà chúng ta sẽ làm việc trên đó.
 
 
 
-### The Terminal
+### Cửa sổ dòng lệnh
 
-Back when the world was young and computing was in its infancy, the common user interface of graphical windows, a cursor controlled by a mouse, and interaction by *direct manipulation* didn't exist.
-Instead users typed in commands at a device called a *terminal*.
-The direct manipulation interface is superior for most uses, but there are some cases for which the terminal or *command line* is preferable.
-For example, if we wanted to work out how much space was used by all the files which names starting with `data` in Linux or OS X we can execute the command
+Trở về thời trước đây khi mà tin học vẫn còn trong thuở sơ khai, giao diện cửa đồ hoạ thông dụng như bây giờ, trong đó người dùng chuột điều khiển con trỏ và tương tác bởi *thao tác trực tiếp* vẫn còn chưa tồn tại.
+Hồi đó, người dùng phải gõ vào các câu lệnh trên thiết bị gọi là *thiết bị đầu cuối (terminal)*.
+Thông thường, giao diện thao tác trực tiếp thì có ưu điểm vượt trội, song cũng có lúc thiết bị đầu cuối hay *dòng lệnh (command line)* lại tiện dụng hơn.
+Chẳng hạn, nếu ta muốn biết tất cả những file có tên bắt đầu bằng chữ `data` đã chiếm mất bao nhiêu dung lượng ổ đĩa, thì trên hệ điều hành Linux hay OS X, ta có thể gõ vào lệnh
 
 ```bash
 du -hs data*
 ```
 
-We can break this down into three components:
+Ta có thể tách câu lệnh trên thành 3 phần:
 
-- the command `du` means disk usage;
-- the flags `-hs` mean to print a human readable summary; and
-- the pattern `data*` means all the files whose names begin with `data`.
+- tên lệnh `du` viết tắt từ disk usage (dung lượng đĩa sử dụng);
+- các cờ `-hs` nghĩa là in tóm tắt thông tin để người dùng đọc được; và
+- dạng mẫu `data*` nghĩa là tất cả những file nào có tên bắt đầu bằng `data`.
 
-Doing this with a direct manipulation interface would be much more time consuming.
+Nếu dùng giao diện thao tác trực tiếp, ta sẽ mất thời gian lâu hơn nhiều.
 
-The command line has a steep learning curve, but the reward is an extremely powerful tool.
-Our usage of the terminal will be very limited, so don't worry if you find the example above intimidating!
-
-
-### Text Editors
-
-You're probably used to writing documents in a word processor.
-A word processor allows us to write text and control the formatting of how it appears on the (increasingly rare) printed page.
-A word processor includes powerful commands, such as a spell checker and automatic table of contents generation, to make editing prose easier.
-
-A *text editor* is like a word processor for code.
-Whereas a word processor is concerned about visual presentation of text, a text editor has many programming specific functions.
-Typical examples include powerful tools to search and replace text, and the ability to quickly jump between the many different files that make up a project.
-
-Text editors date back to the days of terminals and perhaps surprisingly some of these tools are still in use.
-The two main ancient and glorious text editors that survive are called Emacs and Vim.
-They have very different approaches (except when they don't) and developers tend to use one or the other.
-I've been using Emacs for about twenty years, and thus I know in my bones that Emacs is the greatest of all possible text editors and Vim users are knuckle-draggers lumbered with poor taste and an inferior tool.
-Vim users no doubt think the same about me.
-
-If there is one thing that unites Vim and Emacs users it's the sure knowledge that new-fangled text editors like Sublime Text and Atom are bringing about the downfall of our civilization.
-Nonetheless we recommend using Atom if you're new to this text editing game.
-Both Vim and Emacs were created before the common interfaces in use today were created, and using them requires learning a very different way of working.
+Để học sử dụng dòng lệnh, bắt đầu sẽ tốn nhiều thời gian, nhưng phần thưởng lại một công cụ vô cùng mạnh mẽ.
+Trong cuốn này ta ít dùng cửa sổ dòng lệnh thôi, nên nếu bạn thấy "choáng" với ví dụ trên thì cũng đừng lo quá!
 
 
-### The Compiler
+### Trình soạn file chữ
 
-The code we write in a text editor is not in a form that a computer can run.
-A *compiler* translates it into something the computer can run.
-As it does this it performs certain checks on the code.
-If these checks don't pass the code won't be compiled and the compiler will print an error message instead.
-We'll learn more about what the compiler can check and what it can't in the rest of this book.
+Có lẽ bạn đã quen với viết văn bản bằng trình xử lý văn bản rồi.
+Một trình xử lý văn bản cho phép ta viết văn bản và kiểm soát định dạng để con chữ xuất hiện trên trang giấy như thế nào.
+Một trình xử lý văn bản bao gồm các tính năng mạnh mẽ, như soát lỗi chính tả và tự động tạo mục lục, hay trợ giúp cho việc viết các đoạn thơ một cách dễ dàng hơn.
 
-When we said the compiler translates the code is something the computer can run, this is not the complete truth in the case of Scala.
-The output of the compiler is something called bytecode, and another program, called the Java Virtual Machine (JVM), runs this code[^complications].
+Một *trình soạn file chữ (text editor)* cũng tựa như trình xử lý văn bản, nhưng là đối với mã lệnh.
+Nếu như trình xử lý văn bản quan tâm đến việc thể hiện hình thức của văn bản, thì trình soạn file chữ lại có nhiều tính năng cụ thể liên quan đến lập trình, điển hình có những công cụ mạnh giúp tìm kiếm và thay thế chữ, và khả năng nhanh chóng nhảy tới các phần khác nhau của file trong một dự án lập trình.
 
+Các trình soạn chữ có từ thời của thiết bị đầu cuối và có lẽ thật ngạc nhiên là một số vẫn còn được dùng đến ngày nay.
+Hai trình biên tập chữ cổ điển và huy hoàng vẫn còn tồn tại là Emacs và Vim.
+Chúng có cách thức tiếp cận rất khác biệt và lập trình viên thường chỉ chọn một trong hai.
+Tôi thì dùng Emacs khoảng 20 năm rồi, và trong lòng luôn coi Emacs là trình soạn chữ tốt nhất có thể có được, còn người dùng Vim thật ngốc nghếch với khiếu thẩm mĩ kém cùng một công cụ xoàng.
+Ngược lại, chắc hẳn những người dùng Vim sẽ nghĩ điều tương tự về tôi.
 
-### Integrated Development Environments
-
-Integrated development environments (IDEs) are an alternative approach that combine a text editor, a compiler, and several other programmer tools into a single program.
-Some people swear by IDEs, while some people prefer to use the terminal and a text editor.
-Our recommendation if you're new to programming is to take the terminal-and-text-editor approach.
-If you're already used to an IDE then IntelliJ IDEA is currently the best IDE for Scala development.
-
-
-### Version Control
-
-Version control is the final tool we'll use.
-A version control system is a program that allows us to keep a record of all the changes that have been made to a group of files.
-It's very useful for allowing multiple people to work on a project at the same time, and it ensures people don't accidentally overwrite each others changes.
-This is not a huge concern in Creative Scala, but it is good to get some exposure to version control now.
-
-The version control software we'll use is called Git.
-It's powerful but complex.
-The good news is we don't need to learn much about Git.
-Most of our use of Git will be via a website called GitHub, which allows people to share software that is stored in Git.
-We use GitHub to share the software used in Creative Scala.
+Nếu có thứ gì hoà giải được hai nhóm người dùng Vim và Emacs, đó hẳn phải là hiểu biết rằng những trình soạn chữ hiện đại như Sublime Text và Atom đang đưa tới hồi kết của thời đại cuộc chiến giữa Vim và Emacs.
+Dù sao thì chúng tôi cũng gợi ý bạn dùng Atom nếu bạn mới tham gia vào "cuộc chiến" trình soạn này.
+Cả Vim và Emacs được tạo ra trước khi các giao diện thông dụng như hiện nay ra đời, và việc sử dụng chúng lại đòi hỏi một cách làm việc rất khác.
 
 
-### Onward!
+### Trình biên dịch
 
-Now that we've got some background, let's move on to installing the software we need to write Scala code.
+Mã lệnh mà ta viết trong một trình soạn chữ thì lại không thuộc dạng mà máy tính có thể thực hiện được.
+Một *trình biên dịch* có nhiệm vụ dịch nó thành thứ mà máy tính có thể thực hiện được.
+Khi dịch mã, trình biên dịch sẽ thực hiện những khâu kiểm tra nhất định đối với mã lệnh.
+Nếu không vượt qua khâu kiểm tra này, mã lệnh sẽ không thể được biên dịch; thay vào đó trình biên dịch sẽ in ra một thông báo lỗi.
+Trong phần còn lại cuốn sách này, chúng ta sẽ biết thêm rằng trình biên dịch có thể kiểm tra những gì và không thể kiểm tra những gì.
+
+Khi chúng tôi nói rằng trình biên dịch sẽ dịch mã lệnh thành một thứ mà máy tính có thể chạy được, điều này không hoàn toàn đúng với trường hợp của Scala.
+Sản phẩm đầu ra của trình biên dịch là thứ được gọi là mã byte (bytecode), và một chương trình khác có tên là máy ảo Java (Java Virtual Machine, JVM), sẽ chạy mã byte này[^complications].
 
 
-[^complications]: This is not itself the entire truth! We usually run Scala code on the JVM, but we can actually compile Scala to three different formats. The first and most common is JVM bytecode. We can also compiled to Javascript, another programming language, which allows us to run Scala code in a web browser. Finally, Scala Native will compile Scala to something a computer *can* run directly without requiring the JVM.
+### Môi trường phát triển tích hợp
+
+Các môi trường phát triển tích hợp (integrated development environments, IDE) là một cách tiếp cận khác; ở đó một trình soạn chữ, một trình biên dịch, và vài công cụ lập trình khác được kết hợp vào thành một chương trình duy nhất.
+Có người trông cậy hoàn toàn vào IDE, song cũng có người thích dùng cửa sổ lệnh và trình soạn chữ hơn.
+Theo chúng tôi, nếu bạn mới lập trình thì nên chọn cách làm cửa sổ lệnh và trình soạn chữ.
+Còn nếu bạn đã dùng quen IDE rồi thì IntelliJ IDEA hiện là IDE để phát triển chương trình Scala.
+
+
+### Bộ kiểm soát phiên bản
+
+Công cụ cuối cùng mà ta sẽ sử dụng là bộ kiểm soát phiên bản.
+Một hệ thống kiểm soát phiên bản (version control system) là một chương trình cho phép ta ghi chép lại tất cả những thay đổi được thực hiện trên một nhóm tập tin.
+Việc cho phép mọi người đồng thời cùng làm việc trong một dự án là rất cần thiết, và nó đảm bảo rằng mọi người không vô ý ghi đè lên những thay đổi của người khác.
+Điều này không phải là mối quan tâm quá lớn trong Scala Sáng tạo, song ta nên bắt đầu tiếp xúc với kiểm soát phiên bản ngay từ bây giờ.
+
+Phầm mềm kiểm soát phiên bản mà ta sẽ sử dụng được gọi là Git. Nó rất mạnh song phức tạp.
+Một điều thuận lợi, đó là ta không cần phải học quá nhiều về Git.
+Phần lớn việc sử dụng Git của ta sẽ thông qua một website có tên GitHub; nó cho phép mọi người chia sẻ phần mềm được lưu trong Git.
+Ta sẽ dùng GitHub để chia sẻ phần mềm được sử dụng trong Scala Sáng tạo.
+
+
+### Tiến lên!
+
+Bây giờ khi đã có một vài kiến thức nền, ta hãy tiếp tục cài đặt phần mềm cần thiết để viết mã lệnh Scala.
+
+
+[^complications]: Điều này bản thân nó không hoàn toàn đúng! Ta thường chạy mã lệnh Scala trên JVM, song thực ra thì ta có thể biên dịch Sala thành 3 định dạng khác nhau. Định dạng đầu tiên và cũng thông dụng nhất là mã byte (bytecode) JVM. Ta cuxgn có thể biên dịch thành Javascript, một ngôn ngữ lập trình khác vốn cho phép chạy các mã lệnh Scala trong một trình duyệt. Sau cùng, Scala Native sẽ biên dịch Scala thành một thứ mà máy tính *có thể* chạy được trực tiếp mà không cần tới JVM.
