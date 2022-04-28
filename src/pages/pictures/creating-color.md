@@ -1,4 +1,4 @@
-## Creating Colors
+## Tạo ra màu sắc
 
 ```scala mdoc:invisible
 import doodle.core._
@@ -8,39 +8,39 @@ import doodle.image.syntax.core._
 import doodle.java2d._
 ```
 
-We've seen how to use predefined colors in our images. What about creating our own colors? In this section we will see how to create colors of our own, and transform existing colors into new ones.
+Ta đã thấy cách dùng những màu định sẵn cho các hình vẽ rồi. Thế còn tạo riêng ra các màu mới? Trong mục này ta sẽ thấy cách tự tạo màu, và biến đổi các màu sẵn có thành các màu mới.
 
-### RGB Colors
+### Các màu RGB
 
-Computers work with colors defined by mixing together different amounts of red, green, and blue. This "RGB" model is an [additive model][additive-model] of color, which means adding more colors gets us closer to white. This is the oppositive of paint, which is a subtractive model where adding more paints gets us closer to black. Each red, green, or blue component can have a value between zero and 255. If all three components are set to the maximum of 255 we get pure white. If all components are zero we get black.
+Máy tính làm việc với các màu được định nghĩa bằng cách trộn lẫn lượng sắc đỏ, sắc lục và sắc lam. Mô hình "RGB" này là một [mô hình cộng tính][additive-model] với màu sắc. Điều đó nghĩa là cộng thêm các sắc tố vào sẽ làm cho màu tổng hợp tiến gần tới màu trắng. Như vậy khác hẳn với sơn màu, đó là mô hình trừ; nghĩa là cứ thêm màu sơn vào sẽ tổng hơp tiến gần màu đen. Mỗi sắc tố đỏ, lục, và lam có thể nhận giá trị từ 0 đến 255. Nếu cả 3 thành phần đều đặt trị số cực đại bằng 255 thì ta được màu trắng. Nếu tất cả sắc tố bằng 0 thì ta được màu đen.
 
-We can create our own RGB colors using the `rgb` method on the `Color` object. This method takes three parameters: the red, green, and blue components. These are numbers between 0 and 255, called an `UnsignedByte`[^byte]. There is no literal expression for `UnsignedByte` like there is for `Int`, so we must convert an `Int` to `UnsignedByte`. We can do this with the `uByte` method. An `Int` can take on more values that an `UnsignedByte`, so if the number is too small or too large to be represented as a `UnsignedByte` it will be converted to the closest values is the range 0 to 255. These examples illustrate the conversion.
+Ta có thể tự tạo ra những màu RGB bằng phương thức `rgb` của đối tượng `Color`. Phương thức này nhận vào ba tham số: các sắc tố đỏ, lục và lam. Đó là những số từ 0 đến 255, gọi là `UnsignedByte`[^byte]. Không có biểu thức nguyên văn nào cho `UnsignedByte` như đã từng có với `Int`, bởi vậy ta phải quy đổi từ `Int` sang `UnsignedByte`. Có thể làm điều này bàng phương thức `uByte`. Một số `Int` có thể nhận nhiều giá trị hơn là một `UnsignedByte`. Bởi vậy, nếu con số quá nhỏ hoặc quá lớn để có thể biểu diễn bằng một một `UnsignedByte` thì nó sẽ được quy đổi thành giá trị sát nhất trong khoảng từ 0 đến 255. Những ví dụ dưới đây minh họa cho phép quy đổi.
 
 ```scala mdoc
 0.uByte.get
 255.uByte.get
 128.uByte.get
--100.uByte.get // Too small, is transformed to 0
-1000.uByte.get // Too big, is transformed to 255
+-100.uByte.get // Quá nhỏ, quy đổi thành 0
+1000.uByte.get // Quá lớn, quy đổi thành 255
 ```
 
-(Note that `UnsignedByte` is a feature of Doodle. It is not something provided by Scala.)
+(Lưu ý rằng `UnsignedByte` là một đặc điểm của Doodle. Nó không được cung cấp bởi Scala.)
 
-Now we know how to construct `UnsignedBytes` we can make RGB colors.
+Bây giờ khi đã biết cách lập nên `UnsignedBytes`, ta có thể tạo các màu RGB rồi.
 
 ```scala mdoc:silent
-Color.rgb(255.uByte, 255.uByte, 255.uByte) // White
-Color.rgb(0.uByte, 0.uByte, 0.uByte) // Black
-Color.rgb(255.uByte, 0.uByte, 0.uByte) // Red
+Color.rgb(255.uByte, 255.uByte, 255.uByte) // White, trắng
+Color.rgb(0.uByte, 0.uByte, 0.uByte) // Black, đen
+Color.rgb(255.uByte, 0.uByte, 0.uByte) // Red, đỏ
 ```
 
-### HSL Colors
+### Các màu HSL
 
-The RGB color representation is not very easy to use. The hue-saturation-lightness (HSL) format more closely corresponds to how we perceive color. In this representation a color consists of:
+Cách biểu diễn màu RGB không dễ dùng lắm. Định dạng HSL (viêt tắt từ hue-saturation-lightness, sắc độ-bão hòa-độ sáng) thì gàn gũi hơn với cách mà ta nhìn nhận các màu. Theo cách biểu diễn này, một màu gồm có:
 
-- *hue*, which is an angle between 0 and 360 degrees giving a rotation around the color wheel.
-- *saturation*, which is a number between 0 and 1 giving the intensity of the color from a drab gray to a pure color; and
-- *lightness* between 0 and 1 giving the color a brightness varying from black to pure white.
+- *sắc độ*, là góc từ 0 đến 360 độ quanh bánh xe màu.
+- *độ bão hòa*, là một số từ 0 đến 1, cho ta cường độ của màu từ một màu xám xỉn tới một màu thuần khiết; và 
+- *độ sáng* là một số từ 0 đến 1, cho màu đó một độ sáng từ đen tuyền đến trắng tinh.
 
 [@fig:pictures:color-wheel] shows how colors vary as we change hue and lightness, and [@fig:pictures:saturation] shows the effect of changing saturation.
 
@@ -108,7 +108,7 @@ Image.circle(40)
 [^byte]: A byte is a number with 256 possible values, which takes 8 bits within a computer to represent. A signed byte has integer values from -128 to 127, while an unsigned byte ranges from 0 to 255.
 
 
-### Transparency
+### Độ trong suốt
 
 We can also add a degree of transparency to our colors, by adding an *alpha* value. An alpha value of 0.0 indicates a completely transparent color, while a color with an alpha of 1.0 is completely opaque. The methods `Color.rgba` and `Color.hsla` have a fourth parameter that is a `Normalized` alpha value. We can also create a new color with a different transparency by using the `alpha` method on a color. Here's an example, shown in [@fig:pictures:rgb-alpha].
 
@@ -122,16 +122,16 @@ Image.circle(40)
 ![Circles with alpha of 0.5 showing transparency](./src/pages/pictures/rgb-alpha.pdf+svg){#fig:pictures:rgb-alpha}
 
 
-### Exercises {-}
+### Bài tập {-}
 
-#### Analogous Triangles {-}
+#### Các tam giác tương tự {-}
 
-Create three triangles, arranged in a triangle, with analogous colors. Analogous colors are colors that are similar in hue. See a (fairly elaborate) example in [@fig:pictures:analogous-triangles].
+Hãy tạo nên ba hình tam giác, được sắp đặt bên trong một hình tam giác, với màu sắc tương tự. Nói màu sắc tương tự nghĩa là chúng giống nhau về sắc độ. Hãy xem một ví dụ (khá kĩ lưỡng) ở [@fig:pictures:analogous-triangles].
 
-![Analogous triangles. The colors chosen are variations on `darkSlateBlue`](./src/pages/pictures/complementary-triangles.pdf+svg){#fig:pictures:analogous-triangles}
+![Các tam giác tương tự. Màu sắc được chọn là các biến thể của `darkSlateBlue`](./src/pages/pictures/complementary-triangles.pdf+svg){#fig:pictures:analogous-triangles}
 
 <div class="solution">
-These sort of examples are getting a bit too long to write out at the console. We'll look at a way around this next.
+Những kiểu ví dụ này đang trở nên ngày một dài dòng và khó viết từ console. Ta sẽ tìm cách khắc phục điều này trong bài sau.
 
 ```scala mdoc
 Image.triangle(40, 40)
