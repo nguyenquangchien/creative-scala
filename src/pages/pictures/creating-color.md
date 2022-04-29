@@ -42,13 +42,13 @@ Cách biểu diễn màu RGB không dễ dùng lắm. Định dạng HSL (viêt 
 - *độ bão hòa*, là một số từ 0 đến 1, cho ta cường độ của màu từ một màu xám xỉn tới một màu thuần khiết; và 
 - *độ sáng* là một số từ 0 đến 1, cho màu đó một độ sáng từ đen tuyền đến trắng tinh.
 
-[@fig:pictures:color-wheel] shows how colors vary as we change hue and lightness, and [@fig:pictures:saturation] shows the effect of changing saturation.
+[@fig:pictures:color-wheel] cho thấy màu sắc thay đổi ra sao khi thay chỉnh sắc độ và độ sáng, và [@fig:pictures:saturation] cho thấy ảnh hưởng từ sự thay đổi độ bão hòa.
 
-![A color wheel showing changes in hue (rotations) and lightness (distance from the center) with saturation fixed at 1.](src/pages/pictures/color-wheel.pdf+svg){#fig:pictures:color-wheel}
+![Một bánh xe màu ch tháy những thay đổi về sắc độ (quay bánh) và độ sáng (gần hay xa tâm) với độ bão hòa cố định bằng 1.](src/pages/pictures/color-wheel.pdf+svg){#fig:pictures:color-wheel}
 
-![A gradient showing how changing saturation effects color, with hue and lightness held constant. Saturation is zero on the left and one on the right.](src/pages/pictures/saturation.pdf+svg){#fig:pictures:saturation}
+![Một dốc màu (gradient) cho thấy việc thay đổi độ bão hòa ảnh hưởng thế nào đến màu sắc, khi giữ nguyên sắc độ và độ sáng. Độ bão hòa bằng 0 ở phía trái và bằng 1 ở phía phải.](src/pages/pictures/saturation.pdf+svg){#fig:pictures:saturation}
 
-We can construct a color in the HSL representation using the `Color.hsl` method. This method takes as parameters the hue, saturation, and lightness. The hue is an `Angle`. We can convert a `Double` to an `Angle` using the `degrees` (or `radians`) methods.
+Ta có thể lập nên một màu biểu diễn theo cách HSL bằng phương thức `Color.hsl`. Phương thức này nhận các tham số là sắc độ, độ bão hòa và độ sáng. Sắc độ là dữ liệu kiểu góc `Angle`. Ta có thể quy đổi từ `Double` sang `Angle` bằng các phương thức `degrees` (hay `radians`).
 
 ```scala mdoc
 0.degrees
@@ -56,28 +56,28 @@ We can construct a color in the HSL representation using the `Color.hsl` method.
 3.14.radians
 ```
 
-Saturation and lightness are both `Doubles` that should be between 0.0 and 1.0. Values outside this range will be converted to the closest number within the range. 
+Cả độ bão hòa lẫn độ sáng đều là `Doubles` và phải có giá trị từ 0.0 tới 1.0. Các giá trị rơi ra ngoài khoảng này sẽ được quy đổi về trị số sát nhất trong khoảng đó.
 
-We can now create colors using the HSL representation.
+Bây giờ ta có thể tạo các màu bằng cách biểu diễn HSL.
 
 ```scala mdoc:silent
-Color.hsl(0.degrees, 0.8, 0.6) // A pastel red
+Color.hsl(0.degrees, 0.8, 0.6) // Một màu đỏ pastel
 ```
 
-To view this color we can render it in a picture. See [@fig:pictures:triangle-pastel-red] for an example.
+Để xem được màu này ta có thể vẽ nó lên một bức tranh. Một ví dụ là [@fig:pictures:triangle-pastel-red].
 
-![Rendering pastel red in a triangle](./src/pages/pictures/triangle-pastel-red.pdf+svg){#fig:pictures:triangle-pastel-red}
+![Vẽ màu đỏ pastel lên một hình tam giác](./src/pages/pictures/triangle-pastel-red.pdf+svg){#fig:pictures:triangle-pastel-red}
 
 
-### Manipulating Colors
+### Thao tác với màu sắc
 
-The effectiveness of a composition often depends as much on the relationships between colors as the actual colors used. Colors have several methods that allow us to create a new color from an existing one. The most commonly used ones are:
+Mức độ hiệu quả của một cách phối màu thường phụ thuộc vào không chỉ những màu được chọn mà còn cả mối liên hệ giữa chúng nữa. Các màu có vài phương thức cho phép ta tạo ra màu mới từ mầu sẵn có. Những phương thức thông dụng nhất là:
 
-- `spin`, which rotates the hue by an `Angle`;
-- `saturate` and `desaturate`, which respectively add and subtract a `Normalised` value from the color; and
-- `lighten` and `darken`, which respectively add and subtract a `Normalised` value from the lightness.
+- `spin`, để quay sắc độ một góc bằng `Angle`;
+- `saturate` và `desaturate`, lần lượt cộng hoặc trừ một giá trị được chuẩn hóa vào màu hiện có; và
+- `lighten` và `darken`, lần lượt cộng hoặc trừ một giá trị được chuẩn hóa vào độ sáng.
 
-For example,
+Chẳng hạn,
 
 ```scala mdoc:silent
 Image.circle(100)
@@ -87,11 +87,11 @@ Image.circle(100)
      .strokeWidth(5.0)
 ```
 
-produces [@fig:pictures:three-circles-spin].
+cho ta [@fig:pictures:three-circles-spin].
 
-![Three circles, starting with Color.red and spinning by 15 degrees for each successive circle](./src/pages/pictures/three-circles-spin.pdf+svg){#fig:pictures:three-circles-spin}
+![Ba hình tròn, bắt đầu với Color.red và quay góc 15 độ ở từng hình kế tiếp](./src/pages/pictures/three-circles-spin.pdf+svg){#fig:pictures:three-circles-spin}
 
-Here's a similar example, this time manipulating saturation and lightness, shown in [@fig:pictures:saturate-and-lighten].
+Sau đây là một ví dụ tương tự, lần này thao tác với độ bão hòa và độ sáng, cho thấy ở hình [@fig:pictures:saturate-and-lighten].
 
 ```scala mdoc:silent
 Image.circle(40)
@@ -103,14 +103,14 @@ Image.circle(40)
                .beside(Image.rectangle(40,40).fillColor(Color.red)))
 ```
 
-![The top three circles show the effect of changing lightness, and the bottom three squares show the effect of changing saturation.](./src/pages/pictures/saturate-and-lighten.pdf+svg){#fig:pictures:saturate-and-lighten}
+![Ba hình tròn trên cùng cho thấy hiệu ứng thay đổi độ sáng, còn ba hình vuông dưới cùng cho thấy hiệu ứng thay đổi độ bão hòa.](./src/pages/pictures/saturate-and-lighten.pdf+svg){#fig:pictures:saturate-and-lighten}
 
-[^byte]: A byte is a number with 256 possible values, which takes 8 bits within a computer to represent. A signed byte has integer values from -128 to 127, while an unsigned byte ranges from 0 to 255.
+[^byte]: Byte là một số có thể nhận một trong 256 giá trị; byte chiếm 8 bit để biểu diễn nó trong máy tính. Một byte có dấu nhận các giá trị số nguyên từ -128 tới 127, còn byte không dấu chạy từ 0 đến 255.
 
 
 ### Độ trong suốt
 
-We can also add a degree of transparency to our colors, by adding an *alpha* value. An alpha value of 0.0 indicates a completely transparent color, while a color with an alpha of 1.0 is completely opaque. The methods `Color.rgba` and `Color.hsla` have a fourth parameter that is a `Normalized` alpha value. We can also create a new color with a different transparency by using the `alpha` method on a color. Here's an example, shown in [@fig:pictures:rgb-alpha].
+Ta cũng có thể thêm một chút độ trong suốt vào các màu sắc, bằng cách thêm một giá trị *alpha*. Giá trị alpha bằng 0.0 biểu thị một màu trong suốt, còn màu với alpha bằng 1.0 thì hoàn toàn đục. Các phương thức `Color.rgba` và `Color.hsla` có một tham số thứ tư là một trị số alpha được chuẩn hóa. Ta cũng có thể tạo một màu mới với độ trong suốt khác bằng cách dùng phương thức `alpha` trên một màu. Dưới đây là một ví dụ, cho kết quả như [@fig:pictures:rgb-alpha].
 
 ```scala mdoc:silent
 Image.circle(40)
@@ -119,7 +119,7 @@ Image.circle(40)
      .on(Image.circle(40).fillColor(Color.green.alpha(0.5.normalized)))
 ```
 
-![Circles with alpha of 0.5 showing transparency](./src/pages/pictures/rgb-alpha.pdf+svg){#fig:pictures:rgb-alpha}
+![Các hình tròn với alpha bằng 0.5 cho thấy mức độ trong suốt](./src/pages/pictures/rgb-alpha.pdf+svg){#fig:pictures:rgb-alpha}
 
 
 ### Bài tập {-}
