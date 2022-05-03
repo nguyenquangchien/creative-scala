@@ -1,13 +1,13 @@
-# Writing Larger Programs
+# Viết các chương trình lớn hơn
 
-We're getting to the point where it's inconvenient to type programs into the console. 
-In this chapter we'll learn about two tools for writing larger programs:
+Ta đã đến chỗ bắt đầu bất tiện khi phải gõ cả chương trình vào dấu nhắc console. 
+Ở chương này ta sẽ tìm hiểu thêm hai công cụ để viết các chương trình lớn hơn:
 
-- saving programs to a file so we don't have to type code over and over again;
-- giving names to values so we can reuse them.
+- lưu chương trình vào file để ta không phải gõ đi gõ lại mã lệnh;
+- đặt tên cho các giá trị để ta có thể sử dụng lại chúng.
 
 <div class="callout callout-info">
-If you run the examples from the SBT console within Doodle they will just work. If not, you will need to start your code with the following imports to make Doodle available.
+Nếu bạn chạy các ví dụ từ dòng lệnh SBT console bên trong Doodle thì chúng sẽ tự hoạt động. Nếu không, bạn sẽ cần phải mở đầu mã lệnh với những câu lệnh nhập import sau để Doodle dùng được.
 
 ```scala mdoc:silent
 import doodle.core._
