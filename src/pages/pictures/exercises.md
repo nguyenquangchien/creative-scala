@@ -1,4 +1,4 @@
-## Exercises
+## Bài tập
 
 ```scala mdoc:invisible
 import doodle.core._
@@ -8,18 +8,18 @@ import doodle.image.syntax.core._
 import doodle.java2d._
 ```
 
-### Compilation Target
+### Soạn ra mục tiêu
 
-Create a line drawing of an archery target with three concentric scoring bands, as shown in [@fig:pictures:target1].
+Hãy tạo một bức vẽ các đường nét thể hiện mục tiêu (bia) bắn tên gồm ba đường tròn đồng tâm như trên [@fig:pictures:target1].
 
-![Simple archery target](src/pages/pictures/target1.pdf+svg){#fig:pictures:target1}
+![Bia bắn đơn giản](src/pages/pictures/target1.pdf+svg){#fig:pictures:target1}
 
-For bonus credit add a stand so we can place the target on a range, as shown in [@fig:pictures:target2].
+Hãy tiến xa hơn và vẽ thêm một cái giá đỡ để dựng bia này trên trường bắn như trên [@fig:pictures:target2].
 
 ![Archery target with a stand](src/pages/pictures/target2.pdf+svg){#fig:pictures:target2}
 
 <div class="solution">
-The simplest solution is to create three concentric circles using the `on` method:
+Cách làm đơn giản nhất là tạo nên ba hình tròn đồng tâm bằng phương thức `on`:
 
 ```scala mdoc:silent
 Image
@@ -28,7 +28,7 @@ Image
   .on(Image.circle(60))
 ```
 
-For the extra credit we can create a stand using two rectangles:
+Thêm nữa, ta có thể tạo một giá đỡ bằng hai hình chữ nhật:
 
 ```scala mdoc:silent
 Image
@@ -41,18 +41,18 @@ Image
 </div>
 
 
-### Stay on Target
+### Nhằm thẳng mục tiêu
 
-Colour your target red and white, the stand in brown (if applicable),
-and some ground in green. See [@fig:pictures:target3] for an example.
+Hãy tô màu bia bằng hai màu đỏ và trắng, còn giá đỡ màu nâu (nếu được),
+và nền cỏ màu xanh. Xem ví dụ [@fig:pictures:target3].
 
-![Colour archery target](src/pages/pictures/target3.pdf+svg){#fig:pictures:target3}
+![Bia bắn tên được tô màu](src/pages/pictures/target3.pdf+svg){#fig:pictures:target3}
 
 <div class="solution">
-The trick here is using parentheses to control the order of composition.
-The `fillColor()`, `strokeColor()`, and `strokeWidth()` methods
-apply to a single image---we need to make sure that image
-comprises the correct set of shapes:
+Mẹo ở đây là sử dụng các cặp ngoặc tròn để kiểm soát thứ tự lồng ghép.
+Các phương thức `fillColor()`, `strokeColor()`, và `strokeWidth()`
+áp dụng đối với một hình ảnh thôi---ta phải đảm bảo rằng hình ảnh đó
+có chứa đúng tập hợp các hình ta cần:
 
 ```scala mdoc:silent
 Image
