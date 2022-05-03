@@ -1,4 +1,4 @@
-## Coding Outside the Console
+## Viết mã lệnh bên ngoài console
 
 ```scala mdoc:invisible
 import doodle.core._
@@ -8,13 +8,13 @@ import doodle.image.syntax.core._
 import doodle.java2d._
 ```
 
-The code we've been writing inside the console will cause problems running outside the console. For example, put the following code into `Example.scala` in the `src/main/scala`.
+Mã lệnh mà ta đã viết trong console sẽ rắc rỗi khi chạy ngoài console. Chẳng hạn, đưa mã lệnh sau vào file `Example.scala` trong đường dẫn `src/main/scala`.
 
 ```scala mdoc:silent
 Image.circle(100).fillColor(Color.paleGoldenrod).strokeColor(Color.indianRed)
 ```
 
-Now restart SBT and try to enter the console. You should see an error similar to
+Bây giờ hãy khởi động lại SBT và thử vào console. Bạn sẽ thấy một lỗi giống như
 
 ```bash
 [error] src/main/scala/Example.scala:1: expected class or object definition
@@ -23,16 +23,16 @@ Now restart SBT and try to enter the console. You should see an error similar to
 [error] one error found
 ```
 
-You'll see something similar if you're using an IDE.
+Bạn cũng sẽ thấy tương tự khi sử dụng môi trường IDE.
 
-The problem is this:
+Vấn đề là ở chỗ:
 
-- Scala is attempting to compile all our code before the console starts; and
-- there are restrictions on code written in files that don't apply to code written directly in the console.
+- Scala đang cố gắng biên dịch tất cả mã lệnh trước khi console khởi động, và
+- có những hạn chế đối với mã lệnh viết trong file vốn lại không ảnh hưởng đến mã lệnh viết trực tiếp vào console.
 
-We need to know about these restrictions and change how we write code in files accordingly.
+Ta cần biết về những hạn chế này và thay đổi cách viết mã lệnh trong file một cách tương ứng.
 
-The error message gives us some hint: `expected class or object definition`. We don't yet know what a class is, but we do know about objects---all values are objects. In Scala all code in a file must be written inside an object or class. We can easily define an object by wrapping an expression like the below.
+Thông báo lỗi cho ta lời gợi ý: `expected class or object definition` (trông đợi một định nghĩa lớp hoặc đối tượng). Ta chưa biết lớp là cái gì, song ta đã biết về đối tượng---mọi giá trị đều là đối tượng. Trong Scala, tất cả mã lệnh viết trong một file phải nằm trong một đối tượng hoặc một lớp. Ta có thể dễ dàng định nghĩa một đối tượng bằng cách bao bọc lấy biểu thức theo cách dưới đây.
 
 ```scala mdoc:silent
 object Example {
@@ -40,7 +40,7 @@ object Example {
 }
 ```
 
-Now the code won't compile for a different reason. You should see a lot of errors similar to
+Bây giờ mã lệnh lại không biên dịch vì một lí do khác. Ta sẽ thấy rất nhiều lỗi kiểu như 
 
 ```bash
 [error] doodle/shared/src/main/scala/doodle/examples/Example.scala:1: not found: value Image
@@ -48,20 +48,20 @@ Now the code won't compile for a different reason. You should see a lot of error
 [error]   ^
 ```
 
-The compiler is saying that we've used a name, `circle`, but the compiler doesn't know what value this name refers to.
-It will have a similiar issue with `Color` in the code above.
-We'll talk in more details about names in just a moment.
-Right now let's tell the compiler where it can find the values for these names by adding some `import` statements.
-The name `Color` is found inside a *package* called `doodle.core`, and the name `circle` is within the object `Image` that is in `doodle.image`.
-We can tell the compiler to use all the name in `doodle.core`, and all the names in `doodle.image` by writing
+Trình biên dịch nói rằng ta đã dùng một cái tên, `circle`, song trình biên dịch không biết tên này chỉ tới giá trị nào.
+Nó sẽ có vấn đề tương tự với `Color` ở mã lệnh bên trên.
+Chúng tôi sẽ nói kĩ hơn về tên sau.
+Ngay bây giờ ta hãy bảo trình biên dịch có thể tìm các tên này ở đâu bằng cách thêm vài câu lệnh `import`.
+Cái tên `Color` được tìm thấy trong một *gói* có tên `doodle.core`, và tên `circle` nằm trong đối tượng `Image` đến lượt nó lại nằm trong `doodle.image`.
+Ta có thể bảo trình biên dịch dùng tất cả các tên trong `doodle.core`, và tất cả tên trong `doodle.image` bằng cách viết
 
 ```scala mdoc:silent
 import doodle.core._
 import doodle.image._
 ```
 
-There are a few other names that the compiler will need to find for the complete code to work.
-We can import these with the lines
+Còn có vài tên gọi khác mà trình biên dịch sẽ cần tìm kiếm để chạy được mã lệnh hoàn chỉnh ta viết.
+Ta có thể nhập các tên này bằng những dòng lệnh
 
 ```scala mdoc:silent
 import doodle.image.syntax._
@@ -69,7 +69,7 @@ import doodle.image.syntax.core._
 import doodle.java2d._
 ```
 
-We should place all these imports at the top of the file, so the complete code looks like
+Ta có thể đặt tất cả những câu lệnh nhập import này ở đầu file, như vậy mã lệnh hoàn chỉnh sẽ như sau
 
 ```scala
 import doodle.core._
@@ -83,14 +83,14 @@ object Example {
 }
 ```
 
-With this in place the code should compile without issue.
+Với tất cả đã xong xuôi, mã lệnh sẽ biên dịch được mà không vấn đề gì.
 
-Now when we go to the console within SBT we can refer to our code using the name, `Example`, that we've given it.
+Bây giờ khi ta vào console trong SBT, ta có thể gọi đến mã lệnh đã viết bằng cái tên `Example` mà ta đã đặt cho nó.
 
 ```scala
-Example // draws the image
+Example // vẽ hình
 ```
 
-### Exercise {-}
+### Bài tập {-}
 
-If you haven't done so already, save the code above in the file `src/main/scala/Example.scala` and check that the code compiles and you can access it from the console.
+Nếu bạn chưa làm, hãy lưu mã lệnh trên vào file `src/main/scala/Example.scala` rồi kiểm tra để đảm bảo rằng mã lệnh biên dịch và bạn có thể truy cập được nó từ console.
