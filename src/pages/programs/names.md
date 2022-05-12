@@ -8,24 +8,24 @@ import doodle.image.syntax.core._
 import doodle.java2d._
 ```
 
-In the previous section we introduced a lot of new concepts.
-In this section we'll explore one of those concepts: naming values.
+Ở các mục trước, chúng tôi đã giới thiệu rất nhiều khái niệm mới.
+Trong mục này, ta sẽ khám phá một trong những khái niệm đó: đặt tên cho giá trị.
 
-We use names to refer to things.
-For example, "Professeur Emile Perrot" refers to a very fragrant rose variety, while "Cherry Parfait" is a highly disease resistant variety but barely smells at all.
-Much ink has been spilled, and many a chin stroked, on how exactly this relationship works in spoken language.
-Programming languages are much more constrained, which allows us to be much more precise: names refer to values.
-We will sometimes say names are *bound* to values, or a name introduces a *binding*.
-Wherever we would write out a value we can instead use its name, if the value has a name.
-In other words, a name evaluates to the value it refers to.
-This naturally raises the question: how do we give names to values?
-There are several ways to do this in Scala.
-Let's see a few.
+Ta dùng tên để chỉ các thứ khác nhau. 
+Chẳng hạn, "Professeur Emile Perrot" dùng để chỉ một loài hoa hồng ngát hương, còn "Cherry Parfait" là loài hoa có khả năng chống bệnh tốt nhưng hầu như chẳng có mùi thơm gì.
+Viết dài dòng với những câu từ hoa mĩ như vậy mới thể hiện được khác biệt trong lời văn.
+Nhưng ngôn ngữ lập trình thì hạn chế hơn nhiều, chúng cho phép ta nói chính xác: tên gọi chỉ đến giá trị.
+Đôi khi ta nói rằng các tên *buộc* vào giá trị, hay tên giới thiệu một *dây buộc*.
+Mỗi khi ta phải viết ra giá trị thì thay vào đó sẽ viết tên nó, nếu giá trị này có tên. 
+NÓi cách khác, một cái tên sẽ ước lượng thành giá trị mà nó chỉ đến. 
+Từ đây sẽ tự nhiên nảy sinh câu hỏi: làm thế nòa để đặt tên cho các giá trị?
+Trong Scala, có vài cách thực hiện điều này.
+Hãy cùng xem nhé.
 
 
-### Object Literals
+### Nguyên văn đối tượng
 
-We have already seen an example of declaring an object literal.
+Ta đã thấy ví dụ về khai báo một nguyên văn đối tượng rồi.
 
 ```scala mdoc:silent
 object Example {
@@ -33,56 +33,56 @@ object Example {
 }
 ```
 
-This is a literal expression, like other literals we've seen so far, but in this case it creates an object with the name `Example`.
-When we use the name `Example` in a program it evaluates to that object.
+Đây là một biểu thức nguyên văn, cũng như những nguyên văn khác mà ta từng gặp, nhưng trong trường hợp này nó tạo nên một đối tượng với cái tên `Example`.
+Trong một chương trình, khi ta dùng tên `Example`, nó sẽ ước lượng thành đối tượng đó.
 
 ```scala
 Example
 // Example.type = Example$@76c39258
 ```
 
-Try this in the console a few times.
-Do you notice any difference in uses of the name?
-You might have noticed that the *first* time you entered the name `Example` a picture was drawn, but on subsequent uses this didn't happen.
-The first time we use an object's name the body of the object is evaluated and the object is created.
-On subsequent uses of the name the object already exists and is not evaluated again.
-We can tell there is a difference in this case because the expression inside the object calls the `draw` method.
-If we replaced it with something like `1 + 1` (or just dropped the call to `draw`) we would not be able to tell the difference.
-We'll have plenty more to say about this in a later chapter.
+Hãy thử lệnh này vài lần trong console.
+Bạn có nhận thấy khác biệt gì giữa các lần sử dụng tên này không?
+Bạn có thể phát hiện thấy rằng lần *đàu* khi nhập vào tên `Example` thì sẽ vẽ nên bức tranh, song điều này sẽ không xảy ra ở những lần tiếp theo sử dụng tên.
+Lần đầu tiên ta dùng tên một đối tượng thì phần thân của đối tượng được ước lượng và đối tượng được tạo nên.
+Ở những lần sử dụng tiếp theo, đối tượng đã tồn tại rồi và sẽ không ước lượng lại nữa.
+Có thể nói rằng sự khác biệt ở đây nằm ở chỗ biểu thức bên trong đối tượng gọi đến phương thức `draw`.
+Nếu ta thay thế nó bằng một thứ kiểu như `1 + 1` (hoặc đơn giản chỉ xóa bỏ lời gọi tới `draw`) thì sẽ không thể nào phân biệt được giữa chúng.
+Trong chương tiếp theo ta sẽ còn nói nhiều về vấn đề này.
 
-We might wonder about the type of the object we've just created.
-We can ask the console about this.
+Bạn có thể băn khoăn về kiểu của đối tượng mới được tạo nên.
+Ta có thể hỏi console về điều này.
 
 ```scala
 :type Example
 // Example.type
 ```
 
-The type of `Example` is `Example.type`, a unique type that no other value has.
+Kiểu của `Example` là `Example.type`, một kiểu độc nhất mà không giá trị nào khác có được.
 
 
-### `val` Declarations
+### Những khai báo `val`
 
-Declaring an object literal mixes together object creation and defining a name.
-It would be useful if we could separate the two, so we could give a name to a pre-existing object.
-A `val` declaration allows us to do this.
+Việc khai báo một nguyên văn đối tượng là sự hòa trộn giữa tạo đối tượng và định nghĩa một cái tên.
+Sẽ rất hữu ích nếu ta có thể tách bạch hai điều này, để có thể đặt tên cho một đối tượng đã tồn tại rồi.
+Lời khai báo `val` cho phép ta làm điều này.
 
-We use `val` by writing
+Ta dùng `val` bằng cách viết
 
 ```scala
 val <name> = <value>
 ```
 
-replacing `<name>` and `<value>` with the name and the expression evaluating to the value respectively.
-For example
+trong đó `<name>` và `<value>` lần lượt thay cho tên và biểu thức ước lượng thành giá trị.
+Chẳng hạn
 
 ```scala mdoc:silent
 val one = 1
 val anImage = Image.circle(100).fillColor(Color.red)
 ```
 
-These two declarations define the names `one` and `anImage`.
-We can use these names to refer to the values in later code.
+Hai lệnh khai báo này đã định nghĩa những cái tên `one` và `anImage`.
+Ta có thể dùng hai tên gọi này để chỉ các giá trị trong mã lệnh sau này.
 
 ```scala mdoc
 one
@@ -90,26 +90,26 @@ anImage
 ```
 
 
-### Declarations
+### Lời khai báo
 
-We've talked about declarations and definitions above.
-It's now time to be precise about what these terms mean, and to look in a bit more depth at the differences between `object` and `val`.
+Ở trên ta đã nói về các lời khai báo và định nghĩa.
+Bây giờ là lúc để nói chính xác hơn ý nghĩa của những khái niệm này, và phân tích sâu hơn những khác biệt giữa `object` và `val`.
 
-We already know about expressions.
-They are a part of a program that evaluates to a value.
-A *declaration* or *definition* is another part of a program, but do not evaluate to a value.
-Instead they give a name to something---not always to a value as you can declare types in Scala, though we won't spend much time on this.
-Both `object` and `val` are declarations.
+Ta đã biết về các biểu thức.
+Chúng là thành phần của một chương trình, và ước lượng thành giá trị.
+Một lời *khai báo* hay *định nghĩa* là thành phần khác của chương trình, nhưng không ước lượng thành giá trị.
+Thay vì vậy, chúng đặt tên cho một thứ gì đó---không nhất thiết phải là giá trị, vì bạn có thể khai báo các kiểu trong Scala, dù ta không dành nhiều thời gian về điều này.
+Cả `object` lẫn `val` đều là những lời khai báo.
 
-One consequence of declarations being separate from expressions is we can't write program like
+Một hệ quả của sự tách biệt giữa khai báo với biểu thức, đó là ta không thể viết chương trình kiểu như
 
 ```scala
 val one = ( val aNumber = 1 )
 ```
 
-because `val aNumber = 1` is not an expression and thus does not evaluate to a value.
+vì `val aNumber = 1` không phải là biểu thức và do vậy không ước lượng thành giá trị.
 
-We can however write
+Dù vậy, ta có thể viết 
 
 ```scala mdoc:reset
 val aNumber = 1
@@ -117,44 +117,44 @@ val one = aNumber
 ```
 
 
-### The Top-Level
+### Tầng đỉnh
 
-It seems a bit unsatisfactory to have both `object` and `val` declarations, as they both give names to values.
-Why not just have `val` for declaring names, and make `object` just create objects without naming them?
-Can you declare an object literal without a name?
+Dường như không ổn khi ta có cả lời khai báo `object` lẫn `val`, vì chúng đều đặt tên cho giá trị.
+Tại sao không phải chỉ là `val` để khai báo tên, và để cho `object` chi tạo nên đối tượng mà không đặt tên chúng?
+Bạn có thể khai báo một nguyên văn đối tượng mà không đặt tên không?
 
 <div class="solution">
-No, Scala doesn't allow us to do this.
-For example, we can't write
+Không, Scala không cho phép ta làm điều này.
+Chẳng hạn, ta không thể viết 
 
 ```scala
 object {}
 ```
 
-We have to give a name to any object literal we create.
+Ta phải đặt tên cho bất kì nguyên văn đối tượng nào ta tạo ra.
 </div>
 
-Scala distinguishes between what is called the *top-level* and other code.
-Code at the top-level is code that doesn't have any other code wrapped around.
-In other words it is something we can write in a file and Scala will compile without having to wrap it in an `object`.
+Scala phân biệt giữa cái mà ta gọi là *tầng đỉnh* với mã lệnh khác.
+Mã lệnh tại tầng đỉnh thì không có mã lệnh nào khác bọc quanh nó.
+Nói cách khác, nó là những gì ta có thể viết vào một file mà Scala sẽ biên dịch mà không phải bọc nó vào một `object`.
 
-We've seen that expressions aren't allowed at the top-level.
-Neither are `val` definitions.
-Object literals, however, are.
+Ta đã thấy rằng các biểu thức không được phép viết tại tầng đỉnh.
+Các định nghĩa `val` cũng vậy.
+Tuy nhiên, các nguyên văn đối tượng thì được.
 
-This distinction is a bit annoying.
-Some other languages don't have this restriction.
-In Scala's case it comes about because Scala builds on top of the Java Virtual Machine (JVM), which was designed to run Java code.
-Java makes a distinction between top-level and other code, and Scala is forced to make this distinction to work with the JVM.
-The Scala console *doesn't* make this top-level distinction (we can think of everything written in the console being wrapped in some object) which can lead to confusion when we first start using Scala.
+Sự phân biệt này có chút khó chịu.
+Một số ngôn ngữ khác không có sự bó buộc này.
+Với trường hợp Scala, sở dĩ vậy vì Scala được lập trên cơ sở máy ảo Java Virtual Machine (JVM), vốn được thiết kế để chạy mã lệnh Java.
+Java phân biệt giữa mã tầng đỉnh với mã lệnh khác, và Scala bị buộc phải phân biệt thế này khi làm việc với JVM. 
+Console của Scala *không* có sự phân biệt tầng đỉnh này (bạn có thể hình dung rằng mọi thứ viết trên console đều được bọc bằng một đối tượng nào đó); điều này có thể gây nhầm lẫn với người mới dùng Scala.
 
-If an object literal is allowed at the top-level, but a `val` definition is not, does this mean we can declare a `val` inside an object literal?
-If we can declare a `val` inside an object literal, can we later refer to that name?
+Nếu tầng đỉnh cho phép viết nguyên văn đối tượng, nhưng không cho định nghĩa `val`, thì điều này có nghĩa rằng ta được khai báo `val` bên trong một nguyên văn đối tượng không?
+Nếu ta có thể khai báo `val` bên trong một nguyên văn đối tượng, thì sau này ta có thể chỉ đến tên gọi đó không?
 
 <div class="solution">
-We sure can!
+Được, dĩ nhiên rồi!
 
-We can put a `val` inside an object literal like so:
+Ta có thể viết `val` bên trong một nguyên văn đối tượng như sau:
 
 ```scala mdoc:reset:silent
 object Example {
@@ -162,26 +162,26 @@ object Example {
 }
 ```
 
-We can then refer to it using the `.` syntax we've been using already.
+Khi đó ta có thể chỉ đến nó bằng cú pháp `.` mà ta đã dùng.
 
 ```scala mdoc
 Example.hi
 ```
 
-Note that we can't use `hi` on it's own
+Lưu ý rằng ta không thể viết `hi` lẻ loi được:
 
 ```scala mdoc:fail
 hi
 ```
 
-We have to tell Scala we want to refer to the name `hi` defined inside the object `Example`.
+Ta phải báo Scala biết rằng ta muốn chỉ tới cái tên `hi` định nghĩa bên trong đối tượng `Example`.
 </div>
 
 
-### Scope
+### Phạm vi
 
-If you did the last exercise (and you did, didn't you?) you'll have seen that a name declared inside an object can't be used outside the object without also referring to the object that contains the name.
-Concretely, if we declare
+Nếu bạn đã làm bài tập trên (bạn làm rồi chứ?) thì sẽ thấy được rằng một cái tên định nghĩa trong một đối tượng sẽ không thể dùng được ngoài đối tượng mà quên chỉ ra đối tượng có chứa tên đó.
+Cụ thể, nếu ta khai báo
 
 ```scala mdoc:reset:silent
 object Example {
@@ -189,28 +189,29 @@ object Example {
 }
 ```
 
-we can't write
+thì ta không thể viết
 
 ```scala mdoc:fail
 hi
 ```
 
-We must tell Scala to look for `hi` inside `Example`.
+Ta phải bảo Scala đi tìm `hi` bên trong `Example`.
 
 ```scala mdoc
 Example.hi
 ```
 
-We say that a name is *visible* in the places where it can be used without qualification, and we call the places where a name is visible its *scope*.
-So using our fancy-pants new terminology, `hi` is not visible outside of `Example`, or alternatively `hi` is not in scope outside of `Example`.
+Ta nói rằng một cái tên chỉ *nhìn thấy* ở những chỗ mà nó có thể được dùng mà không phải định tên (bằng cú pháp dấu chấm như trên), và cũng nói rằng *phạm vi* của một cái tên là những chỗ mà tên đó nhìn thấy được.
+Như vậy, khi dùng các thuật ngữ mới rất trang trọng này, thì `hi` không thể nhìn thấy bên ngoài `Example`, hoặc nói cách khác `hi` chỉ có phạm vi trong `Example`.
 
-How do we work out the scope of a name?
-The rule is fairly simple: a name is visible from the point it is declared to the end of the nearest enclosing braces (braces are `{` and `}`).
-In the example above `hi` is enclosed by the braces of `Example` and so is visible there.
-It's not visible elsewhere.
+Làm thế nào để xác định phạm vi của một cái tên?
+Quy tắc cũng khá đơn giản: một cái tên chỉ nhìn thấy từ chỗ nó được khai báo đến cuối dấu đóng ngoặc nhọn gần nhất (các ngoặc nhọn gồm `{` và `}`).
+Ở ví dụ trên `hi` được bọc bởi các dấu ngoặc của `Example` và do vậy chỉ nhìn thấy trong đó. 
+Nó không thể nhìn thấy được từ những chỗ khác.
 
-We can declare object literals inside object literals, which allows us to make finer distinctions about scope.
-For example in the code below
+Ta có thể khai báo các nguyên văn đối tượng bên trong nguyên văn đối tượng khác, bằng cách này cho phép phân biệt phạm vi một cách chi li hơn.
+
+Chẳng hạn, trong mã lệnh dưới đây
 
 ```scala mdoc:silent
 object Example1 {
@@ -222,12 +223,12 @@ object Example1 {
 }
 ```
 
-`hi` is in scope in `Example2` (`Example2` is defined within the braces that enclose `hi`).
-However the scope of `hello` is restricted to `Example2`, and so it has a smaller scope than `hi`.
+`hi` vẫn trong tầm với trong `Example2` (`Example2` được định nghĩa bên trong cặp ngoặc nhọn bao bọc `hi`).
+Tuy nhiên phạm vi của `hello` bị hạn chế trông `Example2`, và phạm vi của nó bó hẹp hơn là `hi`.
 
-What happens if we declare a name within a scope where it is already declared?
-This is known as *shadowing*.
-In the code below the definition of `hi` within `Example2` shadows the definition of `hi` in `Example1`
+Điều gì sẽ xảy ra nếu ta khai báo một cái tên bên trong một phạm vi nơi đã được khai báo rồi?
+Hiện tượng này là *phủ bóng*.
+Trong mã lệnh dưới đây, lời định nghĩa `hi` bên trong `Example2` đã phủ bóng định nghĩa `hi` trong `Example1`
 
 ```scala mdoc:reset:silent
 object Example1 {
@@ -239,17 +240,17 @@ object Example1 {
 }
 ```
 
-Scala let's us do this, but it is generally a bad idea as it can make code very confusing.
+Scala cho phép ta làm điều này, song nói chung đây là cách làm dở vì nó có thể khiến mã lệnh rất khó hiểu.
 
-We don't have to use object literals to create new scopes.
-Scala allows us to create a new scope just about anywhere by inserting braces.
-So we can write
+Ta không cần dùng các nguyên văn đối tượng để tạo nên những phạm vi mới.
+Scala cho phép ta tạo phạm vi mới gần như mọi nơi chỉ bằng việc viết cặp ngoặc nhọn. 
+Bởi vậy ta có thể viết
 
 ```scala mdoc:reset:silent
 object Example {
   val good = "Good"
 
-  // Create a new scope
+  // Tạo một phạm vi mới
   {
     val morning = good ++ " morning"
     val toYou = morning ++ " to you"
@@ -259,18 +260,18 @@ object Example {
 }
 ```
 
-`morning` (and `toYou`) is declared within a new scope. We have no way to refer to this scope from the outside (it has no name) so we cannot refer to `morning` outside of the scope where it is declared.
-If we had some secrets that we didn't want the rest of the program to know about this is one way we could hide them.
+`morning` (và `toYou`) được khai báo bên trong một phạm vi mới. Ta không có cách nào chỉ đến phạm vi này từ bên ngoài (vì phạm vi này vô danh), bởi vậy ta không thể chỉ tới `morning` từ bên ngoài phạm vi mà nó được khai báo.
+Nếu ta có điều gì bí mật mà không muốn cho phần còn lại của chương trình biến đến, thì đây chính là một cách để che giấu đi.
 
-The way nested scopes work in Scala is called *lexical scoping*.
-Not all languages have lexical scoping.
-For example, Ruby and Python do not, and Javascript has only recently acquired lexical scoping.
-It is the authors' opinion that creating a language without lexical scope is an idea on par with eating a bushel of Guatemalan insanity peppers and then going to the toilet without washing your hands.
+Cách hoạt động của các phạm vi lồng ghép nhau trong Scala được gọi là *phạm vi từ vựng*.
+Không phải ngôn ngữ nào cũng có phạm vi từ vựng.
+Chẳng hạn, Ruby và Python không có, còn Javascript thì mãi gần đây mới tiếp nhận phạm vi từ vựng.
+Theo tác giả thì việc tạo nên ngôn ngữ mà không có phạm vi từ vựng thì cũng chẳng khác gì ăn ớt cay rồi đi vệ sinh mà không rửa tay vậy.
 
 
-### Exercises {-}
+### Bài tập {-}
 
-Test your understanding of names and scoping by working out the value of `answer` in each case below.
+Hãy kiểm tra hiểu biết của bạn về các tên gọi và phạm vi bằng cách tìm ra giá trị của `answer` ở mỗi trường hợp sau.
 
 ```scala mdoc:silent
 val a = 1
@@ -279,7 +280,7 @@ val answer = a + b
 ```
 
 <div class="solution">
-A simple example to get started with. `answer` is `1 + 2`, which is `3`.
+Một ví dụ đơn giản để mở đầu. `answer` bằng `1 + 2`, tức là `3`.
 </div>
 
 ```scala mdoc:silent
@@ -298,7 +299,7 @@ object One {
 ```
 
 <div class="solution">
-Another simple example. `answer` is `1 + 2`, which is `3`. `Two.a` is not in scope where `answer` is defined.
+Một ví dụ đơn giản khác. `answer` bằng `1 + 2`, tức là `3`. `Two.a` nằm ngoài tầm với khi `answer` được định nghĩa.
 </div>
 
 ```scala mdoc:reset:silent
@@ -314,7 +315,7 @@ object One {
 ```
 
 <div class="solution">
-Here `Answer.a` shadows `One.a` so `answer` is `1 + 2`, which is `3`.
+Ở đây `Answer.a` phủ bóng lên `One.a` cho nên `answer` bằng `1 + 2`, tức là `3`.
 </div>
 
 ```scala mdoc:reset:silent
@@ -326,7 +327,7 @@ object One {
 ```
 
 <div class="solution">
-This is perfectly fine. The expression `a + 1` on the right hand side of the declaration of `b` is an expression like any other so `answer` is `3` again.
+Viết thế này hoàn toàn hợp lệ. Biểu thức `a + 1` ở vế phải của dòng khai báo `b` cũng giống như bao biểu thức khác, vì vậy một lần nữa `answer` lại bằng `3`.
 </div>
 
 ```scala mdoc:reset:fail:silent
@@ -342,7 +343,7 @@ object One {
 ```
 
 <div class="solution">
-This code doesn't compile as `b` is not in scope where `answer` is declared.
+Mã lệnh này không biên dịch vì `b` nằm ngoài tầm với khi `answer` được khai báo.
 </div>
 
 ```scala mdoc:silent:fail
@@ -355,5 +356,5 @@ object One {
 ```
 
 <div class="solution">
-Trick question! This code doesn't work. Here `a` and `b` are defined in terms of each other which leads to a circular dependency that can't be resolved.
+Câu hỏi mẹo! Mã lệnh này không hoạt động. Ở đây `a` và `b` được khai báo phụ thuộc lẫn nhau, dẫn tới sự phụ thuộc luẩn quẩn mà không thể phân giải được.
 </div>
