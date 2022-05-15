@@ -1,40 +1,40 @@
-## Packages and Imports
+## Các gói và lệnh nhập
 
-When we changed our code to compile we had to add many *import statements* to it.
-In this section we learn about them.
+Khi ta thay đổi mã lệnh để biên dịch, ta phải thêm vào nhiều *lệnh nhập*.
+Ở mục này, ta sẽ tìm hiểu về chúng.
 
-We've seen that one name can shadow another.
-This can cause problems in larger programs as many parts of a program many want to put a common name to different uses.
-We can create scopes to hide names from the outside, but we must still deal with names defined at the top-level.
+Ta đã thấy rằng một tên có thể phủ bóng lên một tên khác. 
+Điều này có thể gây nên vấn đề trong những chương trình lớn hơn, vì nhiều phần của chương trình có thể muốn dùng một tên chung cho nhiều mục đích.
+Ta có thể tạo nên các phạm vi để che giấu những tên này khỏi bên ngoài, song vẫn cần phải giải quyết những cái tên định nghĩa ở tầng đỉnh.
 
 
-We have the same problem in natural language.
-For example, if both your brother and friend were called "Ziggy" you would have to qualify which one you meant when you used their name.
-Perhaps you could tell from context, or perhaps your friend was "Ziggy S" and your brother was just "Ziggy".
+Ta cũng gặp vấn đề tương tự trong ngôn ngữ giao tiếp.
+Chẳng hạn, nếu cả người anh và một cậu bạn đều có tên là "Ziggy" thì bạn sẽ phải hạn định xem bạn muốn chỉ ai khi gọi tên họ.
+Có thể bạn sẽ phân biệt theo ngữ cảnh, hoặc có lẽ tên cậu bạn là "Ziggy S" còn tên người anh chỉ là "Ziggy".
 
-In Scala we can use *packages* to organise names.
-A package creates a scope for names defined at the top-level.
-All top-level names within the same package are defined in the same scope.
-To bring names in a package into another scope we must *import* them.
+Trong Scala, ta có thể dùng các *gói* để tổ chức các tên. 
+Mỗi gói tạo ra một phạm vi cho các tên được định nghĩa ở tầng đỉnh.
+Tất cả các tên tầng đỉnh trong cùng một gói thì được định nghĩa trong cùng phạm vi.
+Để đưa các tên trong một gói vào một phạm vi khác, ta phải *nhập* chúng.
 
-Creating a package is simple: we write
+Để tạo một gói thì rất đơn giản: ta viết 
 
 ```scala
 package <name>
 ```
 
-at the top of the file, replace `<name>` with the name of our package.
+vào đầu file, trong đó thay `<name>` bởi tên của gói.
 
-When we want to use names defined in a package we use an `import` statement, specifying the package name followed by `_` for all names, or the just the name we want if we only want one or a few names.
+Khi ta muốn dùng các tên định nghĩa trong một gói, ta dùng một lệnh `import` (nhập), chỉ định tên của gói theo sau là `_` cho tất cả các tên, hoặc chỉ một số tên cụ thể trong gói đó nếu muốn.
 
-Here's an example.
+Sau đây là một ví dụ.
 
 <div class="info">
-You can't define packages in the console.
-To get the following code to work you must put the code within the package `example` into a file and compile it.
+Bạn không thể định nghĩa gói từ trong console.
+Để chạy các mã lệnh sau bạn phải viết mã lệnh trong gói `example` vào một file và bien dịch file đó.
 </div>
 
-Let's start by defining some names within a package.
+Hãy cùng bắt đầu bằng việc định nghĩa vài cái tên trong một gói.
 
 ```scala
 package example
@@ -52,8 +52,8 @@ object Three {
 }
 ```
 
-Now to bring these names into scope we must import them.
-We could import just one name.
+Bây giờ để đưa những tên này vào trong phạm vi, ta phải nhập chúng.
+Có thể ta chỉ nhập mỗi một cái tên.
 
 ```scala
 import example.One
@@ -61,7 +61,7 @@ import example.One
 One.one
 ```
 
-Or both `One` and `Two`.
+Hoặc nhập cả hai tên `One` và `Two`.
 
 ```scala
 import example.{One, Two}
@@ -69,7 +69,7 @@ import example.{One, Two}
 One.one + Two.two
 ```
 
-Or all the names in `example`.
+Hoặc nhập tất cả mọi tên trong `example`.
 
 ```scala
 import example._
@@ -77,8 +77,8 @@ import example._
 One.one + Two.two + Three.three
 ```
 
-In Scala we can also import just about anything that defines a scope, including objects.
-So the following code brings `one` into scope.
+Trong Scala, ta cũng có thể nhập vào gần như mọi thứ định nghĩa nên một phạm vi, bao gồm các đối tượng.
+Vì vậy mã lệnh sau sẽ đưa `one` vào trong phạm vi.
 
 ```scala
 import example.One._
@@ -86,15 +86,15 @@ import example.One._
 one
 ```
 
-### Package Organisation
+### Tổ chức gói
 
-Packages stop top-level names from colliding, but what about collisions between package names?
-It's common to organise packages in a hierarchy, which helps to avoid collisions.
-For example, in Doodle the package `core` is defined within the package `doodle`.
+Gói giúp ta ngăn chặn các tên ở tầng đỉnh khỏi xung khắc nhau, song sự xung khắc giữa các tên gói thì sao?
+Người ta thường tổ chức các gói theo cấp bậc, để tránh xung khắc. 
+Chẳng hạn, trong Doodle thì gói `core` được định nghĩa bên trong gói `doodle`.
 When we use the statement
 
 ```scala mdoc:silent
 import doodle.core._
 ```
 
-we're indicating we want the package `core` within the package `doodle`, and not some other package that might be called `core`.
+Ta đang chỉ ra rằng ta muốn gói `core` bên trong gói `doodle`, chứ không phải một gói nào đó khác cũng tên là `core`.
