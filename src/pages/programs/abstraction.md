@@ -1,4 +1,4 @@
-## Abstraction
+## Trừu tượng hoá
 
 ```scala mdoc:invisible
 import doodle.core._
@@ -8,29 +8,29 @@ import doodle.image.syntax.core._
 import doodle.java2d._
 ```
 
-We've learned a lot about names in the previous section.
-If we want to use fancy programmer words, we could say that *names abstract over expressions*.
-This usefully captures the essence of what defining names does, so let's decode the programmer-talk.
+Ở mục trước, ta đã tìm hiểu nhiều về tên. 
+Nếu muốn theo phong cách của dân lập trình, ta có thể nói rằng *tên đã khái quát hoá các biểu thức*.
+Điều này diễn đạt được bản chất của việc định nghĩa các tên, vậy ta hãy cùng giải mã cách nói này của dân lập trình.
 
-To abstract means to remove unnecessary details.
-For example, numbers are an abstraction.
-The number "one" is never found in nature as a pure concept.
-It's always one object, such as one apple, or one copy of Creative Scala.
-When doing arithmetic the concept of numbers allows us to abstract away the unnecessary detail of the exact objects we're counting and manipulate the numbers on their own.
+Khái quát hoá nghĩa là lược bỏ những chi tiết không cần đến. 
+Chẳng hạn, các số là một cách khái quát hoá.
+Số "một" không bao giờ tìm thấy được trong tự nhiên dưới dạng khái niệm thuần tuý. 
+Nó luôn là một đối tượng, như một quả táo, hay một cuốn sách Scala sáng tạo.
+Khi làm toán, khái niệm các con số giúp ta khái quát hoá tất cả những chi tiết không cần thiết của các sự vật cụ thể mà ta đang đếm, mà chỉ thao tác với bản thân con số thôi.
 
-Similarly a name stands in for an expression.
-An expression tells us how to construct a value.
-If that value has a name then we don't need to know anything about how the value is constructed.
-The expression can have arbitrary complexity, but we don't have to care about this complexity if we just use the name.
-This is what it means when we say that names abstract over expressions.
-Whenever we have an expression we can substitute a name that refers to the same value.
+Tương tự như vậy, một cái tên sẽ đại diện cho một biểu thức.
+Một biểu thức cho ta biết cách thiết lập một giá trị.
+Nếu giá trị đó có một tên thì ta sẽ không cần biết gì về việc giá trị đó được thiết lập ra sao.
+Biểu thức có thể phức tạp tuỳ ý, nhưng ta không cần lưu tâm đến sự phức tạp này nếu ta chỉ dùng đến cái tên.
+Đây là ý nghĩa của việc nói rằng cái tên đã khái quát hoá một biểu thức.
+Mỗi khi có một biểu thức, ta có thể thay thế một cái tên để chỉ tới cùng giá trị đó.
 
-Abstraction makes code easier to read and write.
-Let's take as an example creating a sequence of boxes like shown in [@fig:programs:sequential-boxes].
+Khái quát hoá giúp cho mã lệnh dễ đọc và viết hơn.
+Hãy làm một ví dụ tao ra một loạt các ô như trên [@fig:programs:sequential-boxes].
 
-![Five boxes filled with Royal Blue](./src/pages/programs/sequential-boxes.pdf+svg){#fig:programs:sequential-boxes}
+![Năm ô vuông tô màu xanh Royal Blue](./src/pages/programs/sequential-boxes.pdf+svg){#fig:programs:sequential-boxes}
 
-We can write out a single expression that creates the picture.
+Ta có thể viết hẳn ra một biểu thức duy nhất để tạo ra bức tranh.
 
 ```scala mdoc:silent
 Image.rectangle(40, 40)
@@ -60,9 +60,9 @@ Image.rectangle(40, 40)
      )
 ```
 
-In this code it is difficult to see the simple pattern within.
-Can you really tell at a glance that all the rectangles are exactly the same?
-If we make the abstraction of naming the basic box the code becomes much easier to read.
+Trong mã lệnh này thấy khó thấy được dạng mẫu đơn giản bên trong. 
+Liệu thật sự bạn có thể liếc qua mà phát hiện được rằng tất cả các hình vuông đều như nhau không?
+Nếu ta có thể khái quát hoá bằng cách đặt tên cho ô thì mã lệnh sẽ dễ đọc hơn nhiều.
 
 ```scala mdoc:silent
 val box =
@@ -74,25 +74,25 @@ val box =
 box.beside(box).beside(box).beside(box).beside(box)
 ```
 
-Now we can easily see how the box is made, and easily see that the final picture is that box repeated five times.
+Bây giờ ta có thể dễ dàng thấy được rằng ô được tạo nên ra sao, và dễ dàng thấy được bức tranh gồm hình ô lặp lại 5 lần.
 
 
-### Exercises {-}
+### Bài tập {-}
 
-#### Archery Again {-}
+#### Lại là trường bắn {-}
 
-Let's return to the archery target we created in an earlier chapter, shown in [@fig:programs:target3].
+Hãy trở về đích bắn tên mà ta đã tạo ra ở chương trước, xem [@fig:programs:target3].
 
-![The Archery Target](./src/pages/programs/target3.pdf+svg){#fig:programs:target3}
+![Đích bắn tên](./src/pages/programs/target3.pdf+svg){#fig:programs:target3}
 
-Last time we created the image we didn't know how to name values, so we can to write one large expression.
-This time around, give the components of the image names so that it is easier for someone else to understand how the image is constructed.
-You'll have to use your own taste to decide what parts should be named and what parts don't warrant names of their own.
+Lần trước ta đã tạo nên hình ảnh mà ta chưa biết cách đặt tên cho giá trị, vì vậy ta có thể viết một biểu thức lớn.
+Lần này trở lại, hãy đặt tên cho các thành phần của bức tranh để cho người khác dễ hiểu được hình vẽ đã được tạo nên thế nào.
+Bạn sẽ phải tự đánh giá để quyết định xem những phần nào cần đặt tên còn phần nào không xứng đáng có tên riêng.
 
 <div class="solution">
-We decided to name the target, stand, and ground, as shown below.
-This makes is clear how the final image is constructed.
-Naming more components seemed to us that it would not aid comprehension.
+Chúng tôi quyết định đặt tên cho bia đích, giá đỡ, và nền đất như ở dưới đây. 
+Điều này sẽ giúp làm rõ xem bức tranh cuối cùng được vẽ nên thế nào.
+Việc đặt tên nhiều thành phần khác, theo chúng tôi, sẽ không còn giúp hiểu rõ nữa.
 
 ```scala mdoc:silent
 val coloredTarget =
@@ -113,16 +113,16 @@ val image = coloredTarget above stand above ground
 </div>
 
 
-#### Streets Ahead {-}
+#### Đường phố {-}
 
-For a more compelling use of names, create a street scene like that shown in [@fig:programs:street].
-By naming the individual components of the image you should be able to avoid a great deal of repetition.
+Để thấy được một cách thuyết phục hơn về việc dùng tên, hãy tạo ra một cảnh đường phố như trên [@fig:programs:street].
+Bằng cách đặt các thành phần riêng của hình ảnh, bạn có thể tránh được đáng kể việc lặp lại.
 
-![A Street Scene](./src/pages/programs/street.pdf+svg){#fig:programs:street}
+![Cảnh đường phố](./src/pages/programs/street.pdf+svg){#fig:programs:street}
 
 <div class="solution">
-Here's our solution.
-As you can see, by breaking the scene down into smaller components we were able to write relatively little code.
+Sau đây là lời giải của chúng tôi.
+Như bạn thấy, bằng cách chia khung cảnh thành những thành phần nhỏ hơn, ta đã có thể viết khá ít mã lệnh.
 
 ```scala mdoc:reset:invisible
 import doodle.core._
