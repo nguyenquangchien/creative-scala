@@ -1,4 +1,4 @@
-## Order of Evaluation
+## Thứ tự ước lượng
 
 ```scala mdoc:invisible
 import doodle.core._
@@ -8,49 +8,49 @@ import doodle.image.syntax.core._
 import doodle.java2d._
 ```
 
-We're now ready to tackle the question of order-of-evaluation.
-We might wonder if the order of evaluation even matters?
-In the examples we've looked at so far the order doesn't seem to matter, except for the issue that we cannot evaluate an expression before it's sub-expressions.
+Bây giờ ta đã sẵn sàng trả lời câu hỏi thứ tự ước lượng.
+Ta có thể tự hỏi liệu thứ tự ước lượng có quan trọng không?
+Ở những ứng dụng ta đã thấy trước đây, thứ tự dường như không quan trọng, chỉ cần lưu ý rằng ta không thể ước lượng biểu thức trước khi ước lượng hết các biểu thức con của nó.
 
-To investigate these issues further we need to introduce a new concept.
-So far we have almost always dealt with *pure* expressions.
-These are expressions that we can freely substitute in any order without issue[^corner-cases].
+Để xem xét kĩ những vấn đề này, ta cần giới thiệu một khái niệm mới.
+Đến giờ ta gần như luôn tính toán với các biểu thức *thuần*.
+Đây là những biểu thức mà ta có thể tùy ý thay thế theo bất kì thứ tự nào mà không gặp vấn đề gì[^corner-cases].
 
-*Impure* expressions are those where the order of evaluation matters.
-We have already used one impure expression, the method `draw`.
-If we evaluate
+Các biểu thức *không thuần* là những biểu thức mà thứ tự ước lượng là quan trọng.
+Ta đã dùng một biểu thức không thuần, đó là phương thức `draw`.
+Nếu ta ước lượng
 
 ```scala
 Image.circle(100).draw
 Image.rectangle(100, 50).draw
 ```
 
-and
+và
 
 ```scala
 Image.rectangle(100, 50).draw
 Image.circle(100).draw
 ```
 
-the windows containing the images will appear in different orders.
-Hardly an exciting difference, but it *is* a difference, which is the point.
+thì các cửa sổ chứa các hình ảnh sẽ xuất hiện theo thứ tự khác nhau. 
+Khác biệt là rất nhỏ, nhưng *vẫn là* khác biệt, chính là điều muốn nói ở đây.
 
-The key distinguishing feature of impure expressions is that their evaluation causes some change that we can see.
-For example, evaluating `draw` causes an image to be displayed.
-We call these observable changes *side effects*, or just *effects* for short.
-In a program containing side effects we cannot freely use substitution.
-However we can use side effects to investigate the order of evaluation.
-Our tool for doing so will be the `println` method.
+Tính năng độc đáo chính của biểu thức không thuần là ở chỗ sự ước lượng chúng gây ra thay đổi trông thấy.
+Chẳng hạn, việc ước lượng `draw` khiến cho một hình ảnh được hiển thị. 
+Ta gọi những biến đổi trông thấy này là *hiệu ứng phụ*, hay gọi tắt là *hiệu ứng*.
+Trong một chương trình có chứa hiệu ứng phụ, ta không thể dùng cách thay thế.
+Tuy nhiên ta có thể dùng hiệu ứng phụ để điều tra thứ tự ước lượng.
+Công cụ giúp ta thực hiện là phương thức `println`.
 
-The `println` method displays text on the console (a side effect) and evaluates to unit.
-Here's an example:
+Phương thức `println` hiển thị chữ lên console (một hiệu ứng phụ) và ước lượng thành unit.
+Sau đây là ví dụ:
 
 ```scala mdoc
 println("Hello!")
 ```
 
-The side-effect of `println`---printing to the console---gives us a convenient way to investigate the order of evaluation.
-For example, the result of running
+Hiệu ứng phụ của `println`---in ra console---cho ta cách tiện lợi để điều tra thứ tự ước lượng.
+Chẳng hạn, kết quả của việc chạy mã lệnh
 
 ```scala mdoc
 println("A")
@@ -58,35 +58,35 @@ println("B")
 println("C")
 ```
 
-indicates to us that expressions are evaluated from top to bottom.
-Let's use `println` to investigate further.
+sẽ cho thấy rằng các biểu thức được thực hiện từ trên xuống. 
+Ta hãy dùng `println` để điều tra thêm.
 
 
-### Exercises {-}
+### Bài tập {-}
 
-#### No Substitute for Println {-}
+#### Không thay thế cho Println {-}
 
-In a pure program we can give a name to any expression and substitute any other occurrences of that expression with the name.
-Concretely, we can rewrite
+Trong một chương trình thuần ta có thể đặt tên cho biểu thức bất kì và thay thế mọi lượt xuất hiện của biểu thức này bằng tên.
+Cụ thể, ta có thể viết lại 
 
 ```scala mdoc:silent
 (2 + 2) + (2 + 2)
 ```
 
-to
+thành
 
 ```scala mdoc:silent
 val a = (2 + 2)
 a + a
 ```
 
-and the result of the program doesn't change.
+mà kết quả chương trình vẫn không thay đổi.
 
-Using `println` as an example of an impure expression, demonstrates that this is *not* the case for impure expressions, and hence we can say that impure expressions, or side effects, break substitution.
+Hãy dùng `println` làm ví dụ về một biểu thức không thuần nhằm cho thấy rằng: nhận định trên *không* đúng với các biểu thức không thuần, và  the case for impure expressions, và do vậy ta có thể nói rằng biểu thức không thuần, hay hiệu ứng phụ, đã phá vỡ luật thay thế.
 
 <div class="solution">
-Here is a simple example that illustrates this.
-The following two programs are observably different.
+Sau đây là một ví dụ đơn giản cho thấy điều này.
+Hai chương trình dưới khác biệt trông thấy.
 
 ```scala mdoc
 println("Happy birthday to you!")
@@ -101,17 +101,17 @@ happy
 happy
 ```
 
-Therefore we cannot freely use substitution in the presence of side effects, and we must be aware of the order of evaluation.
+Do vậy ta không thể thoải mái sử dụng thay thế khi chương trình có các hiệu ứng phụ, và cần phải nhận thức được thứ tự ước lượng.
 </div>
 
 
-#### Madness to our Methods {-}
+#### Phát điên với các phương thức {-}
 
-When we introduced scopes we also introduced block expressions, though we didn't call them that at the time.
-A block is created by curly braces (`{}`). It evaluates all the expressions inside the braces. The final result is the result of the last expression in the block.
+Khi chúng tôi giới thiệu về phạm vi thì cũng giới thiệu cả biểu thức khối, dù rằng chưa gọi chúng bằng cái tên này.
+Một khối được tạo thành từ cặp ngoặc nhọn (`{}`). Nó ước lượng tất cả các biểu thức có trong cặp ngoặc. Giá trị cuối cùng là giá trị của biểu thức cuối cùng trong khối.
 
 ```scala mdoc
-// Evaluates to three
+// Ước lượng thành 3
 {
   val one = 1
   val two = 2
@@ -119,21 +119,21 @@ A block is created by curly braces (`{}`). It evaluates all the expressions insi
 }
 ```
 
-We can use block expressions to investigate the order in which method parameters are evaluated, by putting `println` expression inside a block that evaluates to some other useful value.
+Ta có thể dùng biểu thức khối để điều tra thứ tự ước lượng các tham số phương thức, bằng cách đặt biểu thức `println` vào trong khối ước lượng thành một giá trị hữu ích nào đó khác.
 
-For example, using `Image.rectangle` or `Color.hsl` and block expressions, we can determine if Scala evaluates method parameters in a fixed order, and if so what that order is.
+Chẳng hạn, dùng `Image.rectangle` hay `Color.hsl` và biểu thức khối, ta có thể xác định xem liệu Scala ước lượng các tham số phương thức theo thứ tự cố định hay không, và nếu đúng vậy thì thứ tự là gì.
 
-Note that you can write a block compactly, on one line, by separating expressions with semicolons (`;`).
-This is generally not good style but might be useful for these experiments.
-Here's an example.
+Lưu ý rằng bạn có thể viết gọn một khối trên một dòng, bằng cách phân tách những biểu thức dấu chấm phẩy (`;`).
+Thường thì đây không phải là phong cách hay song cũng hữu ích cho việc thử nghiệm này.
+Sau đây là một ví dụ.
 
 ```scala mdoc
-// Evaluates to three
+// Ước lượng thành 3
 { val one = 1; val two = 2; one + two }
 ```
 
 <div class="solution">
-The following code demonstrates that method parameters are evaluated from left to right.
+Mã lệnh sau biểu diễn rằng các tham số phương thức được ước lượng từ trái qua phải.
 
 ```scala mdoc
 Color.hsl(
@@ -152,7 +152,7 @@ Color.hsl(
 )
 ```
 
-We can write this more compactly as
+Có thể viết mã lệnh này gọn hơn như sau
 ```scala mdoc
 Color.hsl({ println("a"); 0.degrees },
           { println("b"); 1.0 },
@@ -161,23 +161,23 @@ Color.hsl({ println("a"); 0.degrees },
 </div>
 
 
-#### The Last Order {-}
+#### Thứ tự cuối {-}
 
-In what order are Scala expressions evaluated?
-Perform whatever experiments you need to determine an answer to this question to your own satisfaction.
-You can reasonably assume that Scala uses consistent rules across all expressions.
-There aren't special cases for different expressions.
+Các biểu thức Scala được ước lượng theo thứ tự nào?
+Hãy làm thử nghiệm bất kì theo ý bạn, để trả lời câu hỏi này.
+Bạn có thể giả định một cách hợp lý rằng Scala dùng quy tắc thống nhất với tất cả mọi biểu thức.
+Không có trường hợp đặc biệt cho các biểu thức khác nhau.
 
 <div class="solution">
-We've already seen that expressions are evaluated from top-to-bottom, and method parameters are evaluated from left-to-right.
-We might want to check that expressions are in general evaluated left-to-right.
-We can show this fairly easily.
+Ta đã thấy rằng các biểu thức được ước lượng từ trên xuống dưới, và tham số phương thức được ước lượng từ trái qua phải.
+Có thể ta sẽ muốn kiểm tra rằng các biểu thức nói chung được ước lượng từ trái qua phải.
+Điều này có thể cho thấy khá dễ dàng.
 
 ```scala mdoc
 { println("a"); 1 } + { println("b"); 2 } + { println("c"); 3}
 ```
 
-So in conclusion we can say that Scala expressions are evaluated from top-to-bottom and left-to-right.
+Vậy kết luận là biểu thức Scala được ước lượng từ trên xuống dưới và từ trái qua phải.
 </div>
 
-[^corner-cases]: This is not entirely true. There are some corner cases where the order of evaluation does make a difference even with pure expressions. We're not going to worry about these cases here. If you're interested in learning more, and this is interesting and useful stuff, you can read up on "eager evaluation" and "lazy evaluation".
+[^corner-cases]: Điều này không hoàn toàn đúng. Có những trường hợp lắt léo mà ở đó thứ tự ước lượng sẽ tạo nên khác biệt thậm chí với cả biểu thức thuần. Song ở đây ta sẽ không lo lắng về các trường hợp như vậy. Nếu bạn muốn tìm hiểu thêm, và điều đó thú vị và hữu ích, bạn có thể đọc về ước lượng ham ("eager evaluation") và ước lượng nhác ("lazy evaluation").
