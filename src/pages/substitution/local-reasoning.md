@@ -1,52 +1,53 @@
-## Local Reasoning
+## Suy luận cục bộ
 
-We've seen that the order of evaluation is only really important when we have side effects.
-For example, if the following expressions produce side effects
+Ta đã thấy rằng thứ tự ước lượng chỉ thực sự quan trọng khi ta có hiệu ứng phụ.
+Chẳng hạn, nếu các biểu thức sau tạo ra hiệu ứng phụ
 
 ```scala
-disableWarheads()
-launchTheMissles()
+disableWarheads()   # vô hiệu hóa đầu đạn
+launchTheMissles()  # phóng tên lửa
 ```
 
-we really want to ensure that the expressions are evaluated top to bottom so the warheads are disabled before the missles are launched.
+Ta thực sự muốn đảm bảo chắc rằng các biểu thức được ước lượng từ trên xuống dưới để cho các đầu đạn bị vô hiệu hóa trước khi tên lửa được phóng ra.
 
-All useful programs must have some effect, because effects are how the program interacts with the outside world.
-The effect might just be printing out something when the program has finished, but it's still there.
-Minimising side effects is a key goal of functional programming so we will spend a few more words on this topic.
+Tất cả chương trình hữu ích phải có một hiệu ứng nào đó, vì hiệu ứng chính là cách mà chương trình tương tác với thế giới bên ngoài.
+Hiệu ứng có thể chỉ là in ra thứ gì đó khi chương trình kết thúc và nội dung đó vẫn còn hiện.
+Làm giảm thiểu hiệu ứng phụ là mục tiêu then chốt của lập trình hàm, vì vậy ta sẽ nói thêm về chủ đề này.
 
-Substitution is really easy to understand.
-When the order of evaluation doesn't matter it means any other code cannot change the meaning of the code we're looking at.
-`1 + 1` is always `2`, no matter what other code we have in our program, but the effect of `launchTheMissles()` depends on whether we have already disabled the warheads or not.
+Thay thế thì rất dễ hiểu.
+Khi thứ tự ước lượng không quan trọng, điều đó nghĩa là bất kì mã lệnh nào khác cũng không làm thay đổi ý nghĩa đoạn mã lệnh mà ta đang xét.
+`1 + 1` thì luôn bằng `2`, bất kể mã lệnh khác trong chương trình có thế nào đi nữa. Nhưng hiệu ứng của `launchTheMissles()` thì lại phụ thuộc vào liệu ta đã vô hiệu hóa đầu đạn chưa.
 
-The upshot of this is that pure code can be understood in isolation.
-Since no other code can change its meaning, if we're only interested in one fragment we can ignore the rest of the code.
-The meaning of impure code, on the other hand, depends on all the code that will have run before it is evaluated.
-This property is known as *local reasoning*.
-Pure code has it, but impure code does not.
+Kết cục của điều này là mã lệnh thuần khiết có thể hiểu được biệt lập.
+Vì không có mã nào khác có thể làm thay đổi ý nghĩa của nó nên nếu ta chỉ quan tâm đến một đoạn mã thì có thể bỏ qua phần còn lại.
+Mặt khác, ý nghĩa của mã lệnh không thuần lại phụ thuộc vào tất cả mã lệnh mà đã được chạy trước khi nó ước lượng.
+Đặc tính này được gọi là *suy luận cục bộ*.
 
-As programs get larger it becomes harder and harder to keep all the details in our head.
-Since the size of our head is a fixed quantity the only solution is to introduce abstraction.
-Remember that an abstraction is the removal of irrelevant details.
-Pure code is the ultimate abstraction, because it tells us that everything else is an irrelevant detail.
-This is one of the properties that gets functional programmers really excited: the ability to make large programs understandable.
-Functional programming doesn't mean avoiding effects, because all useful programs have effects.
-It does, however, mean controlling effects so the majority of the code can be reasoned about using the simple model of substitution.
+Mã lệnh thuần khiết có đặc tính này, nhưng mã không thuần thì không.
+
+Khi chương trình lớn dần, thì ta ngày càng khó nhớ được tất cả thông tin chi tiết.
+Vì dung lượng mà ta ghi nhớ được chỉ là cố định thôi nên giải pháp duy nhất là giới thiệu khái quát hóa.
+Lại nhớ rằng khái quát hóa là việc lược bỏ các chi tiết không liên quan.
+Mã thuần khiết là khái quát hóa ở mức cao nhất, vì nó cho ta biết rằng mọi chi tiết khác đều là không liên quan.
+Đây là một trong số những đặc tính khiến giới lập trình hàm phấn khởi: khả năng làm cho các chương trình lớn trở nên dễ hiểu.
+Lập trình hàm không có nghĩa là tránh các hiệu ứng, vì mọi chương trình hữu ích đều có hiệu ứng.
+Tuy nhiên, nó có nghĩa là kiểm soát các hiệu ứng để cho phần lớn mã lệnh đều có thể suy luận được bằng mô hình thay thế đơn giản.
 
 
-### The Meaning of Meaning
+### Ý nghĩa của ý nghĩa
 
-So far, we've talked a lot about the meaning of code, where we've taken "meaning" to mean to the result it evaluates to, and perhaps the side effects it performs.
+Đến giờ, ta đã nói nhiều về ý nghĩa của mã lệnh, trong đó ta nói "ý nghĩa" là để chỉ kết quả ước lượng thành, và có thể là hiệu ứng phụ mà mã lệnh đó thực hiện.
 
-In substitution, the meaning of a program is exactly what it evaluates to.
-Thus two programs are equal if they evaluate to the same result.
-This is precisely why side effects break substitution: the substitution model has no notion of side effects and therefore cannot distinguish two programs that differ by their effects.
+Trong phép thay thế, ý nghĩa của chương trình chính là kết quả mà chương trình ước lượng thành.
+Như vậy hai chương trình sẽ bằng nhau nếu chúng ước lượng thành cùng kết quả.
+Đây chính là lí do tại sao hiệu ứng phụ lại phá vỡ sự thay thế: trong mô hình thay thế không có khái niệm về hiệu ứng phụ và do vậy không thể phân biệt nổi hai chương trình chỉ khác nhau bởi hiệu ứng phụ.
 
-There are other ways in which programs can differ.
-For example, one program may take longer than another to produce the same result.
-Again, substitution does not distinguish them.
+Chương trình còn có thể khác nhau theo những cách khác.
+Chẳng hạn, một chương trình này có thể chạy lâu hơn chương trình kia để cho ra cùng kết quả.
+Một lần nữa, phép thay thế không thể phân biệt nổi chúng.
 
-Substitution is an abstraction, and the details it throws away are everything except for the value.
-Side effects, time, and memory usage are all irrelevant to substitution, but perhaps not to the people writing or running the program.
-There is a tradeoff here.
-We can employ richer models that capture more of these details, but they are much harder to work with.
-For most people most of the time substitution makes the right tradeoff of being dead simple to use while still being useful.
+Thay thế là một cách khái quát hóa, và ngoài kết quả ra thì mọi chi tiết khác đều bị bỏ đi.
+Hiệu ứng phụ, thời gian và lượng bộ nhớ sử dụng đều không liên quan tới thay thế, nhưng có lẽ lại đáng quan tâm đối với những người viết hoặc chạy chương trình.
+Ở đây luôn có sự đánh đổi.
+Ta có thể dùng những mô hình phức tạp hơn để nắm bắt thêm được những chi tiết này, song mô hình như vậy lại khó dùng hơn.
+Với đa số người dùng, hầu như lúc nào phép thay thế cũng sẽ là sự đánh đổi hợp lý; nó rất dễ dùng đồng thời vãn còn hữu ích.
