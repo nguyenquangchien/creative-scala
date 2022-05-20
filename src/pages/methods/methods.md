@@ -1,4 +1,4 @@
-## Methods
+## Phương thức
 
 ```scala mdoc:invisible
 import doodle.core._
@@ -8,9 +8,9 @@ import doodle.image.syntax.core._
 import doodle.java2d._
 ```
 
-In a previous chapter we created the image shown in [@fig:methods:sequential-boxes] using the program
+Ở một chương trước ta đã tạo nên hình như trên [@fig:methods:sequential-boxes] bằng chương trình
 
-![Five boxes filled with Royal Blue](./src/pages/programs/sequential-boxes.pdf+svg){#fig:methods:sequential-boxes}
+![Năm ô tô màu Royal Blue](./src/pages/programs/sequential-boxes.pdf+svg){#fig:methods:sequential-boxes}
 
 ```scala mdoc:silent
 val box =
@@ -22,8 +22,8 @@ val box =
 box beside box beside box beside box beside box
 ```
 
-Imagine we wanted to change the color of the boxes.
-Right now we would have to write out the expression again for each different choice of color.
+Hãy hình dung ta muốn đổi màu các ô này.
+Ngay bây giờ ta có thể viết lại những biểu thức với các màu được chọn khác nhau.
 
 ```scala mdoc:silent
 val paleGoldenrod = {
@@ -57,10 +57,10 @@ val mistyRose = {
 }
 ```
 
-This is tedious.
-Each expression only differs in a minor way.
-It would be nice if we could capture the general pattern and allow the color to vary.
-We can do exactly this by declaring a method.
+Làm vậy thì chán chết.
+Mỗi biểu thức chỉ khác nhau rất ít.
+Sẽ tốt bao nhiêu nếu ta có thể nắm được dạng mẫu chung này và cho phép đổi màu.
+Ta có thể thực hiện điều đó bằng cách khai báo một phương thức.
 
 ```scala mdoc:silent
 def boxes(color: Color): Image = {
@@ -79,6 +79,6 @@ boxes(Color.lightSteelBlue)
 boxes(Color.mistyRose)
 ```
 
-Try this yourself to see that you get the same result using the method as you did writing everything out by hand.
+Bạn hãy tự tay thử xem có thu được kết quả tương tự không: khi dùng phương thức và khi viết ra tất tần tật.
 
-Now that we've seen an example of declaring a method, we need to explain the syntax of methods. Next, we'll look at how to write methods, the semantics of method calls, and how they work in terms of substitution.
+Bây giờ khi đã thấy một ví dụ về khai báo phương thức, ta cần giải thích cú pháp của phương thức. Tiếp theo, ta sẽ xem xét cách viết phương thức, ngữ nghĩa của lời gọi phương thức, và cách hoạt động của phép thay thế ra sao.
