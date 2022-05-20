@@ -1,15 +1,15 @@
-# Methods
+# Phương thức
 
-We've already used methods---methods are the way we interact with objects.
-In this chapter we'll learn how to write our own methods.
+Ta đã dùng phương thức rồi---phương thức là cách mà ta tương tác với đối tượng.
+Ở chương này ta sẽ học cách tự viết các phương thức.
 
-Names allow us to abstract over expressions.
-Methods allow us to abstract over and *generalise* expressions.
-By generalisation we mean the ability to express a group of related things, in this case expressions.
-A method captures a template for an expression, and allows the caller to fill in parts of that template by passing the method parameters.
+Các tên cho phép ta khái quát hoá những biểu thức.
+Phương thức cho pháp ta khái quát hoá và *tổng quát* những biểu thức.
+Nói tổng quát nghĩa là khả năng diễn đạt một nhóm những thức có liên quan, như trong trường hợp này là các biểu thức.
+Phương thức thể hiện một bản mẫu của một biểu thức, và cho phép mã lệnh gọi nó điền vào các phần của bản mẫu đó bằng cách truyền đến các tham số phương thức.
 
 <div class="callout callout-info">
-If you run the examples from the SBT console within Doodle they will just work. If not, you will need to start your code with the following imports to make Doodle available.
+Nếu bạn chạy các ví dụ từ dòng lệnh SBT console bên trong Doodle thì chúng sẽ tự hoạt động. Nếu không, bạn sẽ cần phải mở đầu mã lệnh với những câu lệnh nhập import sau để Doodle dùng được. 
 
 ```scala mdoc:silent
 import doodle.core._
