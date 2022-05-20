@@ -1,4 +1,4 @@
-## Method Syntax
+## Cú pháp viết phương thức
 
 ```scala mdoc:invisible
 import doodle.core._
@@ -8,7 +8,7 @@ import doodle.image.syntax.core._
 import doodle.java2d._
 ```
 
-We've already seen an example of declaring a method.
+Ta đã thấy một ví dụ khai báo phương thức.
 
 ```scala mdoc:silent
 def boxes(color: Color): Image = {
@@ -22,91 +22,91 @@ def boxes(color: Color): Image = {
 }
 ```
 
-Let's use this as a model for understanding the syntax of declaring a method.
-The first part is the *keyword* `def`.
-A keyword is a special word that indicates something important to the Scala compiler---in this case that we're going to declare a method.
-We're already seen the `object` and `val` keywords.
+Hãy dùng mã lệnh này để hiểu cú pháp khai báo một phương thức.
+Phần đầu là *từ khoá* `def`.
+Từ khoá là một từ đặc biệt để chỉ điều gì đó quan trọng đối với trình biên dịch Scala---trong trường hợp này là ta chuẩn bị khai báo một phương thức.
+Ta đã thấy các từ khoá `object` và `val`.
 
-The `def` is immediately followed by the name of the method, in this case `boxes`, in the same way that `val` and `object` are immediately followed by the name they declare.
-Like a `val` declaration, a method declaration is not a top-level declaration and must be wrapped in an `object` declaration (or other top-level declaration) when written in a file.
+`def` được nối tiếp ngay bởi tên phương thức, trong trường hợp này là `boxes`, theo cách giống như là `val` và `object` được nối tiếp bởi tên mà chúng khai báo.
+Cũng như khai báo `val`, khai báo phương thức không phải là một khai báo tầng đỉnh và phải được bọc trong một khai báo `object` (hoặc các khai báo tầng đỉnh khác) khi viết vào trong file.
 
-Next we have the method parameters, defined in brackets (`()`).
-The method parameters are the parts that the caller can "plug-in" to the expression that the method evaluates.
-When declaring method parameters we must give them both a name and a type.
-A colon (`:`) separates the name and the type.
-We haven't had to declare types before.
-Most of the time Scala will work out the types for us, a process known as *type inference*.
-Type inference, however, cannot infer the type of method parameters so we must provide them.
+Tiếp theo ta có các tham số phương thức, định nghĩa trong cặp ngoặc (`()`).
+Các tham số phương thức là những phần mà mã lệnh gọi có thể "cài cắm" vào biểu thức mà phương thức đó ước lượng thành.
+Khi khai báo tham số phương thức, ta phải cấp cho chúng cả tên lẫn kiểu.
+Giữa kiểu và tên có dấu hai chấm (`:`) phân cách.
+Trước đây ta chưa từng phải khai báo kiểu.
+Đa số các trường hợp, Scala sẽ tìm ra kiểu cho chúng ta, quá trình này gọi là *suy luận kiểu*.
+Tuy nhiên, suy luận kiểu không thể suy ra được kiểu các tham số, bởi vậy ta phải cung cấp chúng.
 
-After the method parameters comes the result type.
-The result type is the type of the value the method evaluates to when it is called.
-Unlike parameter types Scala can infer the result type, but it is good practice to include it and we will do so throughout Creative Scala.
+Sau các tham số phương thức là đến kiểu kết quả.
+Kiểu kết quả chính là kiểu dữ liệu của giá trị mà phương thức ước lượng thành khi gọi tới phương thức.
+Khác với kiểu tham số, Scala có thể suy luận kiểu kết quả; nhưng quy tắc lập trình tốt là viết cả kiểu kết quả và ta sẽ thống nhất như vậy suốt cuốn Scala Sáng tạo.
 
-Finally, the body expression of the method calculates the result of calling the method.
-A body can be a block expression, as in `boxes` above, or just a single expression.
+Sau cùng, biểu thức phần thân của phương thức tính toán giá trị của gọi phương thức.
+Phần thân có thể là một biểu thức khối, như `boxes` ở trên, hay chỉ là một biểu thức đơn lẻ.
 
 <div class="callout callout-info">
-#### Method Declaration Syntax {-}
+#### Cú pháp khai báo phương thức {-}
 
-The syntax for a method declaration is
+Cú pháp để khai báo một phương thức là 
 
 ```scala
 def methodName(param1: Param1Type, ...): ResultType =
   bodyExpression
 ```
 
-where
+trong đó
 
-- `methodName` is the name of the method;
-- the optional `param1 : Param1Type, ...` are one or more pairs of parameter name and parameter type;
-- the optional `ResultType` is the type of the result of calling the method; and
-- `bodyExpression` is the expression that is evaluated to yield the result of calling the method.
+- `methodName` là tên phương thức;
+- các `param1 : Param1Type, ...` đều tuỳ chọn và là một hoặc nhiều cặp tham số cùng kiểu tham số;
+- `ResultType` cũng tuỳ chọn và là kiểu kết quả của lời gọi phương thức; và
+- `bodyExpression` là biểu thức được ước lượng để cho kết quả của lời gọi phương thức.
 </div>
 
 
-### Exercises {-}
+### Bài tập {-}
 
-Let's practice declaring methods by writing some simple examples.
+Hãy cùng luyện tập khai báo phương thức bằng cách viết vài ví dụ đơn giản.
 
-#### Square {-}
+#### Bình phương {-}
 
-Write a method `square` that accepts an `Int` argument and returns the `Int` square of it's argument. (Squaring a number is multiplying it by itself.)
+Hãy viết một phương thức `square` nhận vào một đối số kiểu `Int` rồi trả lại bình phương kiểu `Int` của đối số này. (Bình phương một số là đem lấy số đó nhân với chính nó.)
 
 <div class="solution">
-The solution is
+Lời giải là
 
 ```scala mdoc:silent
 def square(x: Int): Int =
   x * x
 ```
 
-We can arrive at the solution by the following steps.
+Ta có thể thu được lời giải này qua những bước sau.
 
-We're given the name (`square`), the type of the parameter (`Int`), and the type of the result (`Int`).
-From this we can write the method skeleton
+Ta đã được cho tên phương thức (`square`), kiểu của tham số (`Int`), cũng như kiểu của kết quả (`Int`).
+Từ đây ta có thể viết nên một khung của phương thức này 
 
 ```scala mdoc:reset:silent
 def square(x: Int): Int =
   ???
 ```
 
-where we have chosen `x` as the name of the parameter.
-This is a fairly arbitrary choice.
-Where there is no meaningful name you often see one-letter names such as `x`, `v`, or `i` used.
+ở đó ta đã chọn `x` là tên tham số. 
+Lựa chọn này khá tuỳ ý.
+Khi mà không có cái tên ý nghĩa nào thì bạn thường thấy những tên chỉ bằng một chữ cái `x`, `v`, hay `i` được dùng đến.
 
-By the way this is valid code.
-Enter it into the console and see!
-What happens if you call `square` when it's defined like so?
+Tiện thể, đây cũng là mã lệnh hợp lệ.
+Hãy nhập nó vào console mà xem!
+Sẽ ra sao nếu bạn gọi `square` khi nó được định nghĩa như vậy?
 
-Now we need to complete the body.
-We've been told that squaring is multiplying a number by itself, so `x * x` is what we replace the `???` with.
-We don't need to wrap this in braces as there is only a single expression in the body.
+Bây giờ ta cần phải hoàn thiện phần thân.
+Ta đã được bảo rằng bình phương là đem nhân một số với chính nó, vì vậy `x * x` chính là cái thế chỗ cho `???`.
+Không cần phải bọc biểu thức này trong ngoặc nhọn vì chỉ có một biểu thức trong phần thân.
 </div>
 
 
-#### Halve {-}
+#### Chia đôi {-}
 
-Write a method `halve` that accepts a `Double` argument and returns the `Double` that is half of it's argument.
+Hãy viết phương thức `halve` nhận vào một đối số `Double` rồi trả lại số `Double` bằng một nửa đối số vừa nêu.
 
 <div class="solution">
 ```scala mdoc:silent
@@ -114,5 +114,5 @@ def halve(x: Double): Double =
  x / 2.0
 ```
 
-We can follow the same process as for `square` above to arrive at the solution.
+Ta có thể theo trình tự như `square` ở trên để luận ra lời giải.
 </div>
