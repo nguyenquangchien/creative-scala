@@ -1,30 +1,30 @@
-## Method Semantics
+## Ngữ nghĩa phương thức
 
-Now that we know how to declare methods, let's turn to the semantics.
-How do we understand a method call in terms of our substitution model?
+Bây giờ khi đã biết cách khai báo phương thức, ta hãy quay trở lại ngữ nghĩa.
+Làm thế nào để hiểu được một lời gọi phương thức theo mô hình thay thế vừa xét?
 
-We already know we can substitute a method call with the value it evaluates to.
-However we need a more fine-grained model so we can work out what this value will be.
-Our extended model is as follows: when we see a method call we will create a new block and within this block:
-bind the parameters to the respective expressions given in the method call and substitute the method body.
+Ta đã biết rằng có thể thay thế một lời gọi phương thức bởi giá trị mà nó ước lượng thành.
+Tuy nhiên, ta cần có một mô hình tinh chỉnh hơn để có thể tính ra xem giá trị này sẽ là gì.
+Mô hình mở rộng này như sau: khi thấy một lời gọi phương thức, ta sẽ lập nên một khối mới và trong khối này:
+gắn các tham số vào những biểu thức tương ứng cho trong lời gọi phương thức và thay thế vào phần thân phương thức.
 
-We can then apply substitution as usual.
+Khi đó, ta có thể áp dụng mô hình thay thế như thường.
 
-Let's see a simple example.
-Given the method
+Hãy cùng xem một ví dụ đơn giản.
+Cho trước phương thức 
 
 ```scala mdoc:silent
 def square(x: Int): Int =
   x * x
 ```
 
-we can expand the method call
+ta có thể khai triển lời gọi phương thức này
 
 ```scala mdoc:silent
 square(2)
 ```
 
-by introducing a block
+bằng cách giới thiệu một khối
 
 ```scala mdoc:silent
 {
@@ -32,7 +32,7 @@ by introducing a block
 }
 ```
 
-binding the parameter `x` to the expression `2`
+để gắn tham số `x` vào với biểu thức `2`
 
 ```scala mdoc:silent
 {
@@ -41,7 +41,7 @@ binding the parameter `x` to the expression `2`
 }
 ```
 
-and substituting the method body
+và thay thế phần thân phương thức 
 
 ```scala mdoc:silent
 {
@@ -50,7 +50,7 @@ and substituting the method body
 }
 ```
 
-We can now perform substitution as usual giving
+Bây giờ ta có thể thực hiện thay thế như thường để có 
 
 ```scala mdoc:silent
 {
@@ -58,7 +58,7 @@ We can now perform substitution as usual giving
 }
 ```
 
-and finally
+và sau cùng
 
 ```scala mdoc:silent
 {
@@ -66,20 +66,19 @@ and finally
 }
 ```
 
-Once again we see that substitution is involved but no single step was particularly difficult.
+Một lần nữa ta thấy rằng có sự thay thế nhưng không có riêng bước nào là khó cả.
 
 
-### Exercise {-}
+### Bài tập {-}
 
-Last time we looked at substitution we spent a lot of time investigating order of evaluation.
-In the description above we have decided that a method's arguments are evaluated before the body is evaluated.
-This is not the only possibility.
-We could, for example, evaluate the method's arguments only at the point they are needed.
-This could save us some time if a method doesn't use one of its parameters.
-By using our old friend `println`, determine when method parameters are evaluated in Scala.
+Lân trước khi xét đến thay thế, ta đã dành nhiều thời gian khảo sát thứ tự ước lượng.
+Trong đoạn mô tả trên ta đã quyết định rằng phải ước lượng các đối số của phương thức trước khi ước lượng phần thân.
+Đây không phải là khả năng duy nhất.
+Chẳng hạn, ta có thể ước lượng những đối số của phương thức chỉ vào lúc cần tới. Bằng cách này sẽ giúp ta tiết kiệm chút thời gian nếu phương thức không dùng đến một trong những tham số. 
+Bằng cách dùng công cụ `println`, hãy xác định xem khi nào các tham số phương thức được ước lượng trong Scala.
 
 <div class="solution">
-The following program demonstrates that parameters are evaluated before the method body.
+Chương trình sau cho thấy rằng các tham số được ước lượng trước khi tiến vào phần thân phương thức.
 
 ```scala mdoc
 def example(a: Int, b: Int): Int = {
@@ -90,5 +89,5 @@ def example(a: Int, b: Int): Int = {
 example({ println("a"); 1 }, { println("b"); 2 })
 ```
 
-The alternative we described above is used by some languages, most notably Haskell, and is known as lazy or non-strict evaluation.
+Phương án mà chúng tôi mô tả ở trên đã có ngôn ngữ dùng đến, tiêu biểu là Haskell, và cách này được gọi là ước lượng (lười) nhác hay không nghiêm.
 </div>
