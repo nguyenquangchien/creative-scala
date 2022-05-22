@@ -1,8 +1,8 @@
-## Conclusions
+## Kết luận
 
-In this chapter, we learned how to write our own simple methods and we saw how to use the substitution model of evaluation to understand method calls.
+Ở chương này, ta đã học cách tự viết những phương thức đơn giản và thấy cách dùng mô hình thay thế của ước lượng nhằm hiểu được lời gọi phương thức.
 
-We saw that methods both abstract over expressions, in the same way as names, and also generalize over expressions, allowing us to represent a group of related expressions with one name.
+Ta thấy rằng các phương thức vừa khái quát hoá biểu thức (giống như các tên), lại vừa tổng quát biểu thức, cho phép ta biểu diễn một nhóm các biểu thức bằng cùng một cái tên.
 
-We wrote some interesting methods, but we still have more repeated code than is desirable (think about the repeated calls to `box` and `circle` in the exercises.)
-In the next chapter, we will learn how we can generalize over this using structural recursion over the natural numbers.
+Ta đã viết một số phương thức thú vị, nhưng vẫn còn phải lặp lại mã lệnh nhiều hơn ta mong muốn (nhớ về các lời gọi tới `box` và `circle` trong các bài tập.)
+Ở chương tới, ta sẽ học cách tổng quát hoá vấn đề này bằng cách đệ quy áp dụng cho những số tự nhiên.
