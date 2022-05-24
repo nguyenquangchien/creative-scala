@@ -1,15 +1,15 @@
-# Structural Recursion
+# Đệ quy cấu trúc
 
-In this chapter we see our first major pattern for structuring computations: *structural recursion over the natural numbers*. That's quite a mouthful, so let's break it down:
+Trong chương này ta sẽ thấy dạng mẫu chính thứ nhất để tính toán cấu trúc: *đệ quy cấu trúc trên những số tự nhiên*. Nghe có vẻ đao to búa lớn, vậy ta hãy cùng tách ra xem:
 
-- By a pattern, we mean a way of writing code that is useful in lots of different contexts. We'll encounter structural recursion in many different situations throughout this book. 
+- Nói dạng mẫu nghĩa là một cách viết mã lệnh hữu dụng cho nhiều ngữ cảnh khác nhau. Ta sẽ còn gặp đệ quy cấu trúc ở nhiều tình huống khác nhau trong sách này.
 
-- By the natural numbers we mean the whole numbers 0, 1, 2, and upwards. 
+- Nói số tự nhiên nghĩa là những số nguyên từ 0, 1, 2, trở lên. 
 
-- By recursion we mean something that refers to itself. Structural recursion means a recursion that follows the structure of the data it is processing. If the data is recursive (refers to itself) then the structural recursion will also refer to itself. We'll see in more detail what this means in a moment.
+- Nói đệ quy nghĩa là điều gì đó tự nó lặp lại. Đệ quy cấu trúc nghĩa là phép đệ quy tuân theo cấu trúc của dữ liệu mà nó xử lí. Nếu dữ liệu có tính đệ quy (tức là tham chiếu tới chính nó) thì đệ quy cấu trúc cũng sẽ tham chiếu tới chính nó. Sau này sẽ thấy kĩ hơn điều đó nghĩa là gì.
 
 <div class="callout callout-info">
-If you run the examples from the SBT console within Doodle they will just work. If not, you will need to start your code with the following imports to make Doodle available.
+Nếu bạn chạy các ví dụ từ dòng lệnh SBT console bên trong Doodle thì chúng sẽ tự hoạt động. Nếu không, bạn sẽ cần phải mở đầu mã lệnh với những câu lệnh nhập import sau để Doodle dùng được.
 
 ```scala mdoc:silent
 import doodle.core._
