@@ -1,4 +1,4 @@
-## A Line of Boxes
+## Một dãy các ô
 
 ```scala mdoc:invisible
 import doodle.core._
@@ -8,38 +8,38 @@ import doodle.image.syntax.core._
 import doodle.java2d._
 ```
 
-Let's start with an example, drawing a line or row of boxes as in [@fig:recursion:sequential-boxes].
+Hãy cùng bắt đầu với ví dụ đơn giản, vẽ một hàng gồm các ô như [@fig:recursion:sequential-boxes].
 
-![Five boxes filled with Royal Blue](./src/pages/recursion/sequential-boxes.pdf+svg){#fig:recursion:sequential-boxes}
-
-Let's define a box to begin with.
+![Năm ô vuông tô màu Royal Blue](./src/pages/recursion/sequential-boxes.pdf+svg){#fig:recursion:sequential-boxes}
+ 
+Để bắt đầu, hãy cùng định nghĩa một ô.
 
 ```scala mdoc:silent
 val aBox = Image.square(20).fillColor(Color.royalBlue)
 ```
 
-Then one box in a row is just
+Khi đó để có một ô trong hàng, chỉ việc 
 
 ```scala mdoc:silent
 val oneBox = aBox
 ```
 
-If we want to have two boxes side by side, that is easy enough.
+Nếu ta muốn có hai ô sát cạnh nhau, cũng rất dễ dàng.
 
 ```scala mdoc:silent
 val twoBoxes = aBox.beside(oneBox)
 ```
 
-Similarly for three.
+Tương tự với ba ô.
 
 ```scala mdoc:silent
 val threeBoxes = aBox.beside(twoBoxes)
 ```
 
-And so on for as many boxes as we care to create.
+Và cứ như vậy muốn tạo bao nhiêu ô cũng được. 
 
-You might think this is an unusual way to create these images.
-Why not just write something like this, for example?
+Bạn có thể nghĩ rằng đây là cách bất thường để tạo ra những hình này.
+Tại sao không viết thế này luôn chẳng hạn?
 
 ```scala mdoc:reset:invisible
 import doodle.core._
@@ -55,25 +55,25 @@ val twoBoxes = aBox.beside(oneBox)
 val threeBoxes = aBox.beside(aBox).beside(aBox)
 ```
 
-These two definitions are equivalent.
-We've chosen to write later images in terms of earlier ones to emphasise the structure we're dealing with, which is building up to structural recursion.
+Hai cách định nghĩa nêu trên tương đương nhau.
+Ta chọn cách viết các hình sau dựa trên cơ sở hình đã vẽ trước, để nhấn mạnh cấu trúc mà ta đang xử lý, vốn là công đoạn hình thành nên đệ quy cấu trúc.
 
-Writing images in this way could get very tedious.
-What we'd really like is some way to tell the computer the number of boxes we'd like.
-More technically, we would like to abstract over the expressions above.
-We learned in the previous chapter that methods abstract over expressions, so let's try to write a method to solve this problem.
+Viết ra các hình theo cách này có thể sẽ rất nhàm chán.
+Cái mà ta cần là một cách để chỉ bảo cho máy biết số ô ta cần vẽ.
+Nói đúng kĩ thuật, ta muốn khái quát những biểu thức nêu trên.
+Ở chương trước, ta đã biết rằng các phương thức thì khái quát hoá biểu thức, vì vậy hãy cùng thử viết một phương thức để giải quyết vấn đề này.
 
-We'll start by writing a method skeleton that defines, as usual, what goes into the method and what it evaluates to.
-In this case we supply an `Int` `count`, which is the number of boxes we want, and we get back an `Image`.
+Ta hãy bắt đầu bằng cách viết một khung "dàn ý" phương thức để định nghĩa, như thường lệ, những thứ đi vào phương thức và thứ được ước luọng thành.
+Trong trường hợp này, ta cấp một biến `Int` là `count`, đó là số ô cần có, và nhận lại một `Image`.
 
 ```scala mdoc:silent
 def boxes(count: Int): Image =
   ???
 ```
 
-Now comes the new part, the *structural recursion*.
-We noticed that `threeBoxes` above is defined in terms of `twoBoxes`, and `twoBoxes` is itself defined in terms of `box`.
-We could even define `box` in terms of *no* boxes, like so:
+Bây giờ là phần mới, *đệ quy cấu trúc*.
+Ta đã nhận thấy rằng `threeBoxes` nêu trên đã được định nghĩa dựa theo `twoBoxes`, còn `twoBoxes` lại được định nghĩa dựa theo `box`.
+Thậm chí, ta còn có thể định nghĩa `box` theo *không* box, như sau:
 
 ```scala mdoc:reset:invisible
 import doodle.core._
@@ -87,27 +87,27 @@ val aBox = Image.square(20).fillColor(Color.royalBlue)
 val oneBox = aBox.beside(Image.empty)
 ```
 
-Here we used `Image.empty` to represent no boxes.
+Ở đây đã sử dụng `Image.empty` để biểu diễn không box.
 
-Imagine we had already implemented the `boxes` method.
-We can say the following properties of `boxes` always hold, if it is correctly implemented:
+Hãy hình dung như ta đã viết xong phương thức `boxes`.
+Ta có thể nói rằng những đặc tính sau của `boxes` luôn thoả mãn, nếu phương thức này được viết đúng:
 
 - `boxes(0) == Image.empty`
 - `boxes(1) == aBox.beside(boxes(0))`
 - `boxes(2) == aBox.beside(boxes(1))`
 - `boxes(3) == aBox.beside(boxes(2))`
 
-The last three properties all have the same general shape.
-We can describe all of them, and any case for `n > 0`, with the single property `boxes(n) == aBox.beside(boxes(n - 1))`.
-So we're left with two properties
+Ba thuộc tính sau cùng đều có chung một dạng.
+Ta có thể mô tả tất thảy chúng, và cho trường hợp với `n > 0`, chỉ bằng một thuộc tính duy nhất `boxes(n) == aBox.beside(boxes(n - 1))`.
+Bởi vậy ta chỉ còn lại hai thuộc tính sau
 
 - `boxes(0) == Image.empty`
 - `boxes(n) == aBox.beside(boxes(n-1))`
 
-These two properties completely define the behavior of `boxes`.
-In fact we can implement `boxes` by converting these properties into code.
+Hai thuộc tính này định nghĩa trọn vẹn động thái của `boxes`.
+Thực ra ta có thể viết `boxes` bằng cách chuyển đổi những động thái trên thành mã lệnh.
 
-A full implementation of `boxes` is
+Nội dung đầy đủ của `boxes` là
 
 ```scala mdoc:reset:invisible
 import doodle.core._
@@ -125,24 +125,24 @@ def boxes(count: Int): Image =
   }
 ```
 
-Try it and see what results you get!
-This implementation is only tiny bit more verbose than the properties we wrote above, and is our first structural recursion over the natural numbers.
+Hãy thử nó và xem bạn được kết quả gì!
+Cách viết này chỉ hơi dài hơn các thuộc tính mà ta đã ghi ra ở trên, và là phép đệ quy cấu trúc đầu tiên của ta trên các số tự nhiên.
 
-At this point we have two questions to answer.
-Firstly, how does this `match` expression work?
-More importantly, is there some general principle we can use to create methods like this on our own?
-Let's take each question in turn.
+Đến đây ta có hai câu hỏi cần giải đáp.
+Một là, biểu thức `match` (khớp) hoạt động ra sao?
+Quan trọng hơn nữa, có nguyên tắc chung nào ta có thể dùng để tự viết các phương thức như thế này không?
+Hãy lân lượt trả lời từng câu hỏi một.
 
-### Exercise: Stacking Boxes {-}
+### Bài tập: Xếp chồng các ô {-}
 
-Even before we get into the details of `match` expressions you should be able to modify `boxes` to produce an image like [@fig:recursion:stacked-boxes].
+Ngay cả trước khi ta đi sâu vào chi tiết biểu thức `match`, bạn cũng có thể chỉnh sửa `boxes` để tạo nên một hình như [@fig:recursion:stacked-boxes].
 
-At this point we're trying to get used to the syntax of `match`, so rather than copying and pasting `boxes` write it all out by hand again to get some practice.
+Đến đây ta cố gắng quen với cú pháp của `match`, do đó thay vì sao chép và dán các `boxes`, hãy tự tay bạn viết lại toàn bộ để tập cho quen.
 
-![Three stacked boxes filled with Royal Blue](./src/pages/recursion/sequential-boxes.pdf+svg){#fig:recursion:stacked-boxes}
+![Ba ô xếp chồng được tô màu Royal Blue](./src/pages/recursion/sequential-boxes.pdf+svg){#fig:recursion:stacked-boxes}
 
 <div class="solution">
-All you to do is change `beside` to `above` in `boxes`.
+Tất cả những gì bạn cần làm là thay đổi `beside` thành `above` trong `boxes`.
 
 ```scala mdoc:silent
 def stackedBoxes(count: Int): Image =
