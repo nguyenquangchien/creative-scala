@@ -1,6 +1,6 @@
-## Match Expressions
+## Biểu thức khớp
 
-In the previous section we saw the `match` expression
+Ở mục trước ta đã thấy biểu thức khớp `match` 
 
 ```scala
 count match {
@@ -9,16 +9,16 @@ count match {
 }
 ```
 
-How are we to understand this new kind of expression,
-and write our own?
-Let's break it down.
+Ta sẽ hiểu loại biểu thức mới này sao đây, 
+và tự viết nó bằng cách nào?
+Hãy cùng mổ xẻ biểu thức này.
 
-The very first thing to say is that `match` is indeed an expression,
-which means it evaluates to a value.
-If it didn't, the `boxes` method would not work!
+Trước hết phải nói rằng `match` là biểu thức thực sự, 
+nghĩa là nó lượng giá thành một giá trị.
+Nếu không thì phương thức `boxes` đã chẳng hoạt động được!
 
-To understand what it evaluates to we need more detail.
-A `match` expression in general has the shape
+Để hiểu được nó lượng giá thành cái gì, ta cần thêm chi tiết. 
+Một biểu thức `match` thường có dạng sau
 
 ```scala
 <anExpression> match {
@@ -29,28 +29,28 @@ A `match` expression in general has the shape
 }
 ```
 
-`<anExpression>`, concretely `count` in the case above, is the expression that evaluates to the value we're matching against.
-The patterns `<pattern1>` and so on are matched against this value.
-So far we've seen two kinds of patterns:
+`<anExpression>`, mà cụ thể là `count` ở ví dụ trên, là biểu thức mà lượng giá thành giá trị ta đang khớp nó với.
+Dạng mẫu `<pattern1>` và v.v. được khớp với giá trị này.
+Đến giờ ta đã thấy hai loại dạng mẫu:
 
- - a literal (as in `case 0`) which matches exactly the value that literal evaluates to; and
- - a wildcard (as in `case n`) which matches *anything*, and introduces a binding within the right-hand side expression.
+ - nguyên văn (như ở `case 0`) sẽ khớp chính xác với giá trị mà nguyên văn đó lượng giá thành; và
+ - đại diện (như ở `case n`) sẽ khớp với *thứ bất kì*, và hình thành gắn kết ngay trong biểu thức vế phải.
 
-Finally, the right-hand side expressions, `<expression1>` and so on, are just expressions like any other we've written so far.
-The entire `match` expression evaluates to the value of the right-hand side expression of the *first* pattern that matches.
-So when we call `boxes(0)` both patterns will match (because the wildcard matches anything), but because the literal pattern comes first the expression `Image.empty` is the one that is evaluated.
+Cuối cùng, các biểu thức vế phải, `<expression1>` và v.v. chỉ là biểu thức như mọi biểu thức khác mà ta đã viết tới giờ.
+bộ biểu thức `match` lượng giá thành giá trị biểu thức vế phải của dạng mẫu *đầu tiên* mà nó khớp được.
+Bởi vậy khi ta gọi `boxes(0)`, cả hai dạng mẫu đều sẽ khớp (vì cái đại diện khớp được mọi thứ), nhưng vì dạng mẫu nguyên văn lại đứng trước nên biểu thức `Image.empty` sẽ được ước lượng.
 
-A `match` expression that checks for all possible cases is called an exhaustive match.
-If we can assume that `count` is always greater or equal to zero, the `match` in `boxes` is exhaustive.
+Một biểu thức `match` mà kiểm tra toàn bộ trường hợp khả dĩ thì được gọi là khớp triệt để.
+Nếu ta có thể cho rằng `count` luôn lớn hơn hoặc bằng không, thì `match` trong `boxes` chính là phép khớp triệt để.
 
-Once we're comfortable with `match` expressions we need to look at the structure of the natural numbers before we can explain structural recursion over them.
+Một khi đã quen với các biểu thức `match`, ta cần nhìn vào cấu trúc các số nguyên trước khi có thể giải thích đệ quy cấu trúc lên chúng.
 
 
-### Exercises {-}
+### Bài tập {-}
 
-#### Guess the Result {-}
+#### Đoán kết quả {-}
 
-Let's check our understanding of match by guessing what each of the following expressions evaluates to, and why.
+Hãy cùng kiểm tra hiểu biết của mình về phép khớp bằng cách đoán từng biểu thức sau sẽ lượng giá thành cái gì, và tại sao.
 
 ```scala mdoc:silent
 "abcd" match {
@@ -85,29 +85,29 @@ Let's check our understanding of match by guessing what each of the following ex
 
 <div class="solution">
 
-The first example evaluates to `2`, as the pattern `"abcd"` is the only match for the literal `"abcd"` amongst the patterns.
+Ví dụ thứ nhất lượng giá thành `2`, vi trong số các dạng mẫu, chỉ có duy nhất `"abcd"` là khớp được nguyên mẫu `"abcd"`.
 
-The second example evaluates to `"one"`, because the first matching case is the one that is evaluated.
+Ví dụ thứ hai lượng giá thành `"one"`, vi trường hợp khớp đầu tiên chính là cái được ước lượng.
 
-The third example evaluates to `2`, because `case n` defines a wildcard pattern that matches anything.
+Ví dụ thứ nhất lượng giá thành `2`, vì `case n` định nghĩa một dạng mẫu đại diện khớp được mọi thứ.
 
-The final example evaluates to `1` because the first matching case is evaluated.
+Ví dụ cuối lượng giá thành `1` vì trường hợp khớp đầu tiên được ước lượng.
 </div>
 
-#### No Match {-}
+#### Không khớp {-}
 
-What happens if no pattern matches in a `match` expression?
-Take a guess, then write a `match` expression that fails to match and see if you managed to guess correctly.
-(At this point we have no reason to expect any particular behavior so any reasonable guess will do.)
+Điều gì sẽ xảy ra nếu không dạng mẫu nào khớp trong biểu thức `match`?
+Hãy thử đoán, rồi viết một biểu thức `match` mà không khớp được để xem liệu bạn có đoán đúng không.
+(Đến đây, ta không có lí do nào để lường trước một ứng xử cụ thể bởi vậy đoán cách nào hợp lý cũng được hết.)
 
 <div class="solution">
-Here are three reasonable possibilities I can think of; perhaps you came up with something else?
+Sau đây là ba khả năng khả dĩ mà tôi nghĩ được; có lẽ bạn sẽ nghĩ đến điều khác?
 
- - The expression could evaluate to some default, like `Image.empty` (but how should Scala pick the right default?)
- - The Scala compiler should just not let you write code like that.
- - The `match` expression will fail at runtime.
+ - Biểu thức có thể ước lượng thành một giá trị mặc định nào đó, như `Image.empty` (nhưng Scala sẽ chọn mặc định thế nào là đúng đắn?)
+ - Trình biên dịch Scala sẽ không cho phép bạn viết mã lệnh như vậy.
+ - Biểu thức `match` sẽ thất bại khi thực thi.
 
-Here's a match expression that doesn't match.
+Dưới đây là biểu thức khớp thất bại.
 
 ```scala mdoc:crash
 2 match {
@@ -116,7 +116,7 @@ Here's a match expression that doesn't match.
 }
 ```
 
-The correct answer is one of the last two possibilities, failing to compile or failing at runtime.
-In this example we have an error at runtime.
-The exact answer depends on how Scala is configured (we can tell the compiler to refuse to compile matches that it can show are not exhaustive, but this is not the default behavior).
+Đáp án đúng là một trong hai khả năng cuối, hoặc không biên dịch được hoặc thất bại lúc thực thi.
+Ở ví dụ này ta bị lỗi thực thi. 
+Câu trả lời chính xác phụ thuộc vào việc Scala được cấu hình ra sao (ta có thể bảo trình biên dịch từ chối biên dịch các biểu thức khớp mà nó cho thấy rằng chúng không triệt để, song đây không phải là cách ứng xử mặc định).
 </div>
