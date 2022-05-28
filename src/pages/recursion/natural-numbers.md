@@ -1,4 +1,4 @@
-## The Natural Numbers
+## Số tự nhiên 
 
 ```scala mdoc:invisible
 import doodle.core._
@@ -9,32 +9,32 @@ import doodle.java2d._
 val aBox = Image.square(20).fillColor(Color.royalBlue)
 ```
 
-The natural numbers are the whole numbers, or integers, greater than or equal to zero. In other words the numbers 0, 1, 2, 3, ... (Some people define the natural numbers as starting at 1, not 0. It doesn't greatly matter for our purposes which definition you choose, but here we'll assume they start at 0.)
+Số tự nhiên là các số nguyên lớn hơn hoặc bằng không. Nói các khác, đó là các số 0, 1, 2, 3, ... (Có người lại định nghĩa số tự nhiên bắt đầu từ 1 thay vì 0. Với vấn đề hiện đang xét thì bắt đầu từ 0 hay 1 chẳng hề quan trọng, nhưng ta sẽ coi như chúng bắt đầu từ 0.)
 
-One interesting property of the natural numbers is that we can define them recursively. That is, we can define them in terms of themselves. This kind of circular definition seems like it would lead to nonsense. We avoid this by including in the definition a *base case* that ends the recursion. Concretely, the definition is:
+Một trong những thuộc tính của số nguyên là ta có thể định nghĩa chúng theo cách đệ quy. Nghĩa là, có thể định nghĩa chúng theo bản thân chúng. Cách định nghĩa vòng tròn này dường như sẽ dẫn đến vô nghĩa. Để tránh điều này, ta sẽ kèm thêm trong lời định nghĩa một *trường hợp cơ sở* để kết thúc đệ quy. Cụ thể, định nghĩa là:
 
-A natural number `n` is
+Một số tự nhiên `n` là
 
-- 0; or
-- 1 + `m`, where `m` is a natural number.
+- 0; hoặc
+- 1 + `m`, trong đó `m` là số tự nhiên.
 
-The case for 0 is the base case, whilst the other case is recursive as it defines a natural number `n` in terms of a natural number `m`. Because `m` is always smaller than `n`, and the base case is the smallest possible natural number, this definition defines all of the natural numbers.
+Trường hợp 0 là trường hợp cơ sở, còn những trường hợp khác là đệ quy vì nó định nghĩa số tự nhiên `n` theo số tự nhiên `m`. Vì `m` luôn nhỏ hơn `n`, và vì trường hợp cơ sở là số tự nhiên nhỏ nhất có thể, nên định nghĩa này đã xác định mọi số tự nhiên.
 
-Given a natural number, say, 3, we can break it down using the definition above as follows:
+Cho trước một số tự nhiên, chẳng hạn, 3, ta có thể phân tách nó bằng định nghĩa nêu trên như sau:
 
 3 = 1 + 2 = 1 + (1 + 1) = 1 + (1 + (1 + 0))
 
-We use the recursive rule to expand the equation until we cannot use it any more. We then use the base case to stop the recursion.
+Ta dùng quy tắc đệ quy để khai triển phương trình này đến khi không thể dùng đệ quy được nữa. Khi đó, ta dùng trường hợp cơ sở để kết thúc đệ quy.
 
 
-## Structural Recursion
+## Đệ quy cấu trúc
 
-Now onto structural recursion. The structural recursion pattern for the natural numbers gives us two things:
+Bây giờ tới lượt đệ quy cấu trúc. Dạng mẫu đệ quy cấu trúc với số tự nhiên cho ta hai điều:
 
-- a reusable code skeleton for processing any natural number; and
-- the guarantee that we can use this skeleton to implement *any* computation on natural numbers.
+- một khung dàn ý mã để xử lý bất kì số tự nhiên nào; và 
+- sự đảm bảo rằng ta có thể dùng khung dàn ý này để viết *bất kì* tính toán nào đối với số tự nhiên.
 
-Remember we wrote `boxes` as
+Hãy nhớ lại rằng ta đã viết `boxes` như sau
 
 ```scala mdoc:silent
 def boxes(count: Int): Image =
@@ -44,14 +44,14 @@ def boxes(count: Int): Image =
   }
 ```
 
-When we developed `boxes` we just seemed to stumble upon this pattern.
-Here we see that this pattern follows directly from the definition of the natural numbers.
-Remember the recursive definition of the natural numbers: a natural number `n` is
+Khi pháp triển `boxes`, dường như ta đã đụng chạm đến dạng mẫu này. 
+Ở đây ta thấy rằng dạng mẫu trực tiếp đi theo định nghĩa các số tự nhiên. 
+Hãy nhớ lại rằng lời định nghĩa đệ quy về các số tự nhiên: một số tự nhiên `n` là
 
-- 0; or
-- 1 + `m`, where `m` is a natural number.
+- 0; hoặc
+- 1 + `m`, trong đó `m` là số tự nhiên.
 
-The patterns in the `match` expression exactly match this definition. The expression
+Dạng mẫu trong biểu thức `match` khớp đúng với lời định nghĩa này. Biểu thức 
 
 ```scala
 count match {
@@ -60,15 +60,15 @@ count match {
 }
 ```
 
-means we're checking `count` for two cases, the case when `count` is 0, and the case when `count` is any other natural number `n` (which is `1 + m`).
+nghĩa là ta đang kiểm tra `count` cho hai trường hợp, trường hợp khi `count` bằng 0, và trường hợp khi `count` là bất kì số tự nhiên `n` nào khác (vốn bằng `1 + m`).
 
-The right hand side of the `match` expression says what we do in each case. The case for zero is `Image.empty`. The case for `n` is `aBox.beside(boxes(n-1))`.
+Vế phải của biểu thức `match` nói rằng ta sẽ làm gì trong mỗi trường hợp. Trường hợp với số 0 là `Image.empty`. Trường hợp với số `n` là  `aBox.beside(boxes(n-1))`.
 
-Now for the really important point.
-Notice that the structure of the right-hand side mirrors the structure of the natural number we match.
-When we match the base case 0, our result is the base case `Image.empty`. When we match the recursive case `n` the structure of the right hand side matches the structure of the recursive case in the definition of natural numbers.
-The definition states that `n` is `1 + m`.
-On the right-hand side we replace 1 with `aBox`, we replace + with `beside`, and we recursively call `boxes` with `m` (which is `n-1`) where the definition recurses.
+Bây giờ tới điều thực sự quan trọng.
+Lưu ý rằng biểu thức ở vế phải đã phản chiếu cấu trúc của số tự nhiên mà ta khớp.
+Khi ta khớp trường hợp cơ sở số 0, kết quả của chứng ta là trường hợp cơ sở `Image.empty`. Khi ta khớp trường hợp đệ quy `n` thì cấu trúc vế phải khớp cấu trúc trường hợp đệ quy theo lời định nghĩa về số tự nhiên.
+Định nghĩa phát biểu rằng `n` bằng `1 + m`.
+Ở vế phải ta thay 1 bởi `aBox`, và thay + bởi `beside`, rồi ta gọi đệ quy `boxes` với `m` (vốn là `n-1`) ở chỗ mà định nghĩa lặp lại.
 
 ```scala mdoc:reset:invisible
 import doodle.core._
@@ -86,12 +86,12 @@ def boxes(count: Int): Image =
   }
 ```
 
-To reiterate, the left hand side of the `match` expression exactly matches the definition of natural numbers. The right-hand also matches the definition but we replace natural numbers with images. The image that is equivalent to zero is `Image.empty`. The image that is equivalent to `1 + m` is `aBox.beside(boxes(m))`.
+Để nhắc lại, vế trái của biểu thức `match` khớp đúng với lời định nghĩa về các số tự nhiên. Vế phải cũng khớp với định nghĩa này nhưng ta thay số tự nhiên bằng hình. Tương đương với số 0 là hình `Image.empty`. Tương đương với `1 + m` là hình `aBox.beside(boxes(m))`.
 
-This general pattern holds for anything we care to write that transforms the natural numbers into some other type.
-We always have a `match` expression.
-We always have the two patterns, corresponding to the base and recursive cases.
-The right hand side expressions always consist of the base case, and the recursive case which itself has a result specific substitute for `1` and `+`, and a recursive call for `n-1`.
+Dạng mẫu tổng quát này nghiệm đúng với bất kì thứ gì ta cần viết để chuyển đổi từ số tự nhiên qua dạng khác. 
+Ta luôn có một biểu thức `match`.
+Ta luôn có hai dạng mẫu, tương ứng với các trường hợp cơ sở và đệ quy.
+Biểu thức vế phải luôn gồm có trường hợp cơ sở, và trường hợp đệ quy vốn bản thân nó có kết quả thay thế cụ thể cho `1` và `+`, cùng với lời gọi đệ quy tới `n-1`.
 
 <div class="callout callout-info">
 #### Structural Recursion over Natural Numbers Pattern {-}
