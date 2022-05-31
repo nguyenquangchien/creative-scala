@@ -1,4 +1,4 @@
-## Reasoning about Recursion
+## Suy luận về đệ quy
 
 ```scala mdoc:invisible
 import doodle.core._
@@ -8,13 +8,13 @@ import doodle.image.syntax.core._
 import doodle.java2d._
 ```
 
-We're now experienced users of structural recursion over the natural numbers.
-Let's now return to our substitution model and see if it works with our new tool of recursion.
+Bây giờ ta đã có nhiều kinh nghiệm dùng đệ quy cấu trúc trên các số nguyên.
+Hãy cùng trở lại mô hình thay thế của ta và xem liệu nó có hoạt động được với công cụ đệ quy mới này không.
 
-Recall that substitution says we can substitute the value of an expression wherever we see a value.
-In the case of a method call, we can substitute the body of the method with appropriate renaming of the parameters.
+Hãy nhớ lại rằng luật thay thế phát biểu rằng ta có thể thay giá trị bằng biểu thức bất kì khi nào nhìn thấy giá trị.
+Trong trường hợp lời gọi phương thức, ta có thể thay thế phần thân phương thức bằng cách đổi tên các tham số một cách thích hợp.
 
-Our very first example of recursion was `boxes`, written like so:
+Ví dụ đầu tiên về đệ quy mà ta gặp là `boxes`, được viết như sau:
 
 ```scala mdoc:silent
 val aBox = Image.square(20).fillColor(Color.royalBlue)
@@ -26,48 +26,48 @@ def boxes(count: Int): Image =
   }
 ```
 
-Let's try using substitution on `boxes(3)` to see what we get.
+Hãy cùng thử dùng cách thay thế cho `boxes(3)` để xem ta nhận được gì.
 
-Our first substitution is
+Lần thay thế đầu tiên là
 
 ```scala mdoc:silent
 boxes(3)
-// Substitute body of `boxes`
+// Thay thế phần thân của `boxes`
 3 match {
   case 0 => Image.empty
   case n => aBox.beside(boxes(n-1))
 }
 ```
 
-Knowing how to evaluate a `match` expression and using substitution again gives us
+Nhờ việc biết cách ước lượng biểu thức `match` và một lần nữa dùng cách thay thế, ta có
 
 ```scala mdoc:silent
 3 match {
   case 0 => Image.empty
   case n => aBox.beside(boxes(n-1))
 }
-// Substitute right-hand side expression of `case n`
+// Thay thế vế phải biểu thức `case n`
 aBox.beside(boxes(2))
 ```
 
-We can substitute again on `boxes(2)` to obtain
+Ta có thể lại thay thế với `boxes(2)` để có
 
 ```scala mdoc:silent
 aBox.beside(boxes(2))
-// Substitute body of boxes
+// Thay thế phần thân của boxes
 aBox.beside {
   2 match {
     case 0 => Image.empty
     case n => aBox.beside(boxes(n-1))
   }
 }
-// Substitute right-hand side expression of `case n`
+// Thay thế biểu thức vế phải của `case n`
 aBox.beside {
   aBox.beside(boxes(1))
 }
 ```
 
-Repeating the process a few more times we get
+Lặp lại quá trình này thêm vài lần nữa, ta có
 
 ```scala mdoc:silent
 aBox.beside {
@@ -78,13 +78,13 @@ aBox.beside {
     }
   }
 }
-// Substitute right-hand side expression of `case n`
+// Thay thế biểu thức vế phải của `case n`
 aBox.beside {
   aBox.beside {
       aBox.beside(boxes(0))
   }
 }
-// Substitute body of boxes
+// Thay thế phần thân của boxes
 aBox.beside {
   aBox.beside {
     aBox.beside {
@@ -95,7 +95,7 @@ aBox.beside {
     }
   }
 }
-// Substitute right-hand side expression of `case 0`
+// Thay thế biểu thức vế phải của `case 0`
 aBox.beside {
   aBox.beside {
     aBox.beside {
@@ -105,23 +105,23 @@ aBox.beside {
 }
 ```
 
-Our final result, which simplifies to
+Kết quả cuối cùng được rút gọn thành
 
 ```scala mdoc:silent
 aBox.beside(aBox).beside(aBox).beside(Image.empty)
 ```
 
-is exactly what we expect.
-Therefore we can say that substitution works to reason about recursion.
-This is great!
-However the substitutions are quite complex and difficult to keep track of without writing them down.
+chính là điều ta mong đợi.
+Do vậy, có thể nói rằng phép thay thế đã phát huy tác dụng để suy luận về đệ quy.
+Thật tuyệt vời!
+Tuy nhiên các phép thay thế khá phức tạp và khó theo dõi nếu không viết hẳn ra.
 
 
-### Reasoning About Structural Recursion
+### Suy luận về đệ quy cấu trúc
 
-There is a more practical way to reason about structural recursion. Structural recursion guarantees the overall recursion is correct if we get the individual components correct. There are two parts to the structural recursion; the base case and the recursive case. The base case we can check just by looking at it. The recursive case has the recursive call (the method calling itself) but *we don't have to consider this*. It is given to us by structural recursion so it will be correct so long as the other parts are correct. We can simply assume the recursive call it correct and then check that we are doing the right thing with the result of this call.
+Có một cách thực dụng hơn để suy luận vê đệ quy cấu trúc. Đệ quy cấu trúc đảm bảo rằng tổng thể đệ quy được đúng đắn nếu như ta làm đúng từng thành phần của nó. Có hai phần trong một đệ quy cấu trúc; trường hợp cơ sở và trường hợp đệ quy. Với trường hợp cơ sở, chỉ cần nhìn vào là biết đúng sai rồi. Trường hợp đệ quy thì có lời gọi đệ quy (phương thức tự gọi lại nó) nhưng *ta không phải xét tới điều này*. Ta có được luôn điều này nhờ đệ quy cấu trúc, bởi vậy nó sẽ đúng miễn là các phần khác đều đúng. Có thể đơn giản là coi rằng lời gọi đệ quy là đúng đắn và rồi kiểm tra để đảm bảo ta đang làm đúng với kết quả nhận được từ lời gọi nêu trên.
 
-Let's apply this to reasoning about `boxes`.
+Hãy cùng áp dụng cách này để suy luận về `boxes`.
 
 ```scala mdoc:reset:invisible
 import doodle.core._
@@ -139,23 +139,23 @@ def boxes(count: Int): Image =
   }
 ```
 
-We can tell the base case is correct by inspection.
-Looking at the recursive case we *assume* that `boxes(n-1)` will do the right thing.
-The question then becomes: is what we do with the result of the recursive call `boxes(n-1)`, correct?
-The answer is yes: if the recursion `boxes(n-1)` creates `n-1` boxes in a line, sticking a box in front of them is the right thing to do.
-Since the individual cases are correct the whole thing is guaranted correct by structural recursion.
+Bằng cách điêu tra có thể nói rằng trường hợp cơ sở là đúng.
+Khi nhìn vào trường hợp đệ quy ta *coi* rằng `boxes(n-1)` sẽ làm đúng.
+Khi đó câu hỏi trở thành: liệu rằng điều ta làm là đúng với kết quả nhận được từ lời gọi đệ quy `boxes(n-1)`?
+Câu trả lời là có: nếu đệ quy `boxes(n-1)` tạo nên `n-1` ô trên một hàng, thì việc gắn một ô lên phía trước chúng là điều đúng đắn.
+Vì các trường hợp đơn lẻ đã đúng đắn nên toàn bộ công việc sẽ đảm bảo là đúng nhờ đệ quy cấu trúc.
 
-This way of reasoning is much more compact than using substitution *and* guaranteed to work *if* we're using structural recursion.
+Cách suy luận này thị gọin hơn nhiều là dùng thay thế *và cũng* đảm bảo hiệu nghiệm *nếu* ta dùng đệ quy cấu trúc.
 
 
-### Exercises {-}
+### Bài tập {-}
 
-Below are some rather silly examples of structural recursion.
-Work out if the methods do what they claim to do *without* running them.
+Dưới đây là vài ví dụ khá ngốc nghếch về đệ quy cấu trúc.
+Hãy phân tích xem liệu những phương thức này có hoạt động như chúng cam kết không, mà *không* chạy mã lệnh.
 
 ```scala mdoc:silent
-// Given a natural number, returns that number
-// Examples:
+// Cho trước một số tự nhiên, hãy trả lại chính số đó 
+// Ví dụ:
 //   identity(0) == 0
 //   identity(3) == 3
 def identity(n: Int): Int =
@@ -166,15 +166,15 @@ def identity(n: Int): Int =
 ```
 
 <div class="solution">
-It sure does!
-The base case is straightforward.
-Looking at the recursive case, we assume that `identity(n-1)` returns the identity for `n-1` (which is exactly `n-1`).
-The identity for `n` is then `1 + identity(n-1)`.
+Dĩ nhiên là có!
+Trường hợp cơ bản là quá hiển nhiên.
+Nhìn vào trường hợp đệ quy, ta coi rằng `identity(n-1)` trả lại chính identity, tức là nhận diện cho `n-1` (giá trị `n-1`).
+Khi đó, nhận diện cho `n` sẽ bằng `1 + identity(n-1)`.
 </div>
 
 ```scala mdoc:silent
-// Given a natural number, double that number
-// Examples:
+// Cho trước một số tự nhiên, hãy nhân đôi số đó 
+// Ví dụ:
 //   double(0) == 0
 //   double(3) == 6
 def double(n: Int): Int =
@@ -185,11 +185,11 @@ def double(n: Int): Int =
 ```
 
 <div class="solution">
-No way!
-This method is broken in two different ways.
-Firstly, because we're multiplying in the recursive case we will eventualy end up multiplying by base case of zero, and therefore the entire result will be zero.
+Không!
+Phương thức này sai ở hai chỗ.
+Thứ nhất, vì ta tính nhân trong trường hợp đệ quy nên rốt cuộc ta sẽ phải nhân với trường hợp cơ sở bằng không, và do đó toàn bộ kết quả sẽ bằng không.
 
-We might try and fix this by adding a case for `1` (and perhaps wonder why the structural recursion skeleton let us down).
+Ta có thể thử sửa chữa điều này bằng việc thêm trường hợp cơ sở bằng `1` (và có lẽ vẫn còn tự hỏi tại sao khung đệ quy cấu trúc vẫn không giúp gì ta được).
 
 ```scala mdoc:reset:silent
 def double(n: Int): Int =
@@ -200,16 +200,16 @@ def double(n: Int): Int =
   }
 ```
 
-This doesn't give us the correct result, however! We're doing the wrong thing at the recursive case: we should be adding, not multiplying.
+Tuy nhiên, cách này vẫn chẳng cho ta kết quả đúng. Trong trường hợp đệ quy ta đang làm sai: đáng ra ta phải cộng chứ không phải là nhân.
 
-A bit of algebra:
+Viết bằng biểu thức đại số:
 
 ```scala
 2(n-1 + 1) == 2(n-1) + 2
 ```
 
-So if `double(n-1)` is `2(n-1)` then we should *add* 2, not multiply by 2.
-The correct method is
+Vậy nếu `double(n-1)` là `2(n-1)` thì ta sẽ phải *cộng* 2, chứ không phải nhân 2.
+Phương thức đúng phải là
 
 ```scala mdoc:reset:silent
 def double(n: Int): Int =
