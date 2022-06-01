@@ -1,9 +1,9 @@
-# Fractals
+# Phân dạng
 
-A fractal is an image that is *self-similar*, meaning that it contains copies of itself. Fractals are an intriguing type of image as they build complex output from simple rules. In this chapter we will build some simple fractals, get more experience with structural recursion over natural numbers, and finally learn more programming techniques.
+Phân dạng (fractal) là một hình có tính *tự tương đồng*, nghĩa là nó chứa các bản sao của chính nó. Phân dạng là một loại hình rất thú vị vì chúng dựng nên những sản phẩm rất phức tạp từ những quy tắc đơn giản. Ở chương này ta sẽ vẽ vài phân dạng đơn giản, trải nghiệm thêm với đệ quy cấu trúc trên các số tự nhiên, và cuối cùng là học thêm một số kĩ thuật lập trình.
 
 <div class="callout callout-info">
-If you run the examples from the SBT console within Doodle they will just work. If not, you will need to start your code with the following imports to make Doodle available.
+Nếu bạn chạy những ví dụ này từ dòng lệnh (SBT console) bêm trong Doodle, chương trình sẽ hoạt động. Nếu không, bạn sẽ cần phải bắt đầu mã lệnh với những câu lệnh nhập sau đây để gọi được Doodle. 
 
 ```scala mdoc:silent
 import doodle.core._
