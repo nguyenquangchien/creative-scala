@@ -1,82 +1,82 @@
 \appendix
 
-# Syntax Quick Reference {#syntax-quick-reference}
+# Tham khảo nhanh về cú pháp {#syntax-quick-reference}
 
-## Literals and Expressions
+## Nguyên văn và biểu thức
 
 ```scala
-// Literals:
+// Các nguyên văn:
 123      // Int
 123.0    // Double
 "Hello!" // String
 true     // Boolean
 
-// Math:
+// Toán:
 10 + 2   // Int + Int    = Int
 10 + 2.0 // Int + Double = Double
 10 / 2   // Int / Int    = Double
 
-// Boolean logic:
-true && false // logical AND
-true || false // logical OR
-!true         // logical NOT
+// Logic Boole:
+true && false // phép VÀ logic
+true || false // phép HOẶC logic
+!true         // phép phủ định logic
 
-// String concatenation:
+// Nối chuỗi:
 "abc" + "def" // String
-"abc" + 123   // auto-conversion from Int to String
+"abc" + 123   // tự động quy đổi từ Int sang String
 
-// Method calls and infix operators:
-1.+(2)    // method call style
-1 + 2     // infix operator style
-1 + 2 + 3 // equivalent to 1.+(2).+(3)
+// Lời gọi phương thức và toán tử trung tố:
+1.+(2)    // cách gọi phương thức
+1 + 2     // cách dùng toán tử trung tố
+1 + 2 + 3 // tương đương với 1.+(2).+(3)
 
-// Conditionals:
-if(booleanExpression) expressionA else expressionB
+// Câu lệnh điều kiện:
+if(biểuThứcBoole) biểuThứcA else biểuThứcB
 
-// Blocks:
+// Khối lệnh:
 {
-  sideEffectExpression1
-  sideEffectExpression2
-  resultExpression
+  biểuThứcHiệuỨngPhụ1
+  biểuThứcHiệuỨngPhụ2
+  biểuThứcKếtQuả
 }
 ```
 
-## Value and Method Declarations
+## Khai báo các giá trị và phương thức
 
 ```scala
-// Value declaration syntax:
-val valueName: SomeType = resultExpression // declaration with explicit type
-val valueName = resultExpression           // declaration with inferred type
+// Cú pháp khai báo giá trị:
+val tênGiáTrị: Kiểu = biểuThứcKếtQuả     // khai báo với kiểu tường minh
+val tênGiáTrị = biểuThứcKếtQuả           // khai báo với kiểu suy diễn
 
-// Method with parameter list and explicit return type:
-def methodName(argName: ArgType, argName: ArgType): ReturnType =
-  resultExpression
+// Phương thức cùng danh sách tham số và kiểu trả lại tường minh:
+def tênPhươngThức(tênĐốiSố: KiểuĐốiSố, tênĐốiSố: KiểuĐốiSố): KiểuTrảLại =
+  biểuThứcKếtQuả
 
-// Method with parameter list and inferred return type:
-def methodName(argName: ArgType, argName: ArgType) =
-  resultExpression
+// Phương thức cùng danh sách tham số và kiểu trả lại suy diễn:
+def tênPhươngThức(tênĐốiSố: KiểuĐốiSố, tênĐốiSố: KiểuĐốiSố) =
+  biểuThứcKếtQuả
 
-// Multi-expression method (using a block):
-def methodName(argName: ArgType, argName: ArgType): ReturnType = {
-  sideEffectExpression1
-  sideEffectExpression2
-  resultExpression
+// Phương thức đa biểu thức (bằng cách dùng khối):
+def tênPhươngThức(tênĐốiSố: KiểuĐốiSố, tênĐốiSố: KiểuĐốiSố): KiểuTrảLại = {
+  biểuThứcHiệuỨngPhụ1
+  biểuThứcHiệuỨngPhụ2
+  biểuThứcKếtQuả
 }
 
-// Method with no parameter list:
-def methodName: ReturnType =
-  resultExpression
+// Phương thức không có danh sách tham số:
+def tênPhươngThức: KiểuTrảLại =
+  biểuThứcKếtQuả
 
-// Calling a method that has a parameter list:
-methodName(arg, arg)
+// Gọi một phương thức có danh sách tham số:
+tênPhươngThức(đốiSố, đốiSố)
 
-// Calling a method that has no parameter list:
-methodName
+// Gọi một phương thức không có danh sách tham số:
+tênPhươngThức
 ```
 
-## Functions as Values
+## Các hàm như giá trị
 
-Function values are written `(argName: ArgType, ...) => resultExpression`:
+Giá trị hàm được viết là `(tênĐốiSố: KiểuĐốiSố, ...) => biểuThứcKếtQuả`:
 
 ```scala
 val double = (num: Int) => num * 2
@@ -86,22 +86,22 @@ val sum = (a: Int, b: Int) => a + b
 sum: (Int, Int) => Int = <function2>
 ```
 
-Multi-line functions are written using block expressions:
+Các hàm trên nhiều dòng được viết bằng cách dùng khối biểu thức:
 
 ```scala
 val printAndDouble = (num: Int) => {
-  println("The number was " + num)
+  println("Số đã cho là " + num)
   num * 2
 }
 // printAndDouble: Int => Int = <function1>
 
 scala> printAndDouble(10)
-// The number was 10
+// Số đã cho là 10
 // res0: Int = 20
 ```
 
-We have to write function types when declaring parameters and return types.
-The syntax is `ArgType => ResultType` or `(ArgType, ...) => ResultType`:
+Ta phải viết kiểu hàm khi khai báo các tham số cùng kiểu trả lại.
+Cú pháp là `KiểuĐốiSố => KiểuTrảLại` hoặc `(KiểuĐốiSố, ...) => KiểuTrảLại`:
 
 ```scala
 def doTwice(value: Int, func: Int => Int): Int =
@@ -112,138 +112,138 @@ doTwice(1, double)
 // res0: Int = 4
 ```
 
-Function values can be written inline as normal expressions:
+Các giá trị hàm cũng có thể được viết trên một dòng như biểu thức thông thường:
 
 ```scala
 doTwice(1, (num: Int) => num * 10)
 // res1: Int = 100
 ```
 
-We can sometimes omit the argument types,
-assuming the compiler can figure things out for us:
+Đôi khi ta bỏ qua kiểu đối số, 
+và cho rằng trình biên dịch có thể giúp ta hình dung mọi thứ:
 
 ```scala
 doTwice(1, num => num * 10)
 // res2: Int = 100
 ```
 
-## Doodle Reference Guide
+## Hướng dẫn tham khảo Doodle
 
-### Imports
+### Nhập thư viện
 
 ```scala
-// These imports get you everything you need:
+// Các dòng lệnh nhập này giúp bạn có mọi thứ cần thiết:
 import doodle.core._
 import doodle.syntax._
 ```
 
-### Creating Images
+### Tạo các hình ảnh
 
 ```scala
-// Primitive images (black outline, no fill):
-val i: Image = Circle(radius)
-val i: Image = Rectangle(width, height)
-val i: Image = Triangle(width, height)
+// Các hình cơ bản (viền đen, không tô màu):
+val i: Image = Circle(bánKính)
+val i: Image = Rectangle(rộng, cao)
+val i: Image = Triangle(rộng, cao)
 
-// Compound images written using operator syntax:
-val i: Image = imageA beside imageB // horizontally adjacent
-val i: Image = imageA above  imageB // vertically adjacent
-val i: Image = imageA below  imageB // vertically adjacent
-val i: Image = imageA on     imageB // superimposed
-val i: Image = imageA under  imageB // superimposed
+// Các hình ghép được viết bằng cú pháp toán tử:
+val i: Image = imageA beside imageB // đặt kề hướng ngang
+val i: Image = imageA above  imageB // đặt kề hướng đứng
+val i: Image = imageA below  imageB // đặt kề hướng đứng
+val i: Image = imageA on     imageB // chồng xếp
+val i: Image = imageA under  imageB // chồng xếp
 
-// Compound images written using method call syntax:
+// Các hình ghép được viết bằng cú pháp gọi phương thức:
 val i: Image = imageA.beside(imageB)
-// etc...
+// v.v...
 ```
 
-### Styling Images
+### Dùng kiểu cách cho các hình
 
 ```scala
-// Styling images written using operator syntax:
-val i: Image = image fillColor color   // new fill color (doesn't change line)
-val i: Image = image strokeColor color   // new line color (doesn't change fill)
-val i: Image = image strokeWidth integer // new line width (doesn't change fill)
-val i: Image = image fillColor color strokeColor otherColor // new fill and line
+// Đặt kiểu cách bằng cú pháp toán tử:
+val i: Image = image fillColor màu     // màu tô mới (không thay đổi màu viền)
+val i: Image = image strokeColor màu   // màu viền mới (không thay đổi màu tô)
+val i: Image = image strokeWidth integer // bề rộng đường mới (không thay đổi phần được tô)
+val i: Image = image fillColor màu strokeColor màuKhác // màu tô và màu viền mới
 
-// Styling images using method call syntax:
-val i: Image = imageA.fillColor(color)
-val i: Image = imageA.fillColor(color).strokeColor(otherColor)
-// etc...
+// Đặt kiểu cách bằng cú pháp lời gọi hàm:
+val i: Image = imageA.fillColor(màu)
+val i: Image = imageA.fillColor(màu).strokeColor(màuKhác)
+// v.v...
 ```
 
-### Colours
+### Màu
 
 ```scala
-// Basic colors:
-val c: Color = Color.red                       // predefined colors
-val c: Color = Color.rgb(255.uByte, 127.uByte, 0.uByte)          // RGB color
-val c: Color = Color.rgba(255.uByte, 127.uByte, 0.uByte, 0.5.normalized)    // RGBA color
-val c: Color = Color.hsl(15.degrees, 0.25.normalized, 0.5.normalized)       // HSL color
-val c: Color = Color.hsla(15.degrees, 0.25.normalized, 0.5.normalized, 0.5.normalized) // HSLA color
+// Các màu cơ bản:
+val c: Color = Color.red                       // màu định sẵn
+val c: Color = Color.rgb(255.uByte, 127.uByte, 0.uByte)          // màu RGB
+val c: Color = Color.rgba(255.uByte, 127.uByte, 0.uByte, 0.5.normalized)    // màu RGBA
+val c: Color = Color.hsl(15.degrees, 0.25.normalized, 0.5.normalized)       // màu HSL
+val c: Color = Color.hsla(15.degrees, 0.25.normalized, 0.5.normalized, 0.5.normalized) // màu HSLA 
 
-// Transforming/mixing colors using operator syntax:
-val c: Color = someColor spin       10.degrees     // change hue
-val c: Color = someColor lighten    0.1.normalized // change brightness
-val c: Color = someColor darken     0.1.normalized // change brightness
-val c: Color = someColor saturate   0.1.normalized // change saturation
-val c: Color = someColor desaturate 0.1.normalized // change saturation
-val c: Color = someColor fadeIn     0.1.normalized // change opacity
-val c: Color = someColor fadeOut    0.1.normalized // change opacity
+// Đổi màu/trộn màu bằng cú pháp toán tử:
+val c: Color = someColor spin       10.degrees     // đổi màu
+val c: Color = someColor lighten    0.1.normalized // đổi độ sáng
+val c: Color = someColor darken     0.1.normalized // đổi độ sáng
+val c: Color = someColor saturate   0.1.normalized // đổi độ bão hòa
+val c: Color = someColor desaturate 0.1.normalized // đổi độ bão hòa
+val c: Color = someColor fadeIn     0.1.normalized // đổi độ mờ đục
+val c: Color = someColor fadeOut    0.1.normalized // đổi độ mờ đục
 
-// Transforming/mixing colors using method call syntax:
+// Đổi màu/trộn màu bằng cú pháp gọi phương thức:
 val c: Color = someColor.spin(10.degrees)
 val c: Color = someColor.lighten(0.1.normalized)
-// etc...
+// v.v...
 ```
 
-### Paths
+### Đường vẽ
 
 ```scala
-// Create path from list of PathElements:
+// Tạo đường vẽ từ danh sách các PathElement:
 val i: Image = OpenPath(List(
   MoveTo(Vec(0, 0).toPoint),
   LineTo(Vec(10, 10).toPoint)
 ))
 
-// Create path from other sequence of PathElements:
+// Tạo đường vẽ từ dãy PathElement khác:
 val i: Image = OpenPath(
   (0 until 360 by 30) map { i =>
     LineTo(Vec.polar(i.degrees, 100).toPoint)
   }
 )
 
-// Types of element:
-val e1: PathElement = MoveTo(toVec.toPoint)                        // no line
-val e2: PathElement = LineTo(toVec.toPoint)                        // straight line
-val e3: PathElement = BezierCurveTo(cp1Vec.toPoint, cp2Vec.toPoint, toVec.toPoint) // curved line
+// Kiểu phần tử element:
+val e1: PathElement = MoveTo(toVec.toPoint)                        // không nét
+val e2: PathElement = LineTo(toVec.toPoint)                        // nét thẳng
+val e3: PathElement = BezierCurveTo(cp1Vec.toPoint, cp2Vec.toPoint, toVec.toPoint) // nét cong
 
-// NOTE: If the first element isn't a MoveTo,
-//       it is converted to one
+// LƯU Ý: Nếu phần tử đầu không phải là MoveTo,
+//        thì sẽ được quy đổi thành MoveTo
 ```
 
 ### Angles and Vecs
 
 ```scala
-val a: Angle = 30.degrees                // angle in degrees
-val a: Angle = 1.5.radians               // angle in radians
-val a: Angle = math.Pi.radians           // π radians
-val a: Angle = 1.turns                   // angle in complete turns
+val a: Angle = 30.degrees                // góc tính bằng độ
+val a: Angle = 1.5.radians               // góc tính bằng radian
+val a: Angle = math.Pi.radians           // π radian
+val a: Angle = 1.turns                   // góc tính bằng vòng hoàn chỉnh
 
-val v: Vec = Vec.zero                    // zero vector (0,0)
-val v: Vec = Vec.unitX                   // unit x vector (1,0)
-val v: Vec = Vec.unitY                   // unit y vector (0,1)
+val v: Vec = Vec.zero                    // vectơ không  (0,0)
+val v: Vec = Vec.unitX                   // vectơ đơn vị phương x (1,0)
+val v: Vec = Vec.unitY                   // vectơ đơn vị phương y (0,1)
 
-val v: Vec = Vec(3, 4)                   // vector from cartesian coords
-val v: Vec = Vec.polar(30.degrees, 5)    // vector from polar coords
-val v: Vec = Vec(2, 1) * 10              // multiply length
-val v: Vec = Vec(20, 10) / 10            // divide length
-val v: Vec = Vec(2, 1) + Vec(1, 3)       // add vectors
-val v: Vec = Vec(5, 5) - Vec(2, 1)       // subtract vectors
-val v: Vec = Vec(5, 5) rotate 45.degrees // rotate counterclockwise
+val v: Vec = Vec(3, 4)                   // vectơ từ các tọa độ Đề-các
+val v: Vec = Vec.polar(30.degrees, 5)    // vectơ từ các tọa độ cực
+val v: Vec = Vec(2, 1) * 10              // nhân chiều dài
+val v: Vec = Vec(20, 10) / 10            // chia chiều dài
+val v: Vec = Vec(2, 1) + Vec(1, 3)       // cộng vectơ
+val v: Vec = Vec(5, 5) - Vec(2, 1)       // trừ vectơ
+val v: Vec = Vec(5, 5) rotate 45.degrees // quay ngược chiều kim đồng hồ
 
-val x: Double = Vec(3, 4).x              // x coordinate
-val y: Double = Vec(3, 4).y              // y coordinate
-val a: Angle  = Vec(3, 4).angle          // counterclockwise from (1, 0)
-val l: Double = Vec(3, 4).length         // length
+val x: Double = Vec(3, 4).x              // tọa độ x
+val y: Double = Vec(3, 4).y              // tọa độ y
+val a: Angle  = Vec(3, 4).angle          // ngược chiều kim đồng hồ từ (1, 0)
+val l: Double = Vec(3, 4).length         // chiều dài
 ```
