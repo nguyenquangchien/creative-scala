@@ -146,14 +146,14 @@ val i: Image = Rectangle(rộng, cao)
 val i: Image = Triangle(rộng, cao)
 
 // Các hình ghép được viết bằng cú pháp toán tử:
-val i: Image = imageA beside imageB // đặt kề hướng ngang
-val i: Image = imageA above  imageB // đặt kề hướng đứng
-val i: Image = imageA below  imageB // đặt kề hướng đứng
-val i: Image = imageA on     imageB // chồng xếp
-val i: Image = imageA under  imageB // chồng xếp
+val i: Image = hìnhA beside hìnhB // đặt kề hướng ngang
+val i: Image = hìnhA above  hìnhB // đặt kề hướng đứng
+val i: Image = hìnhA below  hìnhB // đặt kề hướng đứng
+val i: Image = hìnhA on     hìnhB // chồng xếp
+val i: Image = hìnhA under  hìnhB // chồng xếp
 
 // Các hình ghép được viết bằng cú pháp gọi phương thức:
-val i: Image = imageA.beside(imageB)
+val i: Image = hìnhA.beside(hìnhB)
 // v.v...
 ```
 
@@ -161,14 +161,14 @@ val i: Image = imageA.beside(imageB)
 
 ```scala
 // Đặt kiểu cách bằng cú pháp toán tử:
-val i: Image = image fillColor màu     // màu tô mới (không thay đổi màu viền)
-val i: Image = image strokeColor màu   // màu viền mới (không thay đổi màu tô)
-val i: Image = image strokeWidth integer // bề rộng đường mới (không thay đổi phần được tô)
-val i: Image = image fillColor màu strokeColor màuKhác // màu tô và màu viền mới
+val i: Image = hình fillColor màu     // màu tô mới (không thay đổi màu viền)
+val i: Image = hình strokeColor màu   // màu viền mới (không thay đổi màu tô)
+val i: Image = hình strokeWidth integer // bề rộng đường mới (không thay đổi phần được tô)
+val i: Image = hình fillColor màu strokeColor màuKhác // màu tô và màu viền mới
 
 // Đặt kiểu cách bằng cú pháp lời gọi hàm:
-val i: Image = imageA.fillColor(màu)
-val i: Image = imageA.fillColor(màu).strokeColor(màuKhác)
+val i: Image = hìnhA.fillColor(màu)
+val i: Image = hìnhA.fillColor(màu).strokeColor(màuKhác)
 // v.v...
 ```
 
@@ -183,17 +183,17 @@ val c: Color = Color.hsl(15.degrees, 0.25.normalized, 0.5.normalized)       // m
 val c: Color = Color.hsla(15.degrees, 0.25.normalized, 0.5.normalized, 0.5.normalized) // màu HSLA 
 
 // Đổi màu/trộn màu bằng cú pháp toán tử:
-val c: Color = someColor spin       10.degrees     // đổi màu
-val c: Color = someColor lighten    0.1.normalized // đổi độ sáng
-val c: Color = someColor darken     0.1.normalized // đổi độ sáng
-val c: Color = someColor saturate   0.1.normalized // đổi độ bão hòa
-val c: Color = someColor desaturate 0.1.normalized // đổi độ bão hòa
-val c: Color = someColor fadeIn     0.1.normalized // đổi độ mờ đục
-val c: Color = someColor fadeOut    0.1.normalized // đổi độ mờ đục
+val c: Color = màu spin       10.degrees     // đổi màu
+val c: Color = màu lighten    0.1.normalized // đổi độ sáng
+val c: Color = màu darken     0.1.normalized // đổi độ sáng
+val c: Color = màu saturate   0.1.normalized // đổi độ bão hòa
+val c: Color = màu desaturate 0.1.normalized // đổi độ bão hòa
+val c: Color = màu fadeIn     0.1.normalized // đổi độ mờ đục
+val c: Color = màu fadeOut    0.1.normalized // đổi độ mờ đục
 
 // Đổi màu/trộn màu bằng cú pháp gọi phương thức:
-val c: Color = someColor.spin(10.degrees)
-val c: Color = someColor.lighten(0.1.normalized)
+val c: Color = màu.spin(10.degrees)
+val c: Color = màu.lighten(0.1.normalized)
 // v.v...
 ```
 
@@ -222,7 +222,7 @@ val e3: PathElement = BezierCurveTo(cp1Vec.toPoint, cp2Vec.toPoint, toVec.toPoin
 //        thì sẽ được quy đổi thành MoveTo
 ```
 
-### Angles and Vecs
+### Các góc và vectơ
 
 ```scala
 val a: Angle = 30.degrees                // góc tính bằng độ
