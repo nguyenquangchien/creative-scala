@@ -1,4 +1,4 @@
-## Nested Methods
+## Phương thức lồng ghép
 
 ```scala mdoc:invisible
 import doodle.core._
@@ -8,11 +8,11 @@ import doodle.image.syntax.core._
 import doodle.java2d._
 ```
 
-A method is a declaration.
-The body of a method can contain declarations and expressions.
-Therefore, a method declaration can contain other method declarations.
+Phương thức là một lời khai báo.
+Phần thân phương thức có thể chứa những lời khai báo cùng biểu thức.
+Do vậy, một phương pháp khai bấo có thể chứa những lời khai báo phương thức khác.
 
-To see why this is useful, lets look at a method we wrote earlier:
+Để thấy được tại sao điều này hữu ích, ta hãy cùng xem phương thức đã viết trước đây:
 
 ```scala mdoc:silent
 def cross(count: Int): Image = {
@@ -24,16 +24,16 @@ def cross(count: Int): Image = {
 }
 ```
 
-We have declared `unit` inside the method `cross`.
-This means the declaration of `unit` is only in scope within the body of `cross`.
-It is good practice to limit the scope of declarations to the minimum needed, to avoid accidentally shadowing other declarations.
-However, let's consider the runtime behavior of `cross` and we'll see that is has some undesirable characteristics.
+Ta đã khai báo `unit` bên trong phương thức `cross`.
+Điều này nghĩa là lời khai báo `unit` chỉ có phạm vi bên trong phần thân của `cross`.
+Một quy tắc thực hành hay, đó là hạn chế phạm vi khai báo ở mức tối thiểu, để tránh tình cờ phủ bóng vào những lời khai báo khác. 
+Dù vậy, hãy cùng xét động thái của `cross` trong lúc thực thi và ta sẽ thấy rằng nó có một số đặc tính không như mong muốn.
 
-We'll use our substitution model to expand `cross(1)`.
+Ta sẽ dùng mô hình thay thế đã đề cập để khai triển `cross(1)`.
 
 ```scala
 cross(1)
-// Expands to
+// Khai triển thành 
 {
   val unit = Image.circle(20)
   1 match {
@@ -41,12 +41,12 @@ cross(1)
     case n => unit.beside(unit.above(cross(n-1)).above(unit)).beside(unit)
   }
 }
-// Expands to
+// Khai triển thành 
 {
   val unit = Image.circle(20)
   unit.beside(unit.above(cross(0)).above(unit)).beside(unit)
 }
-// Expands to
+// Khai triển thành 
 {
   val unit = Image.circle(20)
   unit.beside(unit.above
@@ -59,7 +59,7 @@ cross(1)
   }
   .above(unit)).beside(unit)
 }
-// Expands to
+// Khai triển thành 
 {
   val unit = Image.circle(20)
   unit.beside(unit.above
@@ -71,8 +71,8 @@ cross(1)
 }
 ```
 
-The point of this enormous expansion is to demonstrate that we're recreating `unit` every time we recurse within `cross`.
-We can prove this is true by printing something every time `unit` is created.
+Lý do để dẫn ra đây toàn bộ khai triển dài dòng là nhằm cho thấy ta đang tạo lại `unit` mỗi lần ta đệ quy bên trong `cross`.
+Ta có thể chứng minh điều này là đúng bằng cách mỗi lần tạo nên `unit` sẽ in thứ gì đó ra màn hình.
 
 ```scala mdoc:reset:invisible
 import doodle.core._
@@ -84,7 +84,7 @@ import doodle.java2d._
 ```scala mdoc
 def cross(count: Int): Image = {
   val unit = {
-    println("Creating unit")
+    println("Tạo unit")
     Image.circle(20)
   }
   count match {
@@ -96,9 +96,9 @@ def cross(count: Int): Image = {
 cross(1)
 ```
 
-This doesn't matter greatly for `unit` because it's very small, but we could be doing something that takes up a lot of memory or time, and it's undesirable to repeat it when we don't have to.
+Điều này không có gì đáng kể với `unit` vì ở đây nó rất nhỏ, song trong trường hợp ta phải làm tác vụ nào chiếm nhiều bộ nhớ hay mất nhiều thời gian thì việc lặp lại không cần thiết như vậy thật không phải điều mong muốn.
 
-We could solve this by shifting `unit` outside of `cross`.
+Ta có thể giải quyết vấn đề này bằng việc chuyển `unit` ra ngoài `cross`.
 
 ```scala mdoc:reset:invisible
 import doodle.core._
@@ -108,7 +108,7 @@ import doodle.image.syntax.core._
 ```
 ```scala mdoc
 val unit = {
-  println("Creating unit")
+  println("Tạo unit")
   Image.circle(20)
 }
 
@@ -122,8 +122,8 @@ def cross(count: Int): Image = {
 cross(1)
 ```
 
-This is undesirable because `unit` now has a larger scope than needed.
-A better solution it to use a nested or internal method.
+Điều này lại không như mong muốn vì giờ đây `unit` lại có một phạm vi lớn hơn cần thiết. 
+Một giải pháp hay hơn là dùng phương thức lồng ghép hay nội tại.
 
 ```scala mdoc:reset:invisible
 import doodle.core._
@@ -135,7 +135,7 @@ import doodle.java2d._
 ```scala mdoc
 def cross(count: Int): Image = {
   val unit = {
-    println("Creating unit")
+    println("Tạo unit")
     Image.circle(20)
   }
   def loop(count: Int): Image = {
@@ -151,19 +151,19 @@ def cross(count: Int): Image = {
 cross(1)
 ```
 
-This has the behavior we're after, creating `unit` only once while minimising its scope.
-The internal method `loop` is using structural recursion exactly as before.
-We just need to ensure that we call it in `cross`.
-I usually name this sort of internal method `loop` or `iter` (short for iterate) to indicate that they're performing a loop.
+Cách này có động thái mà ta muốn hướng tới, chỉ tạo `unit` đúng một lần đồng thời hạn chế tối thiểu phạm vi của nó.
+Phương thức nội tại `loop` dùng đệ quy cấu trúc hệt như trước đây.
+Ta chỉ cần đảm bảo gọi đến nó bên trong `cross`.
+Tôi thường gọi những phương thức nội tại như vậy là `loop` (vòng lặp) hoặc `iter` (gọi tắt iterate: lặp) để chỉ định rằng chúng đang thực hiện một vòng lặp.
 
-This technique is just a small variation of what we've done already, but let's do a few exercises to make sure we've got the pattern.
+Kĩ thuật này chỉ là một biến thể nỏ của những gì ta đã làm trước đây, song hãy cùng làm ít bài tập để đảm bảo rằng ta nắm được dạng mẫu lập trình.
 
 
-### Exercises {-}
+### Bài tập {-}
 
-#### Chessboard {-}
+#### Bàn cờ {-}
 
-Rewrite `chessboard` using a nested method so that `blackSquare`, `redSquare`, and `base` are only created once when `chessboard` is called.
+Hãy viết lại `chessboard` (bàn cờ) bằng một phương thức lồng ghép sao cho `blackSquare` (ô đen), `redSquare` (ô đỏ), và `base` (phần cơ sở) chỉ được tạo ra một lần khi `chessboard` được gọi tới.
 
 ```scala mdoc
 def chessboard(count: Int): Image = {
@@ -183,7 +183,7 @@ def chessboard(count: Int): Image = {
 
 <div class="solution">
 
-Here's how we did it. It has exactly the same pattern we used with `boxes`.
+Dưới đây là cách làm của chúng tôi. Nó có đúng kiểu dạng mẫu mà ta đã áp dụng cho `boxes`.
 
 ```scala mdoc:reset:invisible
 import doodle.core._
@@ -213,7 +213,7 @@ def chessboard(count: Int): Image = {
 
 #### Boxing Clever {-}
 
-Rewrite `boxes`, shown below, so that `aBox` is only in scope within `boxes` and only created once when `boxes` is called.
+Hãy viết lại `boxes`, như dưới đây, sao cho `aBox` chỉ có trong phạm vi của `boxes` và chỉ được tạo nên một lần khi `boxes` được gọi tới.
 
 ```scala mdoc:silent
 val aBox = Image.square(20).fillColor(Color.royalBlue)
@@ -227,7 +227,7 @@ def boxes(count: Int): Image =
 
 <div class="solution">
 
-We can do this in two stages, first moving `aBox` within `boxes`.
+Ta có thể làm điều này theo hai giai đoạn, đầu tiên là chuyển `aBox` vào trong `boxes`.
 
 ```scala mdoc:reset:invisible
 import doodle.core._
@@ -246,7 +246,7 @@ def boxes(count: Int): Image = {
 }
 ```
 
-Then we can use an internal method to avoid recreating `aBox` on every recursion.
+Sau đó ta có thể dùng một phương thức nội tại để tránh tạo lại `aBox` ở mỗi lượt đệ quy.
 
 ```scala mdoc:reset:invisible
 import doodle.core._
