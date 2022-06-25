@@ -1,31 +1,31 @@
-# Horticulture and Higher-order Functions
+# Trồng trọt và Hàm bậc cao
 
-In this chapter we're going to learn how to draw flowers and to use functions as first-class values.
+Ở chương này ta sẽ học cách vẽ những bông hoa và dùng hàm như các giá trị lớp hạng nhất.
 
-We know that programs work with values, but not all values are *first-class*. A first-class value is something we can pass as a parameter to a method, or return as a result from a method call, or give a name using `val`.
+Ta biết rằng chương trình làm việc với những giá trị, nhưng không phải giá trị nào cũng thuộc *lớp hạng nhất* (first-class). Một giá trị thuộc lớp hạng nhất là giá trị mà ta có thể truyền như tham số vào phương thức, hay trả lại như một kết quả từ lời gọi phương thức, hay đặt một tên bằng `val`.
 
-If we pass a function as an argument to another function then:
+Nếu ta truyền hàm như một đối số vào trong hàm khác thì:
 
-- the function that is passed is being used as a first-class value; and
-- the function that is receiving the function parameter is called a *higher-order function*.
+- hàm được truyền thì dùng như giá trị thuộc lớp hạng nhất; và 
+- hàm nào nhận vào tham số hàm như vậy sẽ được gọi là *hàm bậc cao*.
 
-This terminology is not especially important, but you'll encounter it in other writing so it's useful to know (at least vaguely) what it means.
-It will soon become clearer when we see some examples.
+Thuật ngữ này không đặc biệt quan trọng, song bạn sẽ gặp phải trong những tài liệu khác, bởi vậy cần biết tới nó (ít ra là hiểu nôm na ý nghĩa).
+Mọi thứ sẽ sớm rõ hơn khi ta xem thêm vài ví dụ nữa.
 
-So far we have used the terms *function* and *method* interchangeably. 
-We'll soon see that in Scala these two terms have distinct, though related, meanings.
+Đến giờ ta đã dùng lẫn các thuật ngữ *hàm* và *phương thức*.
+Ta sẽ sớm thấy rằng trong Scala, hai thuật ngữ này có ý nghĩa riêng, dù liên quan đến nhau.
 
-Enough background. Let's dive in to see:
+Vậy là đủ kiến thức cơ bản rồi. Hãy cùng đi sâu vào để xem:
 
-- how we create functions in Scala; and
-- how we use first-class functions to structure programs.
+- cách tạo ra hàm trong Scala; và
+- cách dùng hàm thuộc lớp hạng nhất để cấu trúc hoá chương trình.
 
-Our motivating example for this will be drawing flowers as in [@fig:hof:flower-power].
+Thôi thúc ta tìm hiểu vấn đề này sẽ là ví dụ vẽ những bông hoa như [@fig:hof:flower-power].
 
 ![A flower created using the techniques in this chapter](src/pages/hof/flower-power.pdf+svg){#fig:hof:flower-power}
 
 <div class="callout callout-info">
-If you run the examples from the SBT console within Doodle they will just work. If not, you will need to start your code with the following imports to make Doodle available.
+Nếu bạn chạy những ví dụ này từ dòng lệnh (SBT console) bêm trong Doodle, chương trình sẽ hoạt động. Nếu không, bạn sẽ cần phải bắt đầu mã lệnh với những câu lệnh nhập sau đây để gọi được Doodle.
 
 ```scala mdoc:silent
 import doodle.core._
