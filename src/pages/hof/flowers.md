@@ -1,4 +1,4 @@
-## Flowers and Other Curves
+## Bông hoa và những đường vẽ khác
 
 ```scala mdoc:invisible
 import doodle.core._
@@ -8,37 +8,36 @@ import doodle.image.syntax.core._
 import doodle.java2d._
 ```
 
-In the previous section we saw that is was useful for methods to accept functions as parameters. In this section we'll see that it is useful for methods to return functions.
+Ở mục trước ta đã thấy rằng việc phương thức chấp nhận hàm là tham số thật là hữu ích. Ở mục này ta sẽ thấy các phương thức trả lại hàm cũng rất hữu ích.
 
-We've seen all the basic steps we need to make our flowers. Now we just need to know the curve that makes the flower shape! The shape I used is known as the [rose curve][rose-curve]. One example is shown in [@fig:hof:rose7]. 
+Ta đã thấy tất cả những bước cơ bản cần để vẽ nên các bông hoa. Bây giờ ta chỉ cần biết nét cong để tạo nên hình bông hoa! Hình mà tôi dùng có tên là [đường cong hoa hồng][rose-curve]. Một ví dụ được cho thấy trên hình [@fig:hof:rose7]. 
 
-![An example of the rose curve.](src/pages/hof/rose7.pdf+svg){#fig:hof:rose7}
+![Ví dụ đường cong hoa hồng.](src/pages/hof/rose7.pdf+svg){#fig:hof:rose7}
 
-The code for the parametric curve that gives this shape is below.
+Mã lệnh cho đường cong tham số cho ta hình đó như sau.
 
 ```scala mdoc:silent
-// Parametric equation for rose with k = 7
+// Phương trình tham số vẽ hoa hồng với k = 7
 val rose7 = (angle: Angle) =>
   Point((angle * 7).cos * 200, angle)
 ```
 
-You may wonder why I called this function `rose7`. It's because we can vary the shape by changing the value `7` to something else. We could make a method or function to which we pass the value of this parameter and this function would return a particular rose curve. Here's that idea in code.
+Có thể bạn sẽ thắc mắc tại sao tôi đặt tên hàm này là `rose7`. Đó là vì ta có thể thay đổi hình dáng bằng cách sửa số `7` thành một số khác. Ta có thể tạo một phương thức hoặc hàm cho phép ta truyền giá trị của tham số này và hàm sẽ trả lại một hình vẽ hoa hồng cụ thể. Dưới đây là mã lệnh thực hiện ý tưởng này.
 
 ```scala mdoc:silent
 def rose(k: Int): Angle => Point =
   (angle: Angle) => Point((angle * k).cos * 200, angle)
 ```
 
-The `rose` method describes a family of curves. They all look similar, and we create individuals by choosing a particular value for the parameter `k`. In [@fig:hof:rose] we show more rose curves, this time with `k` as 5, 8, and 9 respectively.
+Phương thức `rose` mô tả một họ đường cong. Chúng có dạng tương tự nhau, và ta tạo nên từng cá thể bằng cách chọn riêng một giá trị cho tham số `k`. Trong [@fig:hof:rose] chúng tôi đã cho thấy nhiều hình bông hoa khác, lần này với `k` lần lượt bằng 5, 8, và 9.
 
-![Examples of rose curves, with the parameter k chosen as 5, 8, or 9.](src/pages/hof/rose.pdf+svg){#fig:hof:rose}
+![Ví dụ các hình hoa hồng với tham số k chọn bằng 5, 8, hoặc 9.](src/pages/hof/rose.pdf+svg){#fig:hof:rose}
 
+Bây giờ hãy cùng xem một số hình thú vị hơn. Ở [@fig:hof:lissajous] chúng tôi cho thấy các ví dụ một họ các đường nét có tên là [đường cong Lissajous][lissajous].
 
-Let's look at some other interesting curves. In [@fig:hof:lissajous] we show examples of a family of curves called [Lissajous curves][lissajous].
+![Ví dụ các đường cong Lissajous, với các tham số a và b chọn bằng 1, 2, hoặc 3.](src/pages/hof/lissajous.pdf+svg){#fig:hof:lissajous}
 
-![Examples of Lissajous curves, with the parameters a and b chosen as 1, 2, or 3.](src/pages/hof/lissajous.pdf+svg){#fig:hof:lissajous}
-
-The code for this is
+Mã lệnh để vẽ hình là
 
 ```scala
 def lissajous(a: Int, b: Int, offset: Angle): Angle => Point =
@@ -46,9 +45,9 @@ def lissajous(a: Int, b: Int, offset: Angle): Angle => Point =
     Point(100 * ((angle * a) + offset).sin, 100 * (angle * b).sin)
 ```
 
-The examples in [@fig:hof:lissajous] use values of `a` and `b` of 1, 2, or 3, and the `offset` set to 90 degrees.
+Các ví dụ trong [@fig:hof:lissajous] đã dùng giá trị `a` và `b` bằng 1, 2, hoặc 3, và `offset` đặt bằng 90 độ.
 
-There are an unlimited number of functions we could use to create interesting curves. Let's see one more example, this time of what known as an [epicycloid][epicycloid]. An epicycloid is produced when we trace a point on a circle rotating around another circle. We can stack circles on top of circles, and change the speed at which they rotate, to produce many different curves. For our example we are going to fix the number and radius of the circles and allow their speed of rotation to vary. Here is the code:
+Có vô số các hàm mà ta có thể dùng để tạo nên các đường nét thú vị. Hãy cùng xem một ví dụ nữa, lần này là đường có tên gọi [epicycloid][epicycloid]. Một epicycloid được vẽ nên khi ta đi theo một điểm trên một vòng tròn mà vòng tròn này quay quanh vòng tròn khác. Ta có thể xếp chồng vòng tròn lên trên vòng tròn khác, và thay đổi tốc độ quay của chúng, để tạo nên nhiều đường nét khác nhau. Chẳng hạn ta sẽ cố định số vòng tròn cùng bán kính của chúng nhưng cho phép tốc độ quay của chúng biến đổi. Dưới đây là mã lệnh:
 
 ```scala
 def epicycloid(a: Int, b: Int, c: Int): Angle => Point =
@@ -56,16 +55,16 @@ def epicycloid(a: Int, b: Int, c: Int): Angle => Point =
     (Point(75, angle * a).toVec + Point(32, angle * b).toVec + Point(15, angle * c).toVec).toPoint
 ```
 
-You might notice this code converts points to vectors and back again. This is a little technical detail (we cannot add points but we can add vectors) that isn't important if you aren't familiar with vectors.
+Bạn có thể nhận thấy rằng mã lệnh quy đổi từ điểm thành vectơ và rồi quy đổi ngược lại. Đây chỉ là một chi tiết kĩ thuật (ta không thể cộng các điểm nhưng có thể cộng véctơ) mà không quá quan trọng nếu bạn không thạo tính với vectơ.
 
-In [@fig:hof:epicycloid] we see three examples created by choosing the parameters a, b, c, as (1, 6, 14), (7, 13, 25), and (1, 7, -21) respectively.
+Ở [@fig:hof:epicycloid] ta thấy ba ví dụ tạo ra bằng cách chọn các tham số a, b, c lần lượt là (1, 6, 14), (7, 13, 25), và (1, 7, -21).
 
-![Examples of epicycloid curves, with the parameters chosen as (1, 6, 14), (7, 13, 25), and (1, 7 -21).](src/pages/hof/epicycloid.pdf+svg){#fig:hof:epicycloid}
+![Ví dụ các đường epicycloid, với các tham số chọn bằng (1, 6, 14), (7, 13, 25), và (1, 7 -21).](src/pages/hof/epicycloid.pdf+svg){#fig:hof:epicycloid}
 
 
-#### Exercise {-}
+#### Bài tập {-}
 
-We now have a lot of tools to play with. Your task here is simply to use some of the ideas we've just seen to make an image that you like. For inspiration you could use the image that we started the chapter with, but don't let it constrain you if you think of something else to explore.
+Bây giờ ta có nhiều công cụ để nghịch thử rồi. Nhiệm vụ của bạn lúc này chỉ là sử dụng vài ý tưởng như đã thấy để vẽ nên một hình ảnh bạn thích. Để hứng thú hơn bạn có thể dùng lại hình ảnh từ đầu chương, nhưng đừng quá rập khuôn nếu bạn đã nghĩ ra một ý tưởng khác để tìm hiểu.
 
 
 [lissajous]: https://en.wikipedia.org/wiki/Lissajous_curve
