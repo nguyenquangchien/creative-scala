@@ -77,7 +77,7 @@ Image.circle(100).draw()
 </div>
 
 
-#### Kiểu của hình nghệ thuật {-}
+#### Kiểu của hình vẽ {-}
 
 Kiểu dữ liệu của một hình tròn, hình chữ nhật, hình tam giác là gì? 
 
@@ -94,9 +94,9 @@ Chúng đều có kiểu `Image`, như ta thấy trên dòng lệnh console.
 ```
 </div>
 
-#### Không kiểu bản vẽ nghệ thuật {-}
+#### Không phải kiểu hình vẽ {-}
 
-Kiểu dữ liệu của *bản vẽ* một hình là gì? Điều này nghĩa là sao?
+Kiểu dữ liệu của *việc vẽ một hình* một hình là gì? Điều này nghĩa là sao?
 
 <div class="solution">
 Một lần nữa, ta có thể đặt câu hỏi này cho console.
